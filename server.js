@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+
 const ExcelJS = require('exceljs');
 const path = require('path');
 const { createClient } = require('@libsql/client');
@@ -112,18 +114,18 @@ db.run(`CREATE TABLE IF NOT EXISTS admin_user (
 
 
 // 初始化預設帳號
-db.get("SELECT COUNT(*) as count FROM admin_user", async (err, row) => {
-if (row && row.count === 0) {
-const hashAdmin = await bcrypt.hash("123456", 10);
-    db.run(`INSERT INTO admin_user(username, password, role) VALUES (?,?,?)`, ["admin", hashAdmin, "admin"]);
-    console.log("✅ 已建立預設總管理員：admin / 123456 (角色: admin)");
+// 初始化預設帳號，永遠強制覆蓋 admin
+const hashAdmin = bcrypt.hashSync("admin123", 10);
+db.run(`INSERT OR REPLACE INTO admin_user(username, password, role) VALUES (?,?,?)`, ["admin", hashAdmin, "admin"]);
+console.log("✅已重置管理員：admin / admin123");
+
+const hashStaff = bcrypt.hashSync("123456", 10);
+db.run(`INSERT OR REPLACE INTO admin_user(username, password, role) VALUES (?,?,?)`, ["staff01", hashStaff, "staff"]);
+console.log("✅已重置員工帳號：staff01 / 123456");
 
 
-const hashStaff = await bcrypt.hash("123456", 10);
-    db.run(`INSERT INTO admin_user(username, password, role) VALUES (?,?,?)`, ["staff", hashStaff, "staff"]);
-    console.log("✅ 已建立預設普通員工：staff / 123456 (角色: staff)");
-  }
-});
+
+
 
 
 // 登入攔截中間件
@@ -414,7 +416,7 @@ res.status(500).json({ ok: false, msg: "伺服器生成Excel錯誤" });
 });
 
 
-const PORT = 3000;
+
 
 
 // ========== 圖表統計接口 ==========
@@ -481,7 +483,9 @@ res.json({ ok: true, labels, data });
 });
 
 
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 console.log(`✅後台服務啟動完成，本機: http://127.0.0.1:${PORT}`);
-
 });
+
