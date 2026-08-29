@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO & GEO Meta Tags -->
+<title>晟铭科技｜常見問題FAQ｜App軟件開發</title>
+<meta name="description" content="晟铭科技常見問題，關於App開發、報價、工期、程式碼所有權、售後維護、項目簽約等問題解答，香港軟件開發公司。">
+<meta name="keywords" content="軟件開發FAQ,App開發問題,報價,程式碼所有權,香港軟件公司">
+<meta name="geo.region" content="HK">
+<meta name="geo.placename" content="Hong Kong">
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="晟铭科技｜常見問題FAQ">
+<meta property="og:description" content="App與軟件定製開發常見問題一覽。">
+<meta property="og:type" content="website">
+
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<style>
+:root {
+--bg-color: #f8fafc;            /* 質感淺藍灰現代底色 */
+--card-bg: rgba(255, 255, 255, 0.75); /* 輕盈白玻璃卡片底色 */
+--primary-glow: #00a3ff;        /* 科技藍 */
+--secondary-glow: #8b5cf6;      /* 現代感紫色光暈 */
+--text-main: #111827;           /* 極深藍黑文字 */
+--text-muted: #4b5563;          /* 太空灰副標題文字 */
+--accent: #00a3ff;
+--transition: all 0.3s ease;
+}
+
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+
+body {
+background-color: var(--bg-color);
+color: var(--text-main);
+font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
+overflow-x: hidden;
+line-height: 1.6;
+}
+
+
+/* 科技風動態背景光暈 */
+body::before {
+content: '';
+position: fixed;
+top: -20%;
+left: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(0, 243, 255, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+
+body::after {
+content: '';
+position: fixed;
+bottom: -20%;
+right: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(121, 40, 202, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+
+/* 頁頭 Header */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 5%;
+background: rgba(248, 250, 252, 0.85);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(0, 163, 255, 0.15);
+z-index: 1000;
+}
+
+
+.logo {
+font-family: 'Orbitron', sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--text-main);
+letter-spacing: 2px;
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 10px;
+transition: var(--transition);
+}
+.logo:hover{
+text-shadow: 0 0 12px rgba(0,163,255,0.4);
+}
+
+.logo img {
+height: 50px;
+width: auto;
+display: block;
+object-fit: contain;
+}
+
+.logo span {
+display: block;
+color: var(--text-main);
+font-size: 20px;
+font-weight: 700;
+white-space: nowrap;
+}
+
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 30px;
+}
+
+
+nav a {
+color: var(--text-muted);
+text-decoration: none;
+font-weight: 400;
+transition: var(--transition);
+font-size: 0.95rem;
+}
+
+
+nav a:hover, nav a.active {
+color: var(--primary-glow);
+text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+}
+
+
+/* 主內容容器 */
+main {
+padding-top: 100px;
+}
+
+
+section {
+padding: 80px 10%;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+h2.section-title {
+font-family: 'Orbitron', sans-serif;
+font-size: 2.5rem;
+margin-bottom: 20px;
+background: linear-gradient(90deg, #111827, var(--primary-glow));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 1px;
+}
+
+
+/* FAQ 摺疊區塊 */
+.faq-list {
+width: 100%;
+max-width: 850px;
+margin:40px auto 0;
+}
+
+
+.faq-item {
+background: var(--card-bg);
+border: 1px solid rgba(0,163,255,0.15);
+margin-bottom: 15px;
+border-radius: 6px;
+overflow: hidden;
+backdrop-filter: blur(5px);
+}
+
+
+.faq-question {
+padding: 20px;
+font-weight: 700;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+
+.faq-answer {
+padding: 0 20px 20px;
+color: var(--text-muted);
+font-size: 0.95rem;
+display: none;
+}
+
+
+.block-bottom-btn-wrap{
+margin-top:50px;
+text-align:center;
+}
+
+
+.btn-sci-fi {
+display: inline-block;
+padding: 15px 40px;
+background: transparent;
+color: var(--primary-glow);
+border: 2px solid var(--primary-glow);
+font-family: 'Orbitron', sans-serif;
+font-weight: 700;
+text-decoration: none;
+text-transform: uppercase;
+letter-spacing: 2px;
+position: relative;
+overflow: hidden;
+transition: var(--transition);
+box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+border-radius: 4px;
+}
+
+
+.btn-sci-fi:hover {
+background: var(--primary-glow);
+color: var(--bg-color);
+box-shadow: 0 0 25px var(--primary-glow);
+}
+
+
+/* 浮動 WhatsApp 按鈕 */
+.whatsapp-float {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: #25d366;
+color: #fff;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 30px;
+box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+z-index: 1001;
+transition: var(--transition);
+text-decoration: none;
+}
+
+
+.whatsapp-float:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+}
+
+
+/* 頁腳 Footer */
+footer {
+padding: 40px 10%;
+background: rgba(248, 250, 252, 0.9);
+border-top: 1px solid rgba(0, 0, 0, 0.05);
+text-align: center;
+color: var(--text-muted);
+font-size: 0.9rem;
+}
+
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+nav ul {
+display: none;
+}
+h2.section-title {
+font-size: 1.8rem;
+}
+section {
+padding: 60px 5%;
+}
+.logo img {
+height:40px;
+}
+.logo span {
+font-size:16px;
+}
+}
+</style>
+</head>
+<body>
+
+
+<!-- 頁頭（已替換為真實logo圖片） -->
+<header>
+<a href="index.html#home" class="logo" title="返回首頁">
+<img src="./logo.JPG" alt="晟銘科技 App開發">
+<span>晟銘科技 App軟件開發</span>
+</a>
+<nav>
+<ul>
+<li><a href="index.html#home">首頁</a></li>
+<li><a href="./works.html">作品</a></li>
+<li><a href="./service.html">服務項目</a></li>
+<li><a href="./faq.html" class="active">FAQ</a></li>
+<li><a href="index.html#contact">聯絡我們</a></li>
+</ul>
+</nav>
+</header>
+
+
+<main>
+<section>
+<div style="text-align:center;">
+<h2 class="section-title">常見問題 (FAQ)</h2>
+<p style="color:var(--text-muted);max-width:700px;margin:0 auto;">整理客戶最常詢問的開發相關問題，如果這裡找不到答案，歡迎聯繫我們諮詢。</p>
+</div>
+
+
+<div class="faq-list">
+<div class="faq-item">
+<div class="faq-question">開發一個專案通常需要多少時間？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">你們提供售後維護與技術支援嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">如何確保項目的程式碼安全與商業機密？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">App開發大約預算範圍是多少？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">簡單工具類App由數萬起，帶會員、支付、後台管理的商業App會依功能規模向上浮動。需要您提供功能清單，我們才可以給出精確報價。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">做完之後原始程式碼會交給我嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">合約約定交付完成後，全部原始程式碼、設計源檔、數據庫腳本都會完整移交客戶，後續您可以找其他團隊繼續二次開發。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">可以只做Android或者只做iOS單一平台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以，支持只開發單一平台。多數商業項目建議雙平台同時開發，覆蓋更多用戶。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">App如何上架到Apple App Store以及Google Play？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">需要客戶擁有對應開發者帳號，我們負責打包、上架素材準備、提交審核；審核由平台官方負責，我們協助處理審核被駁回的調整。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">項目中途想要新增功能要如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">需求變更會另外評估工時與報價，簽署變更單後再進行開發；合約內原始範圍的功能免費調整。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">還沒有完整產品構想，可以先諮詢嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以，歡迎免費前期溝通，我們協助梳理業務邏輯、建議可行技術方案，不用先付費。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">是否可以先出原型，確認之後再寫程式？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以，流程包含UI原型階段，畫面流程確認完畢，才進入實際編碼，避免後期大規模改動。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">伺服器是你們提供，還是客戶自己購買？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">兩種模式都支持：可協助代租雲伺服器，也可以使用客戶本身已有的雲端帳號。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">香港本地伺服器與海外伺服器如何選擇？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">主要用戶在香港就建議香港節點；面向全球用戶則選多節點CDN加速，我們會給出合適建議。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">你們可以做AI相關功能嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以，支援接入大語言模型、圖像識別、自動化流程、AI問答模塊，可整合進網站、App或是後台系統。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">專案付款方式是怎樣？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">一般採階段付款，簽約支付首期，階段交付對應階段款，全部驗收完畢支付尾數，具體會寫入合約。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">如果項目驗收發現bug如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">保固期內屬於合約範圍內功能缺陷，我們免費修復；新增功能、使用環境人為造成問題不在保固範圍。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">可以接手別間公司做一半的爛尾項目嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以，需要先拿到源碼做代碼審查，評估架構品質，再告知是否可以接手以及對應成本。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">軟件完成後，會教我們員工如何操作後台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">交付時提供操作說明文件，也可以提供線上講解教學，協助內部人員快速上手管理後台。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">網站、App可以支援繁體中文、簡體多語言嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">原生支持多語言架構，繁體、簡體、英文等可以依需求配置。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">開發完成之後後續版本更新如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以簽長期維護合約，按月或按年，持續迭代新版本；也可以每次更新單獨報價。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">你們的團隊技術棧是什麼？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">全棧團隊，覆蓋移動App、前端網頁、後端API、數據庫、雲端部署，一站式完成項目，不需要多方協調不同廠商。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">什麼情況項目會延遲工期？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">客戶反覆修改需求、確認回覆延遲、中途大量新增功能，都會影響工期，我們會及時同步風險。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">可以先做Demo測試概念可行性嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">可以製作最小可行性Demo，驗證商業概念，確認方向正確再投入完整開發。</div>
+</div>
+</div>
+
+
+<div class="block-bottom-btn-wrap">
+<a href="index.html#contact" class="btn-sci-fi">尚有疑問？立即諮詢</a>
+</div>
+</section>
+</main>
+
+
+<!-- 浮動WhatsApp按鈕 -->
+<a href="https://wa.me/85253663058?text=您好，我想查詢貴公司的軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp 聯絡">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+
+<!-- 頁腳 -->
+<footer>
+<p>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<br>
+<p>關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+</footer>
+
+
+<script>
+// FAQ 展開收合
+document.querySelectorAll('.faq-question').forEach(item => {
+item.addEventListener('click', () => {
+const answer = item.nextElementSibling;
+const isOpen = answer.style.display === 'block';
+document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+answer.style.display = isOpen ? 'none' : 'block';
+});
+});
+</script>
+
+
+</body>
+</html>

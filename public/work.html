@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>項目作品 | 晟铭科技app軟件開發</title>
+<meta name="description" content="晟铭科技精選項目作品，APP與全棧軟件開發案例展示">
+<meta name="keywords" content="軟件開發,APP開發,香港,項目案例">
+<meta name="geo.region" content="HK">
+<meta name="geo.placename" content="Hong Kong">
+
+<meta property="og:title" content="項目作品 | 晟铭科技app軟件開發">
+<meta property="og:description" content="探索我們完成的APP、網站與全棧系統開發案例">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+--bg-color: #f8fafc;
+--card-bg: rgba(255, 255, 255, 0.75);
+--primary-glow: #00a3ff;
+--secondary-glow: #8b5cf6;
+--text-main: #111827;
+--text-muted: #4b5563;
+--accent: #00a3ff;
+--transition: all 0.3s ease;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+background-color: var(--bg-color);
+color: var(--text-main);
+font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
+overflow-x: hidden;
+line-height: 1.6;
+}
+
+body::before {
+content: '';
+position: fixed;
+top: -20%;
+left: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(0, 243, 255, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+body::after {
+content: '';
+position: fixed;
+bottom: -20%;
+right: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(121, 40, 202, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+/* 頁頭 Header */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 5%;
+background: rgba(248, 250, 252, 0.85);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(0, 163, 255, 0.15);
+z-index: 1000;
+}
+
+.logo {
+font-family: 'Orbitron', sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--text-main);
+letter-spacing: 2px;
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 10px;
+transition: var(--transition);
+}
+.logo:hover{
+text-shadow: 0 0 12px rgba(0, 163, 255, 0.4);
+}
+
+.logo img{
+height:46px;
+width:auto;
+display:block;
+}
+
+.logo span{
+color:var(--text-main);
+font-size:20px;
+font-weight:700;
+white-space:nowrap;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 30px;
+}
+
+nav a {
+color: var(--text-muted);
+text-decoration: none;
+font-weight: 400;
+transition: var(--transition);
+font-size: 0.95rem;
+}
+
+nav a:hover, nav a.active {
+color: var(--primary-glow);
+text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+}
+
+main {
+padding-top: 120px;
+padding-bottom: 80px;
+max-width: 1200px;
+margin:0 auto;
+padding-left:5%;
+padding-right:5%;
+}
+
+.page-title{
+font-family: 'Orbitron', sans-serif;
+font-size:2.5rem;
+margin-bottom:12px;
+background: linear-gradient(90deg, #111827, var(--primary-glow));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.page-desc{
+color:var(--text-muted);
+margin-bottom:40px;
+max-width:750px;
+}
+
+/* 作品網格 */
+.work-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+gap:32px;
+}
+.work-card{
+background: var(--card-bg);
+border: 1px solid rgba(0, 243, 255, 0.2);
+border-radius:8px;
+overflow:hidden;
+backdrop-filter: blur(5px);
+transition:var(--transition);
+}
+.work-card:hover{
+border-color: var(--primary-glow);
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+}
+.card-img-wrap{height:200px;background:#f3f4f6;overflow:hidden;}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.card-body{padding:22px;}
+.card-title{font-size:18px;font-weight:600;margin-bottom:8px;color:var(--text-main);}
+.card-text{font-size:14px;color:var(--text-muted);line-height:1.5;margin-bottom:18px;}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{padding:9px 16px;border-radius:4px;font-size:14px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;}
+.btn-link{background:rgba(0,163,255,0.08);color:var(--text-main);border:1px solid #cbd5e1;}
+.btn-link:hover{background:#e2e8f0;}
+
+/* WhatsApp浮動按鈕 */
+.whatsapp-float {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: #25d366;
+color: #fff;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 30px;
+box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+z-index: 1001;
+transition: var(--transition);
+text-decoration: none;
+}
+.whatsapp-float:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+}
+
+/* 頁腳Footer */
+footer {
+margin-top:80px;
+padding: 40px 10%;
+background: rgba(248, 250, 252, 0.9);
+border-top: 1px solid rgba(0, 0, 0, 0.05);
+text-align: center;
+color: var(--text-muted);
+font-size: 0.9rem;
+}
+
+/* 手機響應 */
+@media (max-width:768px){
+nav ul{display:none;}
+.page-title{font-size:1.8rem;}
+.work-grid{grid-template-columns:1fr;}
+main{padding-top:100px;}
+.logo img{
+height:36px;
+}
+.logo span{
+font-size:16px;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="./index.html#home" class="logo" title="返回首頁">
+<img src="logo.JPG" alt="晟铭科技 App開發">
+<span>晟銘科技 App軟件開發</span>
+</a>
+<nav>
+<ul>
+<li><a href="./index.html#home">首頁</a></li>
+<li><a href="#" class="active">作品</a></li>
+<li><a href="./index.html#services">服務項目</a></li>
+<li><a href="./index.html#faq">FAQ</a></li>
+<li><a href="./index.html#contact">聯絡我們</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<h1 class="page-title">項目作品</h1>
+<p class="page-desc">過往我們完成多款移動APP、網站與全棧系統開發，從介面設計到後端邏輯由團隊搭建。點擊按鈕可查看截圖、操作Demo影片或訪問線上成品。</p>
+
+<div class="work-grid">
+<!-- 作品1：ISO9001官網 -->
+<div class="work-card">
+<div class="card-img-wrap">
+<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
+<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+src="https://www.youtube.com/embed/1KzAHBXXPg0?si=UBE97r_ERyBkoXSd"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+<div class="card-body">
+<h3 class="card-title">ISO9001 企業官網</h3>
+<p class="card-text">靜態企業網站，包含關於我們、服務、聯絡等完整頁面模塊</p>
+<div class="btn-group">
+<a href="https://yao251226.github.io/hkiso.github.io/iso9001/aboutUs.html" target="_blank" rel="noopener noreferrer" class="btn btn-link">訪問線上版本</a>
+</div>
+</div>
+</div>
+
+<!-- 作品2：旅遊展示網站 -->
+<div class="work-card">
+<div class="card-img-wrap">
+<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
+<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+src="https://www.youtube.com/embed/MaUM_pt-M3k?si=ZAZl6H30cxRzmbU_"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+<div class="card-body">
+<h3 class="card-title">旅遊展示網站</h3>
+<p class="card-text">響應式旅遊主題網站，圖文展示目的地、行程資訊</p>
+<div class="btn-group">
+<a href="https://yao08960-lang.github.io/travel.github.io/travel/index%20(1).html" target="_blank" rel="noopener noreferrer" class="btn btn-link">訪問線上版本</a>
+</div>
+</div>
+</div>
+
+<!-- 作品3：購物網站官網 -->
+<div class="work-card">
+<div class="card-img-wrap">
+<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
+<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+src="https://www.youtube.com/embed/OlTLNjTClcA?si=C7A9tIs18cFMQ0ax"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+<div class="card-body">
+<h3 class="card-title">購物網站官網</h3>
+<p class="card-text">食品行業企業官網，購物車功能，產品展示、企業資訊介紹</p>
+<div class="btn-group">
+<a href="https://www.huayueyaofood.com" target="_blank" rel="noopener noreferrer" class="btn btn-link">訪問線上版本</a>
+</div>
+</div>
+</div>
+
+<!-- 作品4：前後端分離點餐APP -->
+<div class="work-card">
+<div class="card-img-wrap">
+<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
+<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+src="https://www.youtube.com/embed/3r_Uo7De8mc?si=46tvxPtNLBut9A-e"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+<div class="card-body">
+<h3 class="card-title">前後端分離點餐APP</h3>
+<p class="card-text">全棧移動應用，會員、購物車、訂單管理完整點餐業務邏輯</p>
+<div class="btn-group">
+</div>
+</div>
+</div>
+
+<!-- 作品5：科技公司表單型網站 -->
+<div class="work-card">
+<div class="card-img-wrap">
+<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
+<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+src="https://www.youtube.com/embed/6D14z3WO33o?si=PVmz73toMbzZFykg"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+<div class="card-body">
+<h3 class="card-title">科技公司表單型網站</h3>
+<p class="card-text">全棧企業官網，包含作品展示、服務介紹、客戶諮詢表單、後台數據接收功能</p>
+<div class="btn-group">
+<a href="./index.html" target="_blank" rel="noopener noreferrer" class="btn btn-link">訪問線上版本</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<a href="https://wa.me/85253663058?text=您好，我想查詢貴公司的軟件開發服務" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 聯絡">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<footer>
+<p>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<br>
+<p>關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+</footer>
+
+</body>
+</html>

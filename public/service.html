@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO & GEO Meta Tags -->
+<title>晟铭科技｜服務項目｜App軟件開發</title>
+<meta name="description" content="晟铭科技提供App開發、自定義軟件、AI系統整合、雲端架構部署，面向香港企業提供全套軟件開發服務與完整項目流程。">
+<meta name="keywords" content="軟件開發,App開發,AI系統整合,雲端部署,香港軟件公司,項目開發流程">
+<meta name="geo.region" content="HK">
+<meta name="geo.placename" content="Hong Kong">
+<!-- Open Graph -->
+<meta property="og:title" content="晟铭科技｜服務項目">
+<meta property="og:description" content="全方位軟件工程，從需求梳理到上線維護完整服務流程。">
+<meta property="og:type" content="website">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+--bg-color: #f8fafc;
+--card-bg: rgba(255, 255, 255, 0.75);
+--primary-glow: #00a3ff;
+--secondary-glow: #8b5cf6;
+--text-main: #111827;
+--text-muted: #4b5563;
+--accent: #00a3ff;
+--transition: all 0.3s ease;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+background-color: var(--bg-color);
+color: var(--text-main);
+font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
+overflow-x: hidden;
+line-height: 1.6;
+}
+
+body::before {
+content: '';
+position: fixed;
+top: -20%;
+left: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(0,243,255,0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+body::after {
+content: '';
+position: fixed;
+bottom: -20%;
+right: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(121,64,202,0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+}
+
+/* 頁頭 Header */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 5%;
+background: rgba(248,250,252,0.85);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(0,163,255,0.15);
+z-index: 1000;
+}
+
+.logo {
+font-family: 'Orbitron', sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--text-main);
+letter-spacing: 2px;
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 10px;
+transition: var(--transition);
+}
+.logo:hover{
+text-shadow: 0 0 12px rgba(0,163,255,0.4);
+}
+
+.logo img {
+height: 50px;
+width: auto;
+display: block;
+object-fit: contain;
+}
+
+.logo span {
+display: block;
+color: var(--text-main);
+font-size: 20px;
+font-weight: 700;
+white-space: nowrap;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 30px;
+}
+
+nav a {
+color: var(--text-muted);
+text-decoration: none;
+font-weight: 400;
+transition: var(--transition);
+font-size: 0.95rem;
+}
+
+nav a:hover, nav a.active {
+color: var(--primary-glow);
+text-shadow: 0 0 8px rgba(0,243,255,0.6);
+}
+
+/* 主內容 */
+main {
+padding-top: 100px;
+}
+
+section {
+padding: 80px 5%;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+h2.section-title {
+font-family: 'Orbitron', sans-serif;
+font-size: 2.5rem;
+margin-bottom: 20px;
+background: linear-gradient(90deg,#111827,var(--primary-glow));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing:1px;
+}
+
+.grid-container {
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+gap: 30px;
+width:100%;
+margin-top:40px;
+}
+
+.sci-card {
+background: var(--card-bg);
+border:1px solid rgba(0,243,255,0.2);
+border-radius:8px;
+padding:0;
+overflow:hidden;
+transition: var(--transition);
+backdrop-filter: blur(6px);
+}
+.sci-card__img{
+width:100%;
+height:180px;
+object-fit:cover;
+display:block;
+}
+.sci-card__body{
+padding:30px;
+}
+
+.sci-card:hover {
+border-color: var(--primary-glow);
+transform: translateY(-5px);
+box-shadow:0 10px 30px rgba(0,243,255,0.1);
+}
+
+.sci-card h3 {
+font-size:1.3rem;
+margin-bottom:15px;
+color:var(--text-main);
+}
+
+.sci-card p {
+color:var(--text-muted);
+font-size:0.95rem;
+}
+
+.block-bottom-btn-wrap{
+margin-top:40px;
+text-align:center;
+}
+
+.btn-sci-fi {
+display:inline-block;
+padding:15px 40px;
+background:transparent;
+color:var(--primary-glow);
+border:2px solid var(--primary-glow);
+font-family:'Orbitron',sans-serif;
+font-weight:700;
+text-decoration:none;
+text-transform:uppercase;
+letter-spacing:2px;
+position:relative;
+overflow:hidden;
+transition:var(--transition);
+box-shadow:0 0 15px rgba(0,243,255,0.2);
+border-radius:4px;
+}
+
+.btn-sci-fi:hover {
+background:var(--primary-glow);
+color:var(--bg-color);
+box-shadow:0 0 25px var(--primary-glow);
+}
+
+/* 時間軸 */
+.timeline-wrap {
+margin-top:50px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+}
+.timeline-item{
+position:relative;
+padding-left:45px;
+padding-bottom:35px;
+border-left:2px solid rgba(0,163,255,0.3);
+}
+.timeline-item:last-child{
+border-left:2px solid transparent;
+padding-bottom:0;
+}
+.timeline-item::before{
+content:"";
+position:absolute;
+left:-9px;
+top:0px;
+width:16px;
+height:16px;
+border-radius:50%;
+background-color:var(--primary-glow);
+box-shadow:0 0 12px rgba(0,163,255,0.45);
+}
+.timeline-item h4{
+font-size:1.2rem;
+margin-bottom:8px;
+color:var(--text-main);
+}
+.timeline-item p{
+color:var(--text-muted);
+font-size:0.95rem;
+}
+
+/* WhatsApp浮動按鈕 */
+.whatsapp-float {
+position:fixed;
+bottom:30px;
+right:30px;
+background-color:#25d366;
+color:#fff;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+box-shadow:0 4px 20px rgba(37,211,102,0.4);
+z-index:1001;
+transition:var(--transition);
+text-decoration:none;
+}
+
+.whatsapp-float:hover {
+transform:scale(1.1);
+box-shadow:0 6px 25px rgba(37,211,102,0.6);
+}
+
+/* 頁腳 */
+footer {
+padding:40px 10%;
+background:rgba(248,250,252,0.9);
+border-top:1px solid rgba(0,0,0,0.05);
+text-align:center;
+color:var(--text-muted);
+font-size:0.9rem;
+}
+
+/* 手機響應式 */
+@media (max-width:768px) {
+nav ul {
+display:none;
+}
+h2.section-title {
+font-size:1.8rem;
+}
+section {
+padding:60px 5%;
+}
+.timeline-item{
+padding-left:30px;
+}
+.sci-card__img{
+height:140px;
+}
+.logo img {
+height:40px;
+}
+.logo span {
+font-size:16px;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="index.html#home" class="logo" title="返回首頁">
+<img src="./logo.JPG" alt="晟銘科技 App開發">
+<span>晟銘科技 App軟件開發</span>
+</a>
+<nav>
+<ul>
+<li><a href="index.html#home">首頁</a></li>
+<li><a href="./work.html">作品</a></li>
+<li><a href="./service.html" class="active">服務項目</a></li>
+<li><a href="./faq.html">FAQ</a></li>
+<li><a href="index.html#contact">聯絡我們</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<section id="service-page">
+<h2 class="section-title">服務項目</h2>
+<p style="color: var(--text-muted);">全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。</p>
+<div class="grid-container">
+<div class="sci-card">
+<img class="sci-card__img" src="https://picsum.photos/id/3/600/320" alt="APP應用程式開發">
+<div class="sci-card__body">
+<h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary-glow); margin-bottom:10px;"></i> APP應用程式開發</h3>
+<p>iOS、Android移動應用開發，包含會員系統、訂單支付、離線緩存等商業功能，適用各行業商業產品。</p>
+</div>
+</div>
+
+<div class="sci-card">
+<img class="sci-card__img" src="https://picsum.photos/id/0/600/320" alt="自定義軟件與企業網站">
+<div class="sci-card__body">
+<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> 自定義軟件與企業網站</h3>
+<p>企業官網、內部管理系統，按業務需求客製開發，不使用套版，完整交付全部源代碼。</p>
+</div>
+</div>
+
+<div class="sci-card">
+<img class="sci-card__img" src="https://picsum.photos/id/180/600/320" alt="AI與大數據整合">
+<div class="sci-card__body">
+<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> AI與大數據整合</h3>
+<p>接入大模型API、自動化流程、數據儀表板，協助企業提升營運效率。</p>
+</div>
+</div>
+
+<div class="sci-card">
+<img class="sci-card__img" src="https://picsum.photos/id/48/600/320" alt="雲端架構部署與維護">
+<div class="sci-card__body">
+<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> 雲端架構部署與維護</h3>
+<p>伺服器上線配置、安全防護、版本迭代維護，提供長期技術支援。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="service-flow">
+<h2 class="section-title">服務流程</h2>
+<p style="color: var(--text-muted);">標準項目開發流程，公開透明，清楚掌握每個階段進度。</p>
+<div class="timeline-wrap">
+<div class="timeline-item">
+<h4>1. 需求溝通與評估</h4>
+<p>梳理商業目標與功能清單，提供報價、工期與技術方案建議。</p>
+</div>
+<div class="timeline-item">
+<h4>2. 方案確認與簽約</h4>
+<p>敲定交付內容、時程，簽署保密協議及項目合約，正式啟動項目。</p>
+</div>
+<div class="timeline-item">
+<h4>3. UI設計與原型確認</h4>
+<p>製作介面原型，雙方確認畫面風格與交互邏輯，確認後進入開發。</p>
+</div>
+<div class="timeline-item">
+<h4>4. 前後端程式開發</h4>
+<p>全栈開發，階段性交付測試版本，收集反饋調整。</p>
+</div>
+<div class="timeline-item">
+<h4>5. 測試除錯與優化</h4>
+<p>多場景功能測試、相容性測試，修正問題達到上線標準。</p>
+</div>
+<div class="timeline-item">
+<h4>6. 產品上線交付</h4>
+<p>協助伺服器部署、應用商店上架，完整交付源代碼與項目文件。</p>
+</div>
+<div class="timeline-item">
+<h4>7. 售後維護與技術支援</h4>
+<p>保固期問題修復，後續可選擇版本迭代、長期維護服務。</p>
+</div>
+</div>
+<div class="block-bottom-btn-wrap">
+<a href="index.html#contact" class="btn-sci-fi">開始諮詢專案</a>
+</div>
+</section>
+</main>
+
+<a href="https://wa.me/85253663058?text=您好，我想查詢軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp聯絡">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<footer>
+<p>品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。</p>
+<br>
+<p>關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>後台管理系統 - Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-indigo-600 text-white p-2 rounded-lg shadow-md shadow-indigo-200">
+<i class="fa-solid fa-gauge-high text-xl"></i>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900">控制台管理後台</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-2">
+<i class="fa-solid fa-user-shield text-indigo-600"></i>
+<span>帳號：<strong id="curUser" class="text-slate-900">...</strong></span>
+<span id="roleBadge" class="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-slate-200 text-slate-600">...</span>
+</div>
+<button onclick="logout()" class="text-sm text-slate-500 hover:text-rose-600 font-medium transition duration-150 flex items-center gap-1.5">
+<i class="fa-solid fa-right-from-bracket"></i> 登出
+</button>
+</div>
+</div>
+</header>
+
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-md font-bold text-slate-900 flex items-center gap-2">
+<i class="fa-solid fa-chart-line text-indigo-500"></i> 近 30 日客戶諮詢量趨勢
+</h2>
+</div>
+<div class="relative h-64">
+<canvas id="trendChart"></canvas>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-md font-bold text-slate-900 flex items-center gap-2">
+<i class="fa-solid fa-chart-pie text-emerald-500"></i> 熱門諮詢企業分佈
+</h2>
+</div>
+<div class="relative h-64 flex items-center justify-center">
+<canvas id="companyChart"></canvas>
+</div>
+</div>
+</section>
+
+
+<section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+<div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+<i class="fa-solid fa-envelope-open-text text-indigo-500"></i> 客戶諮詢紀錄明細
+</h2>
+<p class="text-xs text-slate-400 mt-1">展示訪客前台提交的所有詢價與表單反饋</p>
+</div>
+<button onclick="exportExcel()" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl transition shadow-sm shadow-emerald-100">
+<i class="fa-solid fa-file-excel"></i> 匯出 CSV
+</button>
+</div>
+<div class="overflow-x-auto" id="contactTable">
+<div class="p-8 text-center text-slate-400 text-sm">
+<i class="fa-solid fa-circle-notch animate-spin text-2xl text-indigo-500 mb-2 block"></i> 系統正在載入數據中…
+</div>
+</div>
+</section>
+
+
+<section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+<h2 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+<i class="fa-solid fa-user-gear text-indigo-500"></i> 管理員帳號設定
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h3 class="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-user-plus text-indigo-500"></i> 建立新管理員
+</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-1.5">登入帳號名稱</label>
+<input id="newAcc" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition" placeholder="例如: staff_01">
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-1.5">安全密碼設定</label>
+<input id="newPwd" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition" placeholder="請設定密碼">
+</div>
+<button onclick="addAdmin()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm py-2.5 rounded-xl transition shadow-sm shadow-indigo-100">
+確認建立帳號
+</button>
+</div>
+</div>
+<div>
+<h3 class="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-key text-amber-500"></i> 修改本人帳號密碼
+</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-1.5">舊密碼</label>
+<input id="oldPassword" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition" placeholder="輸入當前密碼">
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-1.5">新登入帳號（不修改留空）</label>
+<input id="newSelfUsername" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition" placeholder="可修改帳號名，不需要則留空">
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-1.5">新密碼</label>
+<input id="newSelfPassword" type="password" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition" placeholder="設定新密碼">
+</div>
+<div id="pwdMsgBox" class="text-xs text-rose-500"></div>
+<button id="btnChangeSelfPwd" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium text-sm py-2.5 rounded-xl transition shadow-sm">
+更新帳號密碼
+</button>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+<h2 class="text-md font-bold text-slate-900 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-users text-slate-700"></i> 後台帳號列表
+</h2>
+<div class="overflow-x-auto" id="userTable">
+<div class="p-8 text-center text-slate-400 text-sm">載入用戶模組中…</div>
+</div>
+</section>
+
+
+</main>
+
+
+<style>
+table{width:100%}
+th,td{padding:12px 14px;border-bottom:1px solid #e2e8f0;text-align:left;font-size:14px}
+textarea{resize:vertical;min-height:40px}
+</style>
+
+
+<script>
+let userRole = 'admin';
+let chart30Obj = null;
+let chartCompObj = null;
+
+
+window.onload = async () => {
+try {
+const res = await fetch("/api/admin-whoami");
+if (!res.ok) {
+alert("請重新登入後台系統");
+location.href = "admin-login.html";
+return;
+}
+const d = await res.json();
+userRole = d.role;
+document.getElementById("curUser").innerText = d.username;
+const roleBadge = document.getElementById("roleBadge");
+if(userRole === "admin"){
+roleBadge.innerText = "總管理員";
+roleBadge.className = "ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700";
+}else{
+roleBadge.innerText = "普通員工";
+roleBadge.className = "ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-700";
+}
+await loadContactList();
+await loadUsers();
+await initCharts();
+} catch (e) {
+console.error(e);
+alert("登入身份校驗異常");
+location.href = "admin-login.html";
+}
+};
+
+
+async function initCharts() {
+try {
+if(chart30Obj) chart30Obj.destroy();
+if(chartCompObj) chartCompObj.destroy();
+
+
+const resTrend = await fetch("/api/stats-30day", { credentials: "include" });
+const trendJson = await resTrend.json();
+const ctx1 = document.getElementById('trendChart').getContext('2d');
+chart30Obj = new Chart(ctx1, {
+type:'line',
+data:{
+labels: trendJson.labels,
+datasets:[{
+label:'每日諮詢次數',
+data: trendJson.data,
+borderColor:"#6366f1",
+backgroundColor:"rgba(99,102,241,0.1)",
+fill:true,
+tension:0.3
+}]
+},
+options:{responsive:true, maintainAspectRatio:false}
+});
+
+
+const resPie = await fetch("/api/stats-company", { credentials: "include" });
+const pieJson = await resPie.json();
+const ctx2 = document.getElementById('companyChart').getContext('2d');
+chartCompObj = new Chart(ctx2, {
+type:'doughnut',
+data:{
+labels: pieJson.labels,
+datasets:[{
+data: pieJson.data,
+backgroundColor:["#6366f1","#10b981","#f59e0b","#ef4444","#06b6d4","#ec4899","#9ca3af"]
+}]
+},
+options:{responsive:true, maintainAspectRatio:false}
+});
+}catch(e){
+console.log("圖表載入異常",e);
+}
+}
+
+
+async function loadContactList() {
+try {
+const res = await fetch("/api/inquiry-list");
+const list = await res.json();
+const container = document.getElementById("contactTable");
+if (!list || list.length === 0) {
+container.innerHTML = `<div class="p-8 text-center text-slate-400">目前尚無任何諮詢紀錄</div>`;
+return;
+}
+let html = `<table><thead><tr class="bg-slate-50">
+<th>ID</th>
+<th>公司</th>
+<th>聯絡人</th>
+<th>電話</th>
+<th>Email</th>
+<th>諮詢內容</th>
+<th>客戶要求備註</th>
+<th>跟進人</th>
+<th>跟進狀態</th>
+<th>初步報價</th>
+<th>提交時間</th>
+</tr></thead><tbody>`;
+list.forEach(r => {
+// 狀態選項對應
+const statusOptions = `
+<option value="未跟進" ${r.follow_status === '未跟進' ? 'selected' : ''}>未跟進</option>
+<option value="跟進中" ${r.follow_status === '跟進中' ? 'selected' : ''}>跟進中</option>
+<option value="已跟進" ${r.follow_status === '已跟進' ? 'selected' : ''}>已跟進</option>
+`;
+html += `<tr class="hover:bg-slate-50/80 transition">
+<td>${r.id}</td>
+<td>${r.company||'個人'}</td>
+<td>${r.name||''}</td>
+<td>${r.phone||'-'}</td>
+<td>${r.email||'-'}</td>
+<td class="max-w-xs truncate" title="${r.content||''}">${r.content||''}</td>
+<td>
+<textarea maxlength="1000" placeholder="填寫客戶要求備註" onchange="updateFollowInfo(${r.id}, this.value, 'customer_note')" class="w-64 border border-slate-300 rounded px-2 py-1 text-sm">${r.customer_note||''}</textarea>
+</td>
+<td>
+<input type="text" value="${r.follow_user||''}" placeholder="跟進人" onchange="updateFollowInfo(${r.id}, this.value, 'follow_user')" class="w-24 border border-slate-300 rounded px-2 py-1 text-sm">
+</td>
+<td>
+<select onchange="updateFollowInfo(${r.id}, this.value, 'follow_status')" class="border border-slate-300 rounded px-2 py-1 text-sm">
+${statusOptions}
+</select>
+</td>
+<td>
+<input type="text" value="${r.price||''}" placeholder="初步報價" onchange="updateFollowInfo(${r.id}, this.value, 'price')" class="w-28 border border-slate-300 rounded px-2 py-1 text-sm">
+</td>
+<td>${r.create_at||''}</td>
+</tr>`;
+});
+html += `</tbody></table>`;
+container.innerHTML = html;
+} catch (e) {
+console.error(e);
+document.getElementById("contactTable").innerHTML = `<div class="p-8 text-center text-rose-500">無法加載紀錄</div>`;
+}
+}
+
+// ✅ 修復後的更新函數，適配動態更新接口
+async function updateFollowInfo(id, value, field){
+// 構建請求體，只傳入需要更新的字段
+const body = { 
+  id,
+  [field]: value
+};
+try {
+  const res = await fetch("/api/update-follow-info",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(body)
+  });
+  const ret = await res.json();
+  if(!ret.ok){
+    alert(ret.msg||"更新失敗");
+    // 失敗後刷新頁面還原數據
+    await loadContactList();
+  }
+} catch (err) {
+  console.error('更新請求異常:', err);
+  alert("網絡錯誤，更新失敗");
+}
+}
+
+
+async function loadUsers() {
+try {
+const res = await fetch("/api/admin-user-list");
+const list = await res.json();
+const container = document.getElementById("userTable");
+let html = `<table><thead><tr class="bg-slate-50"><th>帳號名稱</th><th>建立時間</th><th>操作</th></tr></thead><tbody>`;
+list.forEach(u => {
+html += `<tr class="hover:bg-slate-50/80 transition"><td>${u.username}</td><td>${u.create_at||''}</td><td><button onclick="delAdmin('${u.username}')" class="text-rose-600 text-sm">刪除</button></td></tr>`;
+});
+html += `</tbody></table>`;
+container.innerHTML = html;
+} catch (e) {
+console.error(e);
+document.getElementById("userTable").innerHTML = `<div class="p-8 text-center text-rose-500">無法加載用戶資料</div>`;
+}
+}
+
+
+async function addAdmin() {
+const username = document.getElementById("newAcc").value.trim();
+const password = document.getElementById("newPwd").value.trim();
+if (!username || !password) return alert("請填寫帳號與密碼");
+const res = await fetch("/api/create-admin-user", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ username, password })
+});
+const ret = await res.json();
+if(ret.ok){
+alert("建立成功！");
+document.getElementById("newAcc").value = "";
+document.getElementById("newPwd").value = "";
+await loadUsers();
+}else{
+alert(ret.msg || "建立失敗");
+}
+}
+
+
+async function delAdmin(username){
+if(!confirm("確認刪除此管理員帳號？")) return;
+const res = await fetch("/api/delete-admin-user",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({username})
+});
+const ret = await res.json();
+alert(ret.msg);
+await loadUsers();
+}
+
+
+function exportExcel() {
+location.href = "/api/inquiry-export-csv";
+}
+
+
+async function logout() {
+await fetch("/api/admin-logout", { method: "POST" });
+location.href = "admin-login.html";
+}
+
+
+document.querySelector("#btnChangeSelfPwd").addEventListener("click", async ()=>{
+const oldPassword = document.querySelector("#oldPassword").value;
+const newUsername = document.querySelector("#newSelfUsername").value.trim();
+const newPassword = document.querySelector("#newSelfPassword").value;
+const msgBox = document.querySelector("#pwdMsgBox");
+msgBox.textContent = "";
+if(!oldPassword || !newPassword){
+msgBox.textContent = "舊密碼、新密碼不能空白";
+return;
+}
+const res = await fetch("/api/change-admin",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({oldPassword, newUsername, newPassword})
+});
+const data = await res.json();
+msgBox.textContent = data.msg;
+if(data.ok){
+alert("密碼修改完成，需要重新登入");
+location.href = "admin-login.html";
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO & GEO Meta Tags -->
+<title>晟铭科技app軟件開發</title>
+<meta name="description" content="晟铭科技app軟件開發 AI 提供頂尖的軟件開發、AI 系統整合與雲端解決方案，專為香港及全球企業打造簡約、大氣、高效能的科技產品。">
+<meta name="keywords" content="軟件開發, 應用程式開發, 人工智能, 系統整合, 網站設計, 香港科技公司">
+<meta name="geo.region" content="HK">
+<meta name="geo.placename" content="Hong Kong">
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="晟铭科技app軟件開發 AI 智能軟件開發">
+<meta property="og:description" content="引領未來的科技風軟件開發專家，助您實現企業數位轉型。">
+<meta property="og:type" content="website">
+
+
+
+
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+
+
+<style>
+:root {
+--bg-color: #f8fafc;            /* 質感淺藍灰現代底色 */
+--card-bg: rgba(255, 255, 255, 0.75); /* 輕盈白玻璃卡片底色 */
+--primary-glow: #00a3ff;        /* 科技藍（微調深確保淺底可讀性） */
+--secondary-glow: #8b5cf6;      /* 現代感紫色光暈 */
+--text-main: #111827;           /* 極深藍黑文字（確保清晰度） */
+--text-muted: #4b5563;          /* 太空灰副標題文字 */
+--accent: #00a3ff;
+--transition: all 0.3s ease;
+}
+
+
+
+
+
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+        }
+
+
+
+
+
+body {
+background-color: var(--bg-color);
+color: var(--text-main);
+font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
+overflow-x: hidden;
+line-height: 1.6;
+        }
+
+
+
+
+
+/* 科技風動態背景光暈 */
+body::before {
+content: '';
+position: fixed;
+top: -20%;
+left: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(0, 243, 255, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+        }
+
+
+
+
+
+body::after {
+content: '';
+position: fixed;
+bottom: -20%;
+right: -20%;
+width: 60vw;
+height: 60vw;
+background: radial-gradient(circle, rgba(121, 40, 202, 0.15), transparent 70%);
+z-index: -1;
+filter: blur(80px);
+        }
+
+
+
+
+
+/* 頁頭 Header */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 5%;
+background: rgba(248, 250, 252, 0.85); /* 改為淺色磨砂背景 */
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(0, 163, 255, 0.15); /* 柔和藍色邊框 */
+z-index: 1000;
+}
+
+
+
+
+
+
+.logo {
+font-family: 'Orbitron', sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--text-main);
+letter-spacing: 2px;
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+
+
+
+
+/* 已註解，圖片logo不需要文字發光樣式 */
+/*
+.logo span {
+color: var(--primary-glow);
+text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+*/
+
+
+
+
+
+.logo img{
+height:46px;
+width:auto;
+display:block;
+}
+
+.logo span{
+color:var(--text-main);
+font-size:20px;
+font-weight:700;
+white-space:nowrap;
+}
+
+
+
+
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 30px;
+        }
+
+
+
+
+
+nav a {
+color: var(--text-muted);
+text-decoration: none;
+font-weight: 400;
+transition: var(--transition);
+font-size: 0.95rem;
+        }
+
+
+
+
+
+nav a:hover, nav a.active {
+color: var(--primary-glow);
+text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+        }
+
+
+
+
+
+/* 主內容容器 */
+main {
+padding-top: 100px;
+        }
+
+
+
+
+
+section {
+min-height: 100vh;
+padding: 80px 10%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+
+
+
+
+h2.section-title {
+font-family: 'Orbitron', sans-serif;
+font-size: 2.5rem;
+margin-bottom: 20px;
+background: linear-gradient(90deg, #111827, var(--primary-glow));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-transform: uppercase;
+letter-spacing: 1px;
+        }
+
+
+
+
+
+/* 首頁 Hero Section 升級左右分欄+輪播 */
+#home {
+text-align: left;
+align-items: stretch;
+}
+.hero-wrap{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+.hero-text{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+#home h1 {
+font-family: 'Orbitron', sans-serif;
+font-size: 3.5rem;
+line-height: 1.2;
+}
+
+
+
+
+
+#home h1 span {
+color: var(--primary-glow);
+text-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+
+
+
+
+
+#home p {
+color: var(--text-muted);
+font-size: 1.2rem;
+max-width: 700px;
+}
+
+
+
+/* Hero輪播容器 */
+.hero-slider{
+width:100%;
+height:420px;
+border-radius:12px;
+overflow:hidden;
+border:1px solid rgba(0,163,255,0.2);
+position:relative;
+backdrop-filter:blur(6px);
+}
+.slider-item{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:opacity 0.8s ease;
+}
+.slider-item.active{
+opacity:1;
+}
+.slider-item img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+
+
+.btn-sci-fi {
+display: inline-block;
+padding: 15px 40px;
+background: transparent;
+color: var(--primary-glow);
+border: 2px solid var(--primary-glow);
+font-family: 'Orbitron', sans-serif;
+font-weight: 700;
+text-decoration: none;
+text-transform: uppercase;
+letter-spacing: 2px;
+position: relative;
+overflow: hidden;
+transition: var(--transition);
+box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+border-radius: 4px;
+width:fit-content;
+        }
+
+
+
+
+
+.btn-sci-fi:hover {
+background: var(--primary-glow);
+color: var(--bg-color);
+box-shadow: 0 0 25px var(--primary-glow);
+        }
+
+
+
+
+
+/* 卡片通用格線 (適用於作品與服務) */
+.grid-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 30px;
+width: 100%;
+margin-top: 40px;
+        }
+
+
+
+
+
+.sci-card {
+background: var(--card-bg);
+border: 1px solid rgba(0, 243, 255, 0.2);
+border-radius: 8px;
+padding: 0;
+transition: var(--transition);
+backdrop-filter: blur(5px);
+overflow:hidden;
+        }
+.sci-card-inner{
+padding:30px;
+}
+.sci-card-img{
+width:100%;
+height:180px;
+object-fit:cover;
+display:block;
+}
+
+
+
+
+.sci-card:hover {
+border-color: var(--primary-glow);
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+        }
+
+
+
+
+
+.sci-card h3 {
+font-size: 1.3rem;
+margin-bottom: 15px;
+color: var(--text-main);
+        }
+
+
+
+
+
+.sci-card p {
+color: var(--text-muted);
+font-size: 0.95rem;
+        }
+
+
+
+
+
+/* FAQ 摺疊區塊 */
+.faq-list {
+width: 100%;
+max-width: 800px;
+margin-top: 30px;
+        }
+
+
+
+
+
+.faq-item {
+background: var(--card-bg);
+border: 1px solid rgba(255, 255, 255, 0.1);
+margin-bottom: 15px;
+border-radius: 6px;
+overflow: hidden;
+        }
+
+
+
+
+
+.faq-question {
+padding: 20px;
+font-weight: 700;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+        }
+
+
+
+
+
+.faq-answer {
+padding: 0 20px 20px;
+color: var(--text-muted);
+font-size: 0.95rem;
+display: none;
+        }
+
+
+
+
+/* 模塊底部動作按鈕，和立即諮詢樣式統一 */
+.block-bottom-btn-wrap{
+margin-top:40px;
+text-align:center;
+}
+
+
+
+
+
+/* 聯絡我們表單 */
+/* 聯絡我們表單容器 */
+.contact-form {
+width: 100%;
+max-width: 700px;
+background: var(--card-bg); /* 使用 :root 的白玻璃底色 */
+border: 1px solid rgba(0, 163, 255, 0.15);
+padding: 40px;
+border-radius: 8px;
+backdrop-filter: blur(10px);
+margin-top: 20px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* 微妙陰影增加層次 */
+}
+
+
+
+
+
+/* 表單欄位輸入框與文字區塊 */
+.form-group input, .form-group textarea {
+width: 100%;
+padding: 12px;
+background: rgba(255, 255, 255, 0.9); /* 輸入框改為白色底 */
+border: 1px solid rgba(0, 0, 0, 0.12); /* 淺色邊框 */
+border-radius: 4px;
+color: var(--text-main); /* 輸入文字改為深色 */
+font-family: inherit;
+transition: var(--transition);
+}
+
+.form-group{
+margin-bottom:16px;
+}
+
+/* 輸入框選取焦點樣式 */
+.form-group input:focus, .form-group textarea:focus {
+outline: none;
+border-color: var(--primary-glow);
+background: #ffffff;
+box-shadow: 0 0 10px rgba(0, 163, 255, 0.15);
+}
+
+
+
+
+
+
+
+/* 浮動 WhatsApp 按鈕 */
+.whatsapp-float {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: #25d366;
+color: #fff;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 30px;
+box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+z-index: 1001;
+transition: var(--transition);
+text-decoration: none;
+        }
+
+
+
+
+
+.whatsapp-float:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+
+
+
+
+/* 頁腳 Footer */
+/* 如果您的 CSS 中有 footer 選擇器，請替換或加上這段 */
+footer {
+padding: 40px 10%;
+background: rgba(248, 250, 252, 0.9); /* 與頁頭呼應的淺色底 */
+border-top: 1px solid rgba(0, 0, 0, 0.05);
+text-align: center;
+color: var(--text-muted); /* 版權文字改為優雅的太空灰 */
+font-size: 0.9rem;
+}
+
+
+
+
+
+/* 響應式調整 (平板與手機) */
+@media (max-width: 768px) {
+nav ul {
+display: none; /* 實務上可加入手機版漢堡選單 */
+            }
+.hero-wrap{
+grid-template-columns:1fr;
+}
+#home h1 {
+font-size: 2.2rem;
+            }
+.hero-slider{
+height:260px;
+}
+h2.section-title {
+font-size: 1.8rem;
+            }
+section {
+padding: 60px 5%;
+            }
+.contact-form {
+padding: 20px;
+            }
+.logo img{
+height:36px;
+}
+.logo span{
+font-size:16px;
+}
+        }
+</style>
+</head>
+<body>
+
+
+
+
+
+<!-- 頁頭：Logo圖 + 旁邊文字 晟銘科技 App軟件開發 -->
+<header>
+<a href="#home" class="logo">
+<img src="logo.JPG" alt="晟铭科技 App開發">
+<span>晟銘科技 App軟件開發</span>
+</a>
+<nav>
+<ul>
+<li><a href="#home" class="active">首頁</a></li>
+<li><a href="#works">作品</a></li>
+<li><a href="#services">服務項目</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact">聯絡我們</a></li>
+</ul>
+</nav>
+</header>
+
+
+
+
+
+<!-- 主內容區 (5個頁面/區塊) -->
+<main>
+<!-- 1. 首頁 Hero 升級：文字 + 自動輪播多圖 -->
+<section id="home">
+<div class="hero-wrap">
+<div class="hero-text">
+<h1>重塑未來 <span>智能軟件開發</span></h1>
+<p>我們將前瞻性科技與極簡美學結合，為全球企業提供頂級的雲端軟件、AI 系統整合與數位轉型方案。</p>
+<a href="#contact" class="btn-sci-fi">立即諮詢</a>
+</div>
+<div class="hero-slider">
+<div class="slider-item active">
+<img src="https://picsum.photos/id/0/1200/800" alt="軟件開發專案展示">
+</div>
+<div class="slider-item">
+<img src="https://picsum.photos/id/180/1200/800" alt="App移動應用">
+</div>
+<div class="slider-item">
+<img src="https://picsum.photos/id/48/1200/800" alt="AI雲端系統">
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+<!-- 2. 作品 -->
+<section id="works">
+<h2 class="section-title">精選作品</h2>
+<p style="color: var(--text-muted);">探索我們為各行業領袖打造的高效能科技產品。</p>
+<div class="grid-container">
+<div class="sci-card">
+<img class="sci-card-img" src="https://picsum.photos/id/1/600/300" alt="Quantum AI 數據分析平台">
+<div class="sci-card-inner">
+<h3>Quantum AI 數據分析平台</h3>
+<p>利用尖端機器學習算法，為跨國金融企業提供即時風險預測與視覺化數據看板。</p>
+</div>
+</div>
+<div class="sci-card">
+<img class="sci-card-img" src="https://picsum.photos/id/2/600/300" alt="AeroCloud 雲端協作系統">
+<div class="sci-card-inner">
+<h3>AeroCloud 雲端協作系統</h3>
+<p>高併發、極速響應的企業級 SaaS 平台，優化全球團隊的遠端工作效率。</p>
+</div>
+</div>
+<div class="sci-card">
+<img class="sci-card-img" src="https://picsum.photos/id/3/600/300" alt="CyberShield 區塊鏈資安系統">
+<div class="sci-card-inner">
+<h3>CyberShield 區塊鏈資安系統</h3>
+<p>為高端電子商務與 Web3 項目打造的去中心化資安防護網。</p>
+</div>
+</div>
+</div>
+<div class="block-bottom-btn-wrap">
+<a href="./work.html" class="btn-sci-fi">查看作品</a>
+</div>
+</section>
+
+
+
+
+
+<!-- 3. 服務項目 -->
+<section id="services">
+<h2 class="section-title">服務項目</h2>
+<p style="color: var(--text-muted);">全方位的軟體工程與技術支援。</p>
+<div class="grid-container">
+<div class="sci-card">
+<div class="sci-card-inner">
+<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> 自定義軟件開發</h3>
+<p>從前端到後端架構，量身打造符合企業獨特業務邏輯的高擴展性應用程式。</p>
+</div>
+</div>
+<div class="sci-card">
+<div class="sci-card-inner">
+<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> AI 與大數據整合</h3>
+<p>導入大語言模型 (LLM) 與自動化工作流，全面提升企業運營效率與智能化水平。</p>
+</div>
+</div>
+<div class="sci-card">
+<div class="sci-card-inner">
+<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> 雲端架構與優化</h3>
+<p>提供 AWS / GCP 雲端架構設計、負載平衡及高安全性防護部署服務。</p>
+</div>
+</div>
+</div>
+<div class="block-bottom-btn-wrap">
+<a href="./service.html" class="btn-sci-fi">查看服務流程</a>
+</div>
+</section>
+
+
+
+
+
+<!-- 4. FAQ 常見問題 -->
+<section id="faq">
+<h2 class="section-title">常見問題 (FAQ)</h2>
+<div class="faq-list">
+<div class="faq-item">
+<div class="faq-question">開發一個專案通常需要多少時間？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">你們提供售後維護與技術支援嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">如何確保項目的程式碼安全與商業機密？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer">我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</div>
+</div>
+</div>
+<div class="block-bottom-btn-wrap">
+<a href="./faq.html" class="btn-sci-fi">查看更多FAQ</a>
+</div>
+</section>
+
+
+
+
+
+<!-- 5. 聯絡我們表單 -->
+<section id="contact">
+<h2 class="section-title">聯絡我們</h2>
+<p style="color: var(--text-muted); margin-bottom: 20px;">填寫以下表單，我們的資深架構師將在 24 小時內與您聯繫。</p>
+<form id="contactForm" class="contact-form">
+<div class="form-group">
+<label for="company">公司名稱 *</label>
+<input type="text" id="company" name="company" required placeholder="例如：未來科技有限公司">
+</div>
+<div class="form-group">
+<label for="name">負責人姓名 *</label>
+<input type="text" id="name" name="name" required placeholder="例如：陳大文">
+</div>
+<div class="form-group">
+<label for="phone">電話 *</label>
+<input type="tel" id="phone" name="phone" required placeholder="例如：+852 1234 5678">
+</div>
+<div class="form-group">
+<label for="email">電郵 *</label>
+<input type="email" id="email" name="email" required placeholder="example@domain.com">
+</div>
+<div class="form-group">
+<label for="message">查詢內容 *</label>
+<textarea id="message" name="content" rows="4" required placeholder="請簡述您的項目需求或合作意向..."></textarea>
+</div>
+<button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;">發送查詢</button>
+</form>
+</section>
+</main>
+
+
+
+
+
+<!-- 浮動 WhatsApp 按鈕 -->
+<a href="https://wa.me/85253663058?text=您好，我想查詢貴公司的軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp 聯絡">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+
+
+
+
+<!-- 頁腳 -->
+<footer>
+<p>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<br>
+<p>關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+</footer>
+
+
+
+
+
+<!-- 簡單互動腳本 -->
+<script>
+// Hero自動輪播
+(function(){
+const items = document.querySelectorAll('.slider-item');
+let index = 0;
+setInterval(()=>{
+items[index].classList.remove('active');
+index = (index + 1) % items.length;
+items[index].classList.add('active');
+},4500);
+})();
+
+
+
+// FAQ 展開/收合互動
+document.querySelectorAll('.faq-question').forEach(item => {
+item.addEventListener('click', () => {
+const answer = item.nextElementSibling;
+const isOpen = answer.style.display === 'block';
+// 關閉其他
+document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+// 切換當前
+answer.style.display = isOpen ? 'none' : 'block';
+            });
+        });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+const form = document.getElementById("contactForm");
+console.log("form物件：", form);
+if(!form){
+console.error("找不到contactForm表單");
+return;
+    }
+form.addEventListener("submit",async function(e){
+e.preventDefault();
+console.log("觸發submit事件");
+const fd = new FormData(form);
+const payload = {
+company:fd.get("company"),
+name:fd.get("name"),
+phone:fd.get("phone"),
+email:fd.get("email"),
+content:fd.get("content")
+        };
+console.log("提交數據：",payload);
+try{
+const res = await fetch("/api/submit-inquiry",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(payload)
+            });
+const ret = await res.json();
+console.log("後端返回：",ret);
+if(ret.ok){
+alert("提交成功，感謝您的查詢");
+form.reset();
+            }else{
+alert("提交失敗："+ret.msg);
+            }
+        }catch(err){
+console.error("請求異常",err);
+alert("網絡請求失敗，請確認後端服務已啟動");
+        }
+    });
+});
+</script>
+</body>
+</html>

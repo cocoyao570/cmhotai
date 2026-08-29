@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晟銘科技｜管理後台登入</title>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+}
+body{
+min-height:100vh;
+background: linear-gradient(135deg,#f0f7ff,#f7f2fc);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+.login-box{
+width:100%;
+max-width:420px;
+background:#ffffff;
+border-radius:16px;
+padding:40px 32px;
+box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+.login-box h2{
+text-align:center;
+color:#111827;
+margin-bottom:32px;
+font-size:24px;
+}
+.item{
+margin-bottom:18px;
+}
+.item input{
+width:100%;
+padding:13px 16px;
+border:1px solid #cbd5e1;
+border-radius:10px;
+font-size:15px;
+outline:none;
+transition:0.2s;
+}
+.item input:focus{
+border-color:#3b82f6;
+box-shadow:0 0 0 3px rgba(59,130,246,0.12);
+}
+.btn-login{
+width:100%;
+padding:13px;
+background-color:#3b82f6;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+transition:0.2s;
+margin-top:8px;
+}
+.btn-login:hover{
+background-color:#2563eb;
+}
+#msgBox{
+margin-top:16px;
+text-align:center;
+color:#dc2626;
+font-size:14px;
+}
+</style>
+</head>
+<body>
+<div class="login-box">
+<h2>晟銘科技 後台登入</h2>
+<div class="item">
+<input type="text" id="inpUser" placeholder="管理員帳號">
+</div>
+<div class="item">
+<input type="password" id="inpPwd" placeholder="密碼">
+</div>
+<button class="btn-login" onclick="login()">登入</button>
+<div id="msgBox"></div>
+</div>
+
+
+
+<script>
+async function login(){
+const username = document.querySelector("#inpUser").value.trim();
+const password = document.querySelector("#inpPwd").value.trim();
+// 僅此處修改：把 /api/login → /api/admin‑login
+const res = await fetch("/api/admin-login",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({username,password})
+})
+const data = await res.json();
+if(data.ok){
+window.location.href="admin-panel.html";
+}else{
+document.querySelector("#msgBox").innerText = data.msg;
+}
+}
+</script>
+</body>
+</html>
