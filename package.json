@@ -16,6 +16,7 @@
     "body-parser": "^2.3.0",
     "connect-sqlite3": "^0.9.18",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "exceljs": "^4.4.0",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
