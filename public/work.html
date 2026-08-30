@@ -85,6 +85,9 @@ display: flex;
 align-items: center;
 gap: 10px;
 transition: var(--transition);
+/* 新增：防止logo無限撐寬擠壓右側 */
+max-width: calc(100% - 130px);
+flex-shrink: 1;
 }
 .logo:hover{
 text-shadow: 0 0 12px rgba(0, 163, 255, 0.4);
@@ -93,22 +96,27 @@ text-shadow: 0 0 12px rgba(0, 163, 255, 0.4);
 height:46px;
 width:auto;
 display:block;
+flex-shrink:0;
 }
 .logo span{
 font-size:20px;
 font-weight:700;
 white-space:nowrap;
+/* 手機下文字超出隱藏 */
+overflow:hidden;
+text-overflow:ellipsis;
 }
 /* 英文模式下強制簡寫，避免擠壓漢堡按鈕 */
 html.en .logo [data-en] {
 font-size: 17px !important;
 letter-spacing:1px;
 }
-
 .header-right{
 display:flex;
 align-items:center;
 gap:24px;
+/* 新增：右側按鈕區域禁止被壓縮，優先顯示 */
+flex-shrink:0;
 }
 .desktop-nav ul {
 display: flex;
@@ -161,6 +169,7 @@ border:none;
 color:var(--text-muted);
 cursor:pointer;
 padding:4px;
+flex-shrink:0;
 }
 /* 手機彈出菜單面板 */
 .mobile-menu{
@@ -199,7 +208,6 @@ font-size:22px;
 color:var(--text-muted);
 text-decoration:none;
 }
-
 /* ========== 媒體查詢：992px以下（手機）隱藏頂部導航，顯示漢堡 ========== */
 @media (max-width: 992px){
 .desktop-nav, .social-header{
@@ -225,7 +233,6 @@ display:block !important;
 display:none !important;
 }
 }
-
 main {
 padding-top: 120px;
 padding-bottom: 80px;
@@ -318,7 +325,7 @@ html.en [data-en]{display:unset;}
 <header>
 <a href="./index.html#home" class="logo" title="返回首頁">
 <img src="logo.JPG" alt="晟銘科技 App開發">
-<span data-zh>晟銘科技 App軟件開發</span>
+<span data-zh>晟銘科技App軟件開發</span>
 <!--切換英文全程顯示簡寫 CM software development -->
 <span data-en>CM software development</span>
 </a>
@@ -467,8 +474,6 @@ allowfullscreen>
 <p class="card-text" data-zh>全棧移動應用，會員、購物車、訂單管理完整點餐業務邏輯</p>
 <p class="card-text" data-en>Full-stack mobile app: member, cart, complete ordering workflow.</p>
 <div class="btn-group">
-<a href="https://github.com/yao08960-lang/Full-Stack-Ordering-APP" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>查看GitHub原始碼</a>
-<a href="https://github.com/yao08960-lang/Full-Stack-Ordering-APP" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>View GitHub Repo</a>
 </div>
 </div>
 </div>
@@ -535,7 +540,6 @@ allowfullscreen>
 <p data-en>About Us: Full-stack developers focusing on custom App & software development, no templates, hand-crafted solutions.</p>
 <p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
 <p data-en>@HKCM Technology. All Rights Reserved.</p>
-
 </footer>
 <script>
 //漢堡菜單開關
