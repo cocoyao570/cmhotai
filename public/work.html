@@ -104,7 +104,6 @@ html.en .logo [data-en] {
 font-size: 17px !important;
 letter-spacing:1px;
 }
-
 .header-right{
 display:flex;
 align-items:center;
@@ -199,7 +198,6 @@ font-size:22px;
 color:var(--text-muted);
 text-decoration:none;
 }
-
 /* ========== 媒體查詢：992px以下（手機）隱藏頂部導航，顯示漢堡 ========== */
 @media (max-width: 992px){
 .desktop-nav, .social-header{
@@ -225,7 +223,6 @@ display:block !important;
 display:none !important;
 }
 }
-
 main {
 padding-top: 120px;
 padding-bottom: 80px;
@@ -266,15 +263,61 @@ border-color: var(--primary-glow);
 transform: translateY(-5px);
 box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
 }
-.card-img-wrap{height:200px;background:#f3f4f6;overflow:hidden;}
-.card-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.card-img-wrap{
+height:200px;
+background:#f3f4f6;
+overflow:hidden;
+position:relative;
+}
+.card-img-wrap a{
+display:block;
+width:100%;
+height:100%;
+position:relative;
+text-decoration:none;
+}
+.card-img-wrap img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition: transform 0.4s ease;
+}
+.card-img-wrap a:hover img{
+transform: scale(1.05);
+}
+/* 影片封面中央播放按鈕 */
+.play-overlay{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:60px;
+height:60px;
+background:rgba(255,0,0,0.85);
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+color:#fff;
+font-size:22px;
+box-shadow:0 4px 20px rgba(255,0,0,0.4);
+transition:var(--transition);
+pointer-events:none;
+}
+.card-img-wrap a:hover .play-overlay{
+background:rgba(255,0,0,1);
+transform:translate(-50%,-50%) scale(1.1);
+}
 .card-body{padding:22px;}
 .card-title{font-size:18px;font-weight:600;margin-bottom:8px;color:var(--text-main);}
 .card-text{font-size:14px;color:var(--text-muted);line-height:1.5;margin-bottom:18px;}
 .btn-group{display:flex;gap:12px;flex-wrap:wrap;}
-.btn{padding:9px 16px;border-radius:4px;font-size:14px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;}
+.btn{padding:9px 16px;border-radius:4px;font-size:14px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;}
 .btn-link{background:rgba(0,163,255,0.08);color:var(--text-main);border:1px solid #cbd5e1;}
 .btn-link:hover{background:#e2e8f0;}
+.btn-youtube{background:#ff0000;color:#fff;border:1px solid #ff0000;}
+.btn-youtube:hover{background:#cc0000;border-color:#cc0000;}
 /* WhatsApp浮動按鈕 */
 .whatsapp-float {
 position: fixed;
@@ -318,7 +361,7 @@ html.en [data-en]{display:unset;}
 <header>
 <a href="./index.html#home" class="logo" title="返回首頁">
 <img src="logo.JPG" alt="晟銘科技 App開發">
-<span data-zh>晟銘科技App軟件開發</span>
+<span data-zh>晟銘科技 App軟件開發</span>
 <!--切換英文全程顯示簡寫 CM software development -->
 <span data-en>CM software development</span>
 </a>
@@ -369,22 +412,17 @@ html.en [data-en]{display:unset;}
 <main>
 <h1 class="page-title" data-zh>項目作品</h1>
 <h1 class="page-title" data-en>Project Works</h1>
-<p class="page-desc" data-zh>過往我們完成多款移動APP、網站與全棧系統開發，從介面設計到後端邏輯由團隊搭建。點擊按鈕可查看截圖、操作Demo影片或訪問線上成品。</p>
-<p class="page-desc" data-en>We have completed multiple mobile APPs, websites and full-stack system projects. From UI design to backend logic built in-house. Click buttons for screenshots, demo videos or live demos.</p>
+<p class="page-desc" data-zh>過往我們完成多款移動APP、網站與全棧系統開發，從介面設計到後端邏輯由團隊搭建。點擊封面或按鈕可觀看操作Demo影片，或訪問線上成品。</p>
+<p class="page-desc" data-en>We have completed multiple mobile APPs, websites and full-stack system projects. From UI design to backend logic built in-house. Click cover or button for demo videos or live demos.</p>
 <div class="work-grid">
+
 <!-- 作品1：ISO9001官網 -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/1KzAHBXXPg0?si=UBE97r_ERyBkoXSd"
-title="ISO9001企業官網演示影片"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=1KzAHBXXPg0" target="_blank" rel="noopener noreferrer" aria-label="觀看ISO9001演示影片">
+<img src="https://img.youtube.com/vi/1KzAHBXXPg0/hqdefault.jpg" alt="ISO9001企業官網演示影片封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>ISO9001 企業官網</h3>
@@ -392,24 +430,21 @@ allowfullscreen>
 <p class="card-text" data-zh>靜態企業網站，包含關於我們、服務、聯絡等完整頁面模塊</p>
 <p class="card-text" data-en>Static corporate site with about-us, services, contact and full page modules.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=1KzAHBXXPg0" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=1KzAHBXXPg0" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 <a href="https://yao251226.github.io/hkiso.github.io/iso9001/home-1.html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>訪問線上版本</a>
 <a href="https://yao251226.github.io/hkiso.github.io/iso9001/home-1.html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>Live Demo</a>
 </div>
 </div>
 </div>
+
 <!-- 作品2：旅遊展示網站 -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/MaUM_pt-M3k?si=ZAZl6H30cxRzmbU_"
-title="旅遊展示網站演示影片"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=MaUM_pt-M3k" target="_blank" rel="noopener noreferrer" aria-label="觀看旅遊展示網站演示影片">
+<img src="https://img.youtube.com/vi/MaUM_pt-M3k/hqdefault.jpg" alt="旅遊展示網站演示影片封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>旅遊展示網站</h3>
@@ -417,24 +452,21 @@ allowfullscreen>
 <p class="card-text" data-zh>響應式旅遊主題網站，圖文展示目的地、行程資訊</p>
 <p class="card-text" data-en>Responsive travel-themed website, show destinations & itineraries.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=MaUM_pt-M3k" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=MaUM_pt-M3k" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 <a href="https://yao08960-lang.github.io/travel.github.io/travel/index%20(1).html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>訪問線上版本</a>
 <a href="https://yao08960-lang.github.io/travel.github.io/travel/index%20(1).html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>Live Demo</a>
 </div>
 </div>
 </div>
+
 <!-- 作品3：購物網站官網 -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/OlTLNjTClcA?si=C7A9tIs18cFMQ0ax"
-title="購物網站官網演示影片"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=OlTLNjTClcA" target="_blank" rel="noopener noreferrer" aria-label="觀看購物網站演示影片">
+<img src="https://img.youtube.com/vi/OlTLNjTClcA/hqdefault.jpg" alt="購物網站官網演示影片封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>購物網站官網</h3>
@@ -442,24 +474,21 @@ allowfullscreen>
 <p class="card-text" data-zh>食品行業企業官網，購物車功能，產品展示、企業資訊介紹</p>
 <p class="card-text" data-en>Food-industry corporate site, shopping cart, product showcase.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=OlTLNjTClcA" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=OlTLNjTClcA" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 <a href="https://www.huayueyaofood.com" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>訪問線上版本</a>
 <a href="https://www.huayueyaofood.com" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>Live Demo</a>
 </div>
 </div>
 </div>
+
 <!-- 作品4：前後端分離點餐APP -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/3r_Uo7De8mc?si=46tvxPtNLBut9A-e"
-title="前後端分離點餐APP演示影片"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=3r_Uo7De8mc" target="_blank" rel="noopener noreferrer" aria-label="觀看點餐APP演示影片">
+<img src="https://img.youtube.com/vi/3r_Uo7De8mc/hqdefault.jpg" alt="前後端分離點餐APP演示影片封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>前後端分離點餐APP</h3>
@@ -467,22 +496,19 @@ allowfullscreen>
 <p class="card-text" data-zh>全棧移動應用，會員、購物車、訂單管理完整點餐業務邏輯</p>
 <p class="card-text" data-en>Full-stack mobile app: member, cart, complete ordering workflow.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=3r_Uo7De8mc" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=3r_Uo7De8mc" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 </div>
 </div>
 </div>
+
 <!-- 作品5：科技公司表單型網站 -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/6D14z3WO33o?si=PVmz73toMbzZFykg"
-title="科技公司表單型網站演示影片"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=6D14z3WO33o" target="_blank" rel="noopener noreferrer" aria-label="觀看科技公司表單網站演示影片">
+<img src="https://img.youtube.com/vi/6D14z3WO33o/hqdefault.jpg" alt="科技公司表單型網站演示影片封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>科技公司表單型網站</h3>
@@ -490,24 +516,21 @@ allowfullscreen>
 <p class="card-text" data-zh>全棧企業官網，包含作品展示、服務介紹、客戶諮詢表單、後台數據接收功能</p>
 <p class="card-text" data-en>Full-stack corporate site: portfolio, services, inquiry form & backend data receiver.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=6D14z3WO33o" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=6D14z3WO33o" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 <a href="https://cmhotai-production.up.railway.app" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>訪問線上版本</a>
 <a href="https://cmhotai-production.up.railway.app" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>Live Demo</a>
 </div>
 </div>
 </div>
+
 <!-- 作品6：科技公司表單型網站後台 -->
 <div class="work-card">
 <div class="card-img-wrap">
-<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;">
-<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
-src="https://www.youtube.com/embed/WZQeezaGwXI?si=YWLj-w3EfOaP1vs3"
-title="公司官網｜客戶諮詢後台管理系統演示"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
-</div>
+<a href="https://www.youtube.com/watch?v=WZQeezaGwXI" target="_blank" rel="noopener noreferrer" aria-label="觀看後台管理系統演示影片">
+<img src="https://img.youtube.com/vi/WZQeezaGwXI/hqdefault.jpg" alt="公司官網客戶諮詢後台管理系統演示封面">
+<div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+</a>
 </div>
 <div class="card-body">
 <h3 class="card-title" data-zh>企業官網｜客戶諮詢後台管理系統</h3>
@@ -515,11 +538,14 @@ allowfullscreen>
 <p class="card-text" data-zh>Node.js+SQLite全棧項目，包含前台官網、詢價表單、登入權限、數據圖表統計、Excel匯出、多賬號管理，手機電腦響應式适配</p>
 <p class="card-text" data-en>Node.js+SQLite full-stack project: site, inquiry form, auth, chart stats, Excel export, multi-account, fully responsive.</p>
 <div class="btn-group">
+<a href="https://www.youtube.com/watch?v=WZQeezaGwXI" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-zh><i class="fa-brands fa-youtube"></i>觀看Demo影片</a>
+<a href="https://www.youtube.com/watch?v=WZQeezaGwXI" target="_blank" rel="noopener noreferrer" class="btn btn-youtube" data-en><i class="fa-brands fa-youtube"></i>Watch Demo</a>
 <a href="https://cmhotai-production.up.railway.app/admin-login.html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-zh>訪問線上版本</a>
 <a href="https://cmhotai-production.up.railway.app/admin-login.html" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-en>Live Demo</a>
 </div>
 </div>
 </div>
+
 </div>
 </main>
 <a href="https://wa.me/85253663058?text=您好，我想查詢貴公司的軟件開發服務" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 聯絡">
@@ -533,7 +559,6 @@ allowfullscreen>
 <p data-en>About Us: Full-stack developers focusing on custom App & software development, no templates, hand-crafted solutions.</p>
 <p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
 <p data-en>@HKCM Technology. All Rights Reserved.</p>
-
 </footer>
 <script>
 //漢堡菜單開關
@@ -542,17 +567,30 @@ const mobileMenu = document.getElementById('mobileMenu');
 hamburgerBtn.addEventListener('click',()=>{
 mobileMenu.classList.toggle('open');
 });
-//多語言切換
+//點擊鏈接關閉手機菜單
+document.querySelectorAll('.mobile-menu a').forEach(item=>{
+item.addEventListener('click',()=>{
+mobileMenu.classList.remove('open');
+})
+})
+//多語言切換，支援localStorage記住語言
 const langSwitch = document.getElementById('langSwitch');
+function updateLangUI(){
+const isEn = document.documentElement.classList.contains('en');
+langSwitch.textContent = isEn ? '中文' : 'EN';
+}
 langSwitch.addEventListener('click',()=>{
 document.documentElement.classList.toggle('en');
-if(document.documentElement.classList.contains('en')){
-langSwitch.textContent = '中文';
-document.documentElement.setAttribute('lang','en');
-}else{
-langSwitch.textContent = 'EN';
-document.documentElement.setAttribute('lang','zh-HK');
+const isEn = document.documentElement.classList.contains('en');
+localStorage.setItem('siteLang', isEn ? 'en' : 'zh');
+updateLangUI();
+});
+document.addEventListener('DOMContentLoaded', function(){
+const savedLang = localStorage.getItem('siteLang');
+if(savedLang === 'en'){
+document.documentElement.classList.add('en');
 }
+updateLangUI();
 });
 </script>
 </body>
