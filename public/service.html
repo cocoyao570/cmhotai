@@ -13,14 +13,12 @@
 <meta property="og:title" content="晟铭科技｜服務項目">
 <meta property="og:description" content="全方位軟件工程，從需求梳理到上線維護完整服務流程。">
 <meta property="og:type" content="website">
-
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 :root {
 --bg-color: #f8fafc;
@@ -32,13 +30,11 @@
 --accent: #00a3ff;
 --transition: all 0.3s ease;
 }
-
 * {
 box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
-
 body {
 background-color: var(--bg-color);
 color: var(--text-main);
@@ -46,7 +42,6 @@ font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
 overflow-x: hidden;
 line-height: 1.6;
 }
-
 body::before {
 content: '';
 position: fixed;
@@ -58,7 +53,6 @@ background: radial-gradient(circle, rgba(0,243,255,0.15), transparent 70%);
 z-index: -1;
 filter: blur(80px);
 }
-
 body::after {
 content: '';
 position: fixed;
@@ -70,7 +64,6 @@ background: radial-gradient(circle, rgba(121,64,202,0.15), transparent 70%);
 z-index: -1;
 filter: blur(80px);
 }
-
 /* 頁頭 Header */
 header {
 position: fixed;
@@ -86,7 +79,6 @@ backdrop-filter: blur(10px);
 border-bottom: 1px solid rgba(0,163,255,0.15);
 z-index: 1000;
 }
-
 .logo {
 font-family: 'Orbitron', sans-serif;
 font-size: 1.5rem;
@@ -102,14 +94,12 @@ transition: var(--transition);
 .logo:hover{
 text-shadow: 0 0 12px rgba(0,163,255,0.4);
 }
-
 .logo img {
 height: 50px;
 width: auto;
 display: block;
 object-fit: contain;
 }
-
 .logo span {
 display: block;
 color: var(--text-main);
@@ -117,36 +107,106 @@ font-size: 20px;
 font-weight: 700;
 white-space: nowrap;
 }
-
-nav ul {
+.header-right{
+display:flex;
+align-items:center;
+gap:24px;
+}
+.desktop-nav ul {
 display: flex;
 list-style: none;
 gap: 30px;
 }
-
-nav a {
+.desktop-nav a {
 color: var(--text-muted);
 text-decoration: none;
 font-weight: 400;
 transition: var(--transition);
 font-size: 0.95rem;
 }
-
-nav a:hover, nav a.active {
+.desktop-nav a:hover, .desktop-nav a.active {
 color: var(--primary-glow);
 text-shadow: 0 0 8px rgba(0,243,255,0.6);
 }
-
+.social-header a{
+color:var(--text-muted);
+font-size:20px;
+margin:0 8px;
+transition:var(--transition);
+text-decoration:none;
+}
+.social-header a:hover{
+color:var(--primary-glow);
+text-shadow:0 0 8px rgba(0,243,255,0.6);
+}
+.lang-btn{
+border:1px solid var(--text-muted);
+background:transparent;
+color:var(--text-muted);
+padding:4px 10px;
+border-radius:4px;
+cursor:pointer;
+font-size:14px;
+transition:var(--transition);
+}
+.lang-btn:hover{
+border-color:var(--primary-glow);
+color:var(--primary-glow);
+text-shadow:0 0 6px rgba(0,243,255,0.4);
+}
+.hamburger{
+display:none;
+font-size:26px;
+background:none;
+border:none;
+color:var(--text-muted);
+cursor:pointer;
+padding:4px;
+}
+.mobile-menu{
+display:none;
+position:fixed;
+top:72px;
+left:0;
+width:100%;
+background:rgba(255,255,255,0.97);
+backdrop-filter:blur(12px);
+padding:28px 5%;
+border-bottom:1px solid rgba(0,163,255,0.15);
+z-index:999;
+}
+.mobile-menu.open{
+display:block;
+}
+.mobile-menu ul{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:18px;
+margin-bottom:24px;
+}
+.mobile-menu a{
+font-size:18px;
+color:var(--text-main);
+text-decoration:none;
+}
+.mobile-social{
+display:flex;
+gap:16px;
+font-size:22px;
+}
+.mobile-social a{
+color:var(--text-muted);
+text-decoration:none;
+}
 /* 主內容 */
 main {
 padding-top: 100px;
 }
-
 section {
 padding: 80px 5%;
 border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-
 h2.section-title {
 font-family: 'Orbitron', sans-serif;
 font-size: 2.5rem;
@@ -156,7 +216,6 @@ background: linear-gradient(90deg,#111827,var(--primary-glow));
 -webkit-text-fill-color: transparent;
 letter-spacing:1px;
 }
-
 .grid-container {
 display: grid;
 grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
@@ -164,7 +223,6 @@ gap: 30px;
 width:100%;
 margin-top:40px;
 }
-
 .sci-card {
 background: var(--card-bg);
 border:1px solid rgba(0,243,255,0.2);
@@ -183,29 +241,70 @@ display:block;
 .sci-card__body{
 padding:30px;
 }
-
 .sci-card:hover {
 border-color: var(--primary-glow);
 transform: translateY(-5px);
 box-shadow:0 10px 30px rgba(0,243,255,0.1);
 }
-
 .sci-card h3 {
 font-size:1.3rem;
 margin-bottom:15px;
 color:var(--text-main);
 }
-
 .sci-card p {
 color:var(--text-muted);
 font-size:0.95rem;
 }
-
+/* 痛點卡片 */
+.pain-card{
+background: var(--card-bg);
+border:1px solid rgba(139,92,246,0.2);
+border-radius:8px;
+padding:28px;
+backdrop-filter: blur(6px);
+transition: var(--transition);
+}
+.pain-card:hover{
+border-color: var(--secondary-glow);
+transform: translateY(-4px);
+box-shadow:0 8px 24px rgba(139,92,246,0.1);
+}
+.pain-card h4{
+margin-bottom:12px;
+font-size:1.1rem;
+color:#1f2937;
+}
+.pain-card p{
+color:var(--text-muted);
+font-size:0.95rem;
+}
+/* 方案對照卡片 */
+.solution-card{
+background: var(--card-bg);
+border:1px solid rgba(0,163,255,0.25);
+border-radius:8px;
+padding:28px;
+backdrop-filter: blur(6px);
+transition: var(--transition);
+}
+.solution-card:hover{
+border-color: var(--primary-glow);
+transform: translateY(-4px);
+box-shadow:0 8px 24px rgba(0,163,255,0.12);
+}
+.solution-card h4{
+margin-bottom:12px;
+font-size:1.1rem;
+color:#1f2937;
+}
+.solution-card p{
+color:var(--text-muted);
+font-size:0.95rem;
+}
 .block-bottom-btn-wrap{
 margin-top:40px;
 text-align:center;
 }
-
 .btn-sci-fi {
 display:inline-block;
 padding:15px 40px;
@@ -223,13 +322,11 @@ transition:var(--transition);
 box-shadow:0 0 15px rgba(0,243,255,0.2);
 border-radius:4px;
 }
-
 .btn-sci-fi:hover {
 background:var(--primary-glow);
 color:var(--bg-color);
 box-shadow:0 0 25px var(--primary-glow);
 }
-
 /* 時間軸 */
 .timeline-wrap {
 margin-top:50px;
@@ -267,7 +364,6 @@ color:var(--text-main);
 color:var(--text-muted);
 font-size:0.95rem;
 }
-
 /* WhatsApp浮動按鈕 */
 .whatsapp-float {
 position:fixed;
@@ -287,12 +383,10 @@ z-index:1001;
 transition:var(--transition);
 text-decoration:none;
 }
-
 .whatsapp-float:hover {
 transform:scale(1.1);
 box-shadow:0 6px 25px rgba(37,211,102,0.6);
 }
-
 /* 頁腳 */
 footer {
 padding:40px 10%;
@@ -302,11 +396,13 @@ text-align:center;
 color:var(--text-muted);
 font-size:0.9rem;
 }
-
 /* 手機響應式 */
 @media (max-width:768px) {
-nav ul {
-display:none;
+.desktop-nav, .social-header{
+display:none !important;
+}
+.hamburger{
+display:block;
 }
 h2.section-title {
 font-size:1.8rem;
@@ -330,110 +426,227 @@ font-size:16px;
 </style>
 </head>
 <body>
-
 <header>
 <a href="index.html#home" class="logo" title="返回首頁">
 <img src="./logo.JPG" alt="晟銘科技 App開發">
-<span>晟銘科技 App軟件開發</span>
+<span data-zh="晟銘科技 App軟件開發" data-en="Shengming Tech App Software Development">晟銘科技 App軟件開發</span>
 </a>
-<nav>
+<div class="header-right">
+<button class="lang-btn" id="langSwitch">EN</button>
+<nav class="desktop-nav">
 <ul>
-<li><a href="index.html#home">首頁</a></li>
-<li><a href="./work.html">作品</a></li>
-<li><a href="./service.html" class="active">服務項目</a></li>
-<li><a href="./faq.html">FAQ</a></li>
-<li><a href="index.html#contact">聯絡我們</a></li>
+<li><a href="index.html#home" data-zh="首頁" data-en="Home">首頁</a></li>
+<li><a href="./work.html" data-zh="作品" data-en="Works">作品</a></li>
+<li><a href="./service.html" class="active" data-zh="服務項目" data-en="Services">服務項目</a></li>
+<li><a href="./faq.html" data-zh="FAQ" data-en="FAQ">FAQ</a></li>
+<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact Us">聯絡我們</a></li>
 </ul>
 </nav>
+<div class="social-header">
+<a href="https://facebook.com/ycweb/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
+<a href="https://www.instagram.com/cm__app_development/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+<i class="fa-brands fa-instagram"></i>
+</a>
+</div>
+<button class="hamburger" id="hamburgerBtn">
+<i class="fas fa-bars"></i>
+</button>
+</div>
 </header>
-
+<!-- 手機彈出菜單 -->
+<div class="mobile-menu" id="mobileMenu">
+<ul>
+<li><a href="index.html#home" data-zh="首頁" data-en="Home">首頁</a></li>
+<li><a href="./work.html" data-zh="作品" data-en="Works">作品</a></li>
+<li><a href="./service.html" class="active" data-zh="服務項目" data-en="Services">服務項目</a></li>
+<li><a href="./faq.html" data-zh="FAQ" data-en="FAQ">FAQ</a></li>
+<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact Us">聯絡我們</a></li>
+</ul>
+<div class="mobile-social">
+<a href="https://facebook.com/ycweb/" target="_blank" rel="noopener noreferrer">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
+<a href="https://www.instagram.com/cm__app_development/" target="_blank" rel="noopener noreferrer">
+<i class="fa-brands fa-instagram"></i>
+</a>
+</div>
+</div>
 <main>
+<section id="service-flow">
+<h2 class="section-title" data-zh="服務流程" data-en="Service Process">服務流程</h2>
+<p style="color: var(--text-muted);" data-zh="標準項目開發流程，公開透明，清楚掌握每個階段進度。" data-en="Standard project development process, transparent progress at every stage.">標準項目開發流程，公開透明，清楚掌握每個階段進度。</p>
+<div class="timeline-wrap">
+<div class="timeline-item">
+<h4 data-zh="1. 需求溝通與評估" data-en="1. Requirement Discussion & Evaluation">1. 需求溝通與評估</h4>
+<p data-zh="梳理商業目標與功能清單，提供報價、工期與技術方案建議。" data-en="Clarify business goals and feature list, provide quotation, timeline and technical suggestions.">梳理商業目標與功能清單，提供報價、工期與技術方案建議。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="2. 方案確認與簽約" data-en="2. Plan Confirmation & Contract">2. 方案確認與簽約</h4>
+<p data-zh="敲定交付內容、時程，簽署保密協議及項目合約，正式啟動項目。" data-en="Confirm deliverables and schedule, sign NDA and project contract to kick‑off.">敲定交付內容、時程，簽署保密協議及項目合約，正式啟動項目。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="3. UI設計與原型確認" data-en="3. UI Design & Prototype Confirmation">3. UI設計與原型確認</h4>
+<p data-zh="製作介面原型，雙方確認畫面風格與交互邏輯，確認後進入開發。" data-en="Create UI prototype, confirm style and interaction before development.">製作介面原型，雙方確認畫面風格與交互邏輯，確認後進入開發。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="4. 前後端程式開發" data-en="4. Front‑end & Back‑end Development">4. 前後端程式開發</h4>
+<p data-zh="全栈開發，階段性交付測試版本，收集反饋調整。" data-en="Full‑stack development, deliver test builds iteratively for feedback.">全栈開發，階段性交付測試版本，收集反饋調整。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="5. 測試除錯與優化" data-en="5. Testing & Optimization">5. 測試除錯與優化</h4>
+<p data-zh="多場景功能測試、相容性測試，修正問題達到上線標準。" data-en="Multi‑scenario function & compatibility testing, fix bugs for release.">多場景功能測試、相容性測試，修正問題達到上線標準。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="6. 產品上線交付" data-en="6. Launch & Delivery">6. 產品上線交付</h4>
+<p data-zh="協助伺服器部署、應用商店上架，完整交付源代碼與項目文件。" data-en="Support server deployment and app store launch, deliver full source code.">協助伺服器部署、應用商店上架，完整交付源代碼與項目文件。</p>
+</div>
+<div class="timeline-item">
+<h4 data-zh="7. 售後維護與技術支援" data-en="7. After‑sales Maintenance & Support">7. 售後維護與技術支援</h4>
+<p data-zh="保固期問題修復，後續可選擇版本迭代、長期維護服務。" data-en="Bug fixes within warranty, optional iteration and long‑term maintenance.">保固期問題修復，後續可選擇版本迭代、長期維護服務。</p>
+</div>
+</div>
+<div class="block-bottom-btn-wrap">
+<a href="index.html#contact" class="btn-sci-fi" data-zh="開始諮詢專案" data-en="Start Project Inquiry">開始諮詢專案</a>
+</div>
+</section>
+
 <section id="service-page">
-<h2 class="section-title">服務項目</h2>
-<p style="color: var(--text-muted);">全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。</p>
+<h2 class="section-title" data-zh="服務項目" data-en="Services">服務項目</h2>
+<p style="color: var(--text-muted);" data-zh="全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。" data-en="Full‑range software engineering support, one‑stop development for App, website, AI and cloud.">全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。</p>
 <div class="grid-container">
 <div class="sci-card">
 <img class="sci-card__img" src="https://picsum.photos/id/3/600/320" alt="APP應用程式開發">
 <div class="sci-card__body">
-<h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary-glow); margin-bottom:10px;"></i> APP應用程式開發</h3>
-<p>iOS、Android移動應用開發，包含會員系統、訂單支付、離線緩存等商業功能，適用各行業商業產品。</p>
+<h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh="APP應用程式開發" data-en="APP Application Development">APP應用程式開發</span></h3>
+<p data-zh="iOS、Android移動應用開發，包含會員系統、訂單支付、離線緩存等商業功能，適用各行業商業產品。" data-en="iOS & Android mobile app development, including membership, payment, offline cache for various businesses.">iOS、Android移動應用開發，包含會員系統、訂單支付、離線緩存等商業功能，適用各行業商業產品。</p>
 </div>
 </div>
-
 <div class="sci-card">
 <img class="sci-card__img" src="https://picsum.photos/id/0/600/320" alt="自定義軟件與企業網站">
 <div class="sci-card__body">
-<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> 自定義軟件與企業網站</h3>
-<p>企業官網、內部管理系統，按業務需求客製開發，不使用套版，完整交付全部源代碼。</p>
+<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh="自定義軟件與企業網站" data-en="Custom Software & Corporate Website">自定義軟件與企業網站</span></h3>
+<p data-zh="企業官網、內部管理系統，按業務需求客製開發，不使用套版，完整交付全部源代碼。" data-en="Corporate site and internal management system, fully custom‑built with complete source‑code handover.">企業官網、內部管理系統，按業務需求客製開發，不使用套版，完整交付全部源代碼。</p>
 </div>
 </div>
-
 <div class="sci-card">
 <img class="sci-card__img" src="https://picsum.photos/id/180/600/320" alt="AI與大數據整合">
 <div class="sci-card__body">
-<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> AI與大數據整合</h3>
-<p>接入大模型API、自動化流程、數據儀表板，協助企業提升營運效率。</p>
+<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh="AI與大數據整合" data-en="AI & Big‑data Integration">AI與大數據整合</span></h3>
+<p data-zh="接入大模型API、自動化流程、數據儀表板，協助企業提升營運效率。" data-en="LLM API integration, workflow automation and dashboard to improve operational efficiency.">接入大模型API、自動化流程、數據儀表板，協助企業提升營運效率。</p>
 </div>
 </div>
-
 <div class="sci-card">
 <img class="sci-card__img" src="https://picsum.photos/id/48/600/320" alt="雲端架構部署與維護">
 <div class="sci-card__body">
-<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> 雲端架構部署與維護</h3>
-<p>伺服器上線配置、安全防護、版本迭代維護，提供長期技術支援。</p>
+<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh="雲端架構部署與維護" data-en="Cloud Deployment & Maintenance">雲端架構部署與維護</span></h3>
+<p data-zh="伺服器上線配置、安全防護、版本迭代維護，提供長期技術支援。" data-en="Server setup, security hardening, version iteration and long‑term technical support.">伺服器上線配置、安全防護、版本迭代維護，提供長期技術支援。</p>
 </div>
 </div>
 </div>
 </section>
 
-<section id="service-flow">
-<h2 class="section-title">服務流程</h2>
-<p style="color: var(--text-muted);">標準項目開發流程，公開透明，清楚掌握每個階段進度。</p>
-<div class="timeline-wrap">
-<div class="timeline-item">
-<h4>1. 需求溝通與評估</h4>
-<p>梳理商業目標與功能清單，提供報價、工期與技術方案建議。</p>
+<section id="pain-point">
+<h2 class="section-title" data-zh="企業常遇痛點" data-en="Common Business Pain Points">企業常遇痛點</h2>
+<p style="color: var(--text-muted);" data-zh="很多創業團隊與中小企業，在做軟件專案時都會遇到以下困境" data-en="Many startups and SMEs face these challenges in software projects.">很多創業團隊與中小企業，在做軟件專案時都會遇到以下困境</p>
+<div class="grid-container">
+<div class="pain-card">
+<h4><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:8px;"></i> <span data-zh="套版成品功能不合需求" data-en="Template products cannot match requirements">套版成品功能不合需求</span></h4>
+<p data-zh="市面現成套件難以對應獨特業務流程，要嘛強迫企業遷就軟件，要嘛二次改動成本昂貴。" data-en="Off‑the‑shelf templates hardly fit unique workflows; forced adaptation or costly rework.">市面現成套件難以對應獨特業務流程，要嘛強迫企業遷就軟件，要嘛二次改動成本昂貴。</p>
 </div>
-<div class="timeline-item">
-<h4>2. 方案確認與簽約</h4>
-<p>敲定交付內容、時程，簽署保密協議及項目合約，正式啟動項目。</p>
+<div class="pain-card">
+<h4><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:8px;"></i> <span data-zh="外包只交付產品，不給源代碼" data-en="Outsourcer delivers product without source code">外包只交付產品，不給源代碼</span></h4>
+<p data-zh="專案做完後程式碼掌握在開發商手上，後續想調整功能，只能繼續依賴原團隊。" data-en="Source code remains with vendor; you are locked‑in for any future modification.">專案做完後程式碼掌握在開發商手上，後續想調整功能，只能繼續依賴原團隊。</p>
 </div>
-<div class="timeline-item">
-<h4>3. UI設計與原型確認</h4>
-<p>製作介面原型，雙方確認畫面風格與交互邏輯，確認後進入開發。</p>
+<div class="pain-card">
+<h4><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:8px;"></i> <span data-zh="進度不透明，工期不斷延後" data-en="Opaque progress and repeated delays">進度不透明，工期不斷延後</span></h4>
+<p data-zh="不清楚開發階段，經常到臨近交付才發現功能與一開始討論的完全不一樣。" data-en="Unclear development stages; big gaps between expectation and final delivery.">不清楚開發階段，經常到臨近交付才發現功能與一開始討論的完全不一樣。</p>
 </div>
-<div class="timeline-item">
-<h4>4. 前後端程式開發</h4>
-<p>全栈開發，階段性交付測試版本，收集反饋調整。</p>
+<div class="pain-card">
+<h4><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:8px;"></i> <span data-zh="上線之後無技術支援" data-en="No technical support after launch">上線之後無技術支援</span></h4>
+<p data-zh="系統正式運行才出現Bug，找不到人維護，影響日常營運。" data-en="Bugs appear after go‑live with no‑one to maintain, disrupting business operation.">系統正式運行才出現Bug，找不到人維護，影響日常營運。</p>
 </div>
-<div class="timeline-item">
-<h4>5. 測試除錯與優化</h4>
-<p>多場景功能測試、相容性測試，修正問題達到上線標準。</p>
 </div>
-<div class="timeline-item">
-<h4>6. 產品上線交付</h4>
-<p>協助伺服器部署、應用商店上架，完整交付源代碼與項目文件。</p>
+</section>
+
+<section id="our-solution">
+<h2 class="section-title" data-zh="我們的解決方案" data-en="Our Solutions">我們的解決方案</h2>
+<p style="color: var(--text-muted);" data-zh="針對以上痛點，晟銘科技給出對應解法" data-en="Shengming Tech provides targeted solutions for above pain points.">針對以上痛點，晟銘科技給出對應解法</p>
+<div class="grid-container">
+<div class="solution-card">
+<h4><i class="fa-solid fa-check-circle" style="color:#10b981;margin-right:8px;"></i> <span data-zh="完全客製開發，不強迫遷就套版" data-en="Fully custom development, no template forcing">完全客製開發，不強迫遷就套版</span></h4>
+<p data-zh="依照你的業務流程定制功能，軟件配合企業運作，不用改變營運模式去適應現成系統。" data-en="Features built around your workflow; no need to adapt business to fit software.">依照你的業務流程定制功能，軟件配合企業運作，不用改變營運模式去適應現成系統。</p>
 </div>
-<div class="timeline-item">
-<h4>7. 售後維護與技術支援</h4>
-<p>保固期問題修復，後續可選擇版本迭代、長期維護服務。</p>
+<div class="solution-card">
+<h4><i class="fa-solid fa-check-circle" style="color:#10b981;margin-right:8px;"></i> <span data-zh="項目完結完整交付全部源代碼" data-en="Full source‑code delivery upon completion">項目完結完整交付全部源代碼</span></h4>
+<p data-zh="所有程式碼、配置檔案全部移交客戶手上，後續可自由選擇任意團隊做二次開發，不受綁定。" data-en="All source‑code and config files handed over; free to choose any developer afterwards.">所有程式碼、配置檔案全部移交客戶手上，後續可自由選擇任意團隊做二次開發，不受綁定。</p>
+</div>
+<div class="solution-card">
+<h4><i class="fa-solid fa-check-circle" style="color:#10b981;margin-right:8px;"></i> <span data-zh="階段性交付，進度公開透明" data-en="Phased delivery with transparent progress">階段性交付，進度公開透明</span></h4>
+<p data-zh="每個開發階段提供可測試版本，功能對齊前期需求，減少最後才發現落差的風險。" data-en="Testable builds at each phase to align requirements and reduce unexpected gaps.">每個開發階段提供可測試版本，功能對齊前期需求，減少最後才發現落差的風險。</p>
+</div>
+<div class="solution-card">
+<h4><i class="fa-solid fa-check-circle" style="color:#10b981;margin-right:8px;"></i> <span data-zh="保固維護 + 可選長期技術支援" data-en="Warranty maintenance plus optional long‑term support">保固維護 + 可選長期技術支援</span></h4>
+<p data-zh="上線後保固期內免費修復程式Bug，也可簽約長期維護，保障系統穩定營運。" data-en="Free bug fixes within warranty period; optional contract for ongoing stable operation.">上線後保固期內免費修復程式Bug，也可簽約長期維護，保障系統穩定營運。</p>
 </div>
 </div>
 <div class="block-bottom-btn-wrap">
-<a href="index.html#contact" class="btn-sci-fi">開始諮詢專案</a>
+<a href="index.html#contact" class="btn-sci-fi" data-zh="免費專案評估" data-en="Free Project Assessment">免費專案評估</a>
 </div>
 </section>
 </main>
 
+<script>
+//漢堡選單
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburgerBtn.addEventListener('click', () => {
+mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu a').forEach(item => {
+item.addEventListener('click', () => {
+mobileMenu.classList.remove('open');
+});
+});
+
+//雙語切換
+let currentLang = "zh";
+const langBtn = document.getElementById("langSwitch");
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('siteLang', lang);
+    langBtn.textContent = lang === "zh" ? "EN" : "中文";
+    document.querySelectorAll("[data-zh][data-en]").forEach(el => {
+        const targetText = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+        let textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim() !== '');
+        if(textNode){
+            textNode.textContent = targetText;
+        }else{
+            el.prepend(document.createTextNode(targetText));
+        }
+    });
+}
+
+langBtn.addEventListener("click", () => {
+    setLanguage(currentLang === "zh" ? "en" : "zh");
+});
+
+//讀取本地記憶語言
+const savedLang = localStorage.getItem('siteLang');
+if(savedLang){
+    setLanguage(savedLang);
+}
+</script>
+
 <a href="https://wa.me/85253663058?text=您好，我想查詢軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp聯絡">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
-
 <footer>
-<p>品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。</p>
+<p data-zh="品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。" data-en="Brand story: We help entrepreneurs realise ideas, turning business concepts into working software.">品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。</p>
 <br>
-<p>關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
+<p data-zh="關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。" data-en="About us: Full‑stack developers focusing on custom App & software development, no templates, hand‑craft every project.">關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
 </footer>
-
 </body>
 </html>
