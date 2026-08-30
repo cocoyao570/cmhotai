@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- SEO & GEO Meta Tags -->
-<title>晟铭科技app軟件開發</title>
+<title data-zh>晟铭科技app軟件開發</title>
+<title data-en>CM software development</title>
 <meta name="description" content="晟铭科技app軟件開發 AI 提供頂尖的軟件開發、AI 系統整合與雲端解決方案，專為香港及全球企業打造簡約、大氣、高效能的科技產品。">
 <meta name="keywords" content="軟件開發, 應用程式開發, 人工智能, 系統整合, 網站設計, 香港科技公司">
 <meta name="geo.region" content="HK">
@@ -101,6 +102,11 @@ font-size:20px;
 font-weight:700;
 white-space:nowrap;
 }
+/* 英文模式logo簡寫，電腦平板 */
+html.en .logo span {
+font-size:17px;
+letter-spacing:1px;
+}
 .header-right{
 display:flex;
 align-items:center;
@@ -195,6 +201,30 @@ font-size:22px;
 color:var(--text-muted);
 text-decoration:none;
 }
+
+/* ========== 媒體查詢規則：>=993px(電腦、平板)保留頂部導航，不隱藏 ========== */
+@media (min-width: 993px) {
+.desktop-nav, .social-header{
+display:flex !important;
+}
+.hamburger{
+display:none !important;
+}
+}
+/* 只有小於等於992px手機：隱藏頂部導航，顯示漢堡 */
+@media (max-width: 992px){
+.desktop-nav, .social-header{
+display:none !important;
+}
+.hamburger{
+display:block !important;
+}
+.header-right{gap:12px;}
+html.en .logo span{
+font-size:14px !important;
+}
+}
+
 /* 主內容容器 */
 main {
 padding-top: 100px;
@@ -430,10 +460,14 @@ text-align: center;
 color: var(--text-muted);
 font-size: 0.9rem;
 }
-/* 響應式調整 (平板與手機) */
+
+/* 多語言隱藏規則 */
+[data-en]{display:none;}
+html.en [data-zh]{display:none;}
+html.en [data-en]{display:unset;}
+
+/* 響應式調整 (手機) */
 @media (max-width: 768px) {
-.desktop-nav, .social-header{display:none !important;}
-.hamburger{display:block;}
 .hero-wrap{
 grid-template-columns:1fr;
 }
@@ -458,7 +492,6 @@ height:36px;
 .logo span{
 font-size:16px;
 }
-.header-right{gap:12px;}
 }
 </style>
 </head>
@@ -466,17 +499,18 @@ font-size:16px;
 <header>
 <a href="#home" class="logo">
 <img src="logo.JPG" alt="晟铭科技 App開發">
-<span data-zh-text="晟銘科技 App軟件開發" data-en-text="Shengming Tech App Software Development">晟銘科技 App軟件開發</span>
+<span data-zh>晟銘科技 App軟件開發</span>
+<span data-en>CM software development</span>
 </a>
 <div class="header-right">
 <button class="lang-btn" id="langSwitch">EN</button>
 <nav class="desktop-nav">
 <ul>
-<li><a href="#home" class="active" data-zh-text="首頁" data-en-text="Home">首頁</a></li>
-<li><a href="#works" data-zh-text="作品" data-en-text="Works">作品</a></li>
-<li><a href="#services" data-zh-text="服務項目" data-en-text="Services">服務項目</a></li>
-<li><a href="#faq" data-zh-text="FAQ" data-en-text="FAQ">FAQ</a></li>
-<li><a href="#contact" data-zh-text="聯絡我們" data-en-text="Contact">聯絡我們</a></li>
+<li><a href="#home" class="active" data-zh>首頁</a><a href="#home" class="active" data-en>Home</a></li>
+<li><a href="#works" data-zh>作品</a><a href="#works" data-en>Works</a></li>
+<li><a href="#services" data-zh>服務項目</a><a href="#services" data-en>Services</a></li>
+<li><a href="#faq" data-zh>FAQ</a><a href="#faq" data-en>FAQ</a></li>
+<li><a href="#contact" data-zh>聯絡我們</a><a href="#contact" data-en>Contact</a></li>
 </ul>
 </nav>
 <div class="social-header">
@@ -495,11 +529,11 @@ font-size:16px;
 <!-- 手機彈出菜單 -->
 <div class="mobile-menu" id="mobileMenu">
 <ul>
-<li><a href="#home" class="active" data-zh-text="首頁" data-en-text="Home">首頁</a></li>
-<li><a href="#works" data-zh-text="作品" data-en-text="Works">作品</a></li>
-<li><a href="#services" data-zh-text="服務項目" data-en-text="Services">服務項目</a></li>
-<li><a href="#faq" data-zh-text="FAQ" data-en-text="FAQ">FAQ</a></li>
-<li><a href="#contact" data-zh-text="聯絡我們" data-en-text="Contact">聯絡我們</a></li>
+<li><a href="#home" class="active" data-zh>首頁</a><a href="#home" class="active" data-en>Home</a></li>
+<li><a href="#works" data-zh>作品</a><a href="#works" data-en>Works</a></li>
+<li><a href="#services" data-zh>服務項目</a><a href="#services" data-en>Services</a></li>
+<li><a href="#faq" data-zh>FAQ</a><a href="#faq" data-en>FAQ</a></li>
+<li><a href="#contact" data-zh>聯絡我們</a><a href="#contact" data-en>Contact</a></li>
 </ul>
 <div class="mobile-social">
 <a href="https://facebook.com/ycweb/" target="_blank" rel="noopener noreferrer">
@@ -515,9 +549,13 @@ font-size:16px;
 <section id="home">
 <div class="hero-wrap">
 <div class="hero-text">
-<h1><span data-zh-text="重塑未來" data-en-text="Reshape Future">重塑未來</span> <span data-zh-text="智能軟件開發" data-en-text="Intelligent Software Dev">智能軟件開發</span></h1>
-<p data-zh-text="我們將前瞻性科技與極簡美學結合，為全球企業提供頂級的雲端軟件、AI 系統整合與數位轉型方案。" data-en-text="We combine forward‑looking tech & minimalist aesthetics, delivering cloud software, AI integration & digital‑transformation solutions.">我們將前瞻性科技與極簡美學結合，為全球企業提供頂級的雲端軟件、AI 系統整合與數位轉型方案。</p>
-<a href="#contact" class="btn-sci-fi" data-zh-text="立即諮詢" data-en-text="Get Inquiry">立即諮詢</a>
+<h1>
+<span data-zh>重塑未來</span><span data-en>Reshape Future</span>
+ <span data-zh>智能軟件開發</span><span data-en>Intelligent Software Dev</span>
+</h1>
+<p data-zh>我們將前瞻性科技與極簡美學結合，為全球企業提供頂級的雲端軟件、AI 系統整合與數位轉型方案。</p>
+<p data-en>We combine forward‑looking tech & minimalist aesthetics, delivering cloud software, AI integration & digital‑transformation solutions.</p>
+<a href="#contact" class="btn-sci-fi" data-zh>立即諮詢</a><a href="#contact" class="btn-sci-fi" data-en>Get Inquiry</a>
 </div>
 <div class="hero-slider">
 <div class="slider-item active">
@@ -533,122 +571,141 @@ font-size:16px;
 </div>
 </section>
 <section id="works">
-<h2 class="section-title" data-zh-text="精選作品" data-en-text="Selected Works">精選作品</h2>
-<p style="color: var(--text-muted);" data-zh-text="探索我們為各行業領袖打造的高效能科技產品。" data-en-text="Explore high‑performance tech products built for industry leaders.">探索我們為各行業領袖打造的高效能科技產品。</p>
+<h2 class="section-title" data-zh>精選作品</h2>
+<h2 class="section-title" data-en>Selected Works</h2>
+<p style="color: var(--text-muted);" data-zh>探索我們為各行業領袖打造的高效能科技產品。</p>
+<p style="color: var(--text-muted);" data-en>Explore high‑performance tech products built for industry leaders.</p>
 <div class="grid-container">
 <div class="sci-card">
 <img class="sci-card-img" src="https://picsum.photos/id/1/600/300" alt="Quantum AI 數據分析平台">
 <div class="sci-card-inner">
-<h3 data-zh-text="Quantum AI 數據分析平台" data-en-text="Quantum AI Analytics Platform">Quantum AI 數據分析平台</h3>
-<p data-zh-text="利用尖端機器學習算法，為跨國金融企業提供即時風險預測與視覺化數據看板。" data-en-text="Real‑time risk prediction & visual dashboard powered by cutting‑edge ML for multinational finance.">利用尖端機器學習算法，為跨國金融企業提供即時風險預測與視覺化數據看板。</p>
+<h3 data-zh>Quantum AI 數據分析平台</h3>
+<h3 data-en>Quantum AI Analytics Platform</h3>
+<p data-zh>利用尖端機器學習算法，為跨國金融企業提供即時風險預測與視覺化數據看板。</p>
+<p data-en>Real‑time risk prediction & visual dashboard powered by cutting‑edge ML for multinational finance.</p>
 </div>
 </div>
 <div class="sci-card">
 <img class="sci-card-img" src="https://picsum.photos/id/2/600/300" alt="AeroCloud 雲端協作系統">
 <div class="sci-card-inner">
-<h3 data-zh-text="AeroCloud 雲端協作系統" data-en-text="AeroCloud Collaboration System">AeroCloud 雲端協作系統</h3>
-<p data-zh-text="高併發、極速響應的企業級 SaaS 平台，優化全球團隊的遠端工作效率。" data-en-text="High‑concurrency enterprise SaaS to boost remote‑team efficiency worldwide.">高併發、極速響應的企業級 SaaS 平台，優化全球團隊的遠端工作效率。</p>
+<h3 data-zh>AeroCloud 雲端協作系統</h3>
+<h3 data-en>AeroCloud Collaboration System</h3>
+<p data-zh>高併發、極速響應的企業級 SaaS 平台，優化全球團隊的遠端工作效率。</p>
+<p data-en>High‑concurrency enterprise SaaS to boost remote‑team efficiency worldwide.</p>
 </div>
 </div>
 <div class="sci-card">
 <img class="sci-card-img" src="https://picsum.photos/id/3/600/300" alt="CyberShield 區塊鏈資安系統">
 <div class="sci-card-inner">
-<h3 data-zh-text="CyberShield 區塊鏈資安系統" data-en-text="CyberShield Blockchain Security">CyberShield 區塊鏈資安系統</h3>
-<p data-zh-text="為高端電子商務與 Web3 項目打造的去中心化資安防護網。" data-en-text="Decentralized security network for premium e‑commerce & Web3 projects.">為高端電子商務與 Web3 項目打造的去中心化資安防護網。</p>
+<h3 data-zh>CyberShield 區塊鏈資安系統</h3>
+<h3 data-en>CyberShield Blockchain Security</h3>
+<p data-zh>為高端電子商務與 Web3 項目打造的去中心化資安防護網。</p>
+<p data-en>Decentralized security network for premium e‑commerce & Web3 projects.</p>
 </div>
 </div>
 </div>
 <div class="block-bottom-btn-wrap">
-<a href="./work.html" class="btn-sci-fi" data-zh-text="查看作品" data-en-text="View Works">查看作品</a>
+<a href="./work.html" class="btn-sci-fi" data-zh>查看作品</a><a href="./work.html" class="btn-sci-fi" data-en>View Works</a>
 </div>
 </section>
 <section id="services">
-<h2 class="section-title" data-zh-text="服務項目" data-en-text="Our Services">服務項目</h2>
-<p style="color: var(--text-muted);" data-zh-text="全方位的軟體工程與技術支援。" data-en-text="Full‑range software engineering & technical support.">全方位的軟體工程與技術支援。</p>
+<h2 class="section-title" data-zh>服務項目</h2>
+<h2 class="section-title" data-en>Our Services</h2>
+<p style="color: var(--text-muted);" data-zh>全方位的軟體工程與技術支援。</p>
+<p style="color: var(--text-muted);" data-en>Full‑range software engineering & technical support.</p>
 <div class="grid-container">
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh-text="自定義軟件開發" data-en-text="Custom Software Dev">自定義軟件開發</span></h3>
-<p data-zh-text="從前端到後端架構，量身打造符合企業獨特業務邏輯的高擴展性應用程式。" data-en-text="Full‑stack custom applications built to match your unique business logic.">從前端到後端架構，量身打造符合企業獨特業務邏輯的高擴展性應用程式。</p>
+<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>自定義軟件開發</span><span data-en>Custom Software Dev</span></h3>
+<p data-zh>從前端到後端架構，量身打造符合企業獨特業務邏輯的高擴展性應用程式。</p>
+<p data-en>Full‑stack custom applications built to match your unique business logic.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh-text="AI 與大數據整合" data-en-text="AI & Big‑Data Integration">AI 與大數據整合</span></h3>
-<p data-zh-text="導入大語言模型 (LLM) 與自動化工作流，全面提升企業運營效率與智能化水平。" data-en-text="LLM & automated workflows to upgrade enterprise‑level intelligence & efficiency.">導入大語言模型 (LLM) 與自動化工作流，全面提升企業運營效率與智能化水平。</p>
+<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>AI 與大數據整合</span><span data-en>AI & Big‑Data Integration</span></h3>
+<p data-zh>導入大語言模型 (LLM) 與自動化工作流，全面提升企業運營效率與智能化水平。</p>
+<p data-en>LLM & automated workflows to upgrade enterprise‑level intelligence & efficiency.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh-text="雲端架構與優化" data-en-text="Cloud Architecture & Optimization">雲端架構與優化</span></h3>
-<p data-zh-text="提供 AWS / GCP 雲端架構設計、負載平衡及高安全性防護部署服務。" data-en-text="AWS/GCP architecture design, load‑balancing & secure production deployment.">提供 AWS / GCP 雲端架構設計、負載平衡及高安全性防護部署服務。</p>
+<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>雲端架構與優化</span><span data-en>Cloud Architecture & Optimization</span></h3>
+<p data-zh>提供 AWS / GCP 雲端架構設計、負載平衡及高安全性防護部署服務。</p>
+<p data-en>AWS/GCP architecture design, load‑balancing & secure production deployment.</p>
 </div>
 </div>
 </div>
 <div class="block-bottom-btn-wrap">
-<a href="./service.html" class="btn-sci-fi" data-zh-text="查看服務流程" data-en-text="Service Process">查看服務流程</a>
+<a href="./service.html" class="btn-sci-fi" data-zh>查看服務流程</a><a href="./service.html" class="btn-sci-fi" data-en>Service Process</a>
 </div>
 </section>
 <section id="faq">
-<h2 class="section-title" data-zh-text="常見問題 (FAQ)" data-en-text="FAQ">常見問題 (FAQ)</h2>
+<h2 class="section-title" data-zh>常見問題 (FAQ)</h2>
+<h2 class="section-title" data-en>FAQ</h2>
 <div class="faq-list">
 <div class="faq-item">
 <div class="faq-question">
-<span data-zh-text="開發一個專案通常需要多少時間？" data-en-text="How long for one project?">開發一個專案通常需要多少時間？</span>
+<span data-zh>開發一個專案通常需要多少時間？</span><span data-en>How long for one project?</span>
 <i class="fa-solid fa-chevron-down"></i>
 </div>
 <div class="faq-answer">
-<p data-zh-text="項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。" data-en-text="Depends on complexity. Small‑medium:4‑8 weeks; large AI integration:3+ months. Exact timeline given after requirement review.">項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</p>
+<p data-zh>項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</p>
+<p data-en>Depends on complexity. Small‑medium:4‑8 weeks; large AI integration:3+ months. Exact timeline given after requirement review.</p>
 </div>
 </div>
 <div class="faq-item">
 <div class="faq-question">
-<span data-zh-text="你們提供售後維護與技術支援嗎？" data-en-text="Do you provide after‑sale support?">你們提供售後維護與技術支援嗎？</span>
+<span data-zh>你們提供售後維護與技術支援嗎？</span><span data-en>Do you provide after‑sale support?</span>
 <i class="fa-solid fa-chevron-down"></i>
 </div>
 <div class="faq-answer">
-<p data-zh-text="是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。" data-en-text="Yes, all delivered software includes warranty, 7×24 cloud monitoring & long‑term upgrade/maintenance options.">是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</p>
+<p data-zh>是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</p>
+<p data-en>Yes, all delivered software includes warranty, 7×24 cloud monitoring & long‑term upgrade/maintenance options.</p>
 </div>
 </div>
 <div class="faq-item">
 <div class="faq-question">
-<span data-zh-text="如何確保項目的程式碼安全與商業機密？" data-en-text="How about code security & confidentiality?">如何確保項目的程式碼安全與商業機密？</span>
+<span data-zh>如何確保項目的程式碼安全與商業機密？</span><span data-en>How about code security & confidentiality?</span>
 <i class="fa-solid fa-chevron-down"></i>
 </div>
 <div class="faq-answer">
-<p data-zh-text="我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。" data-en-text="Strict NDA signed before cooperation. All code assets fully belong to client upon hand‑over.">我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</p>
+<p data-zh>我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</p>
+<p data-en>Strict NDA signed before cooperation. All code assets fully belong to client upon hand‑over.</p>
 </div>
 </div>
 </div>
 <div class="block-bottom-btn-wrap">
-<a href="./faq.html" class="btn-sci-fi" data-zh-text="查看更多FAQ" data-en-text="More FAQ">查看更多FAQ</a>
+<a href="./faq.html" class="btn-sci-fi" data-zh>查看更多FAQ</a><a href="./faq.html" class="btn-sci-fi" data-en>More FAQ</a>
 </div>
 </section>
 <section id="contact">
-<h2 class="section-title" data-zh-text="聯絡我們" data-en-text="Contact Us">聯絡我們</h2>
-<p style="color: var(--text-muted); margin-bottom: 20px;" data-zh-text="填寫以下表單，我們的資深架構師將在 24 小時內與您聯繫。" data-en-text="Fill the form, our senior architect will contact you within 24 hours.">填寫以下表單，我們的資深架構師將在 24 小時內與您聯繫。</p>
+<h2 class="section-title" data-zh>聯絡我們</h2>
+<h2 class="section-title" data-en>Contact Us</h2>
+<p style="color: var(--text-muted); margin-bottom: 20px;" data-zh>填寫以下表單，我們的資深架構師將在 24 小時內與您聯繫。</p>
+<p style="color: var(--text-muted); margin-bottom: 20px;" data-en>Fill the form, our senior architect will contact you within 24 hours.</p>
 <form id="contactForm" class="contact-form">
 <div class="form-group">
-<label for="company" data-zh-text="公司名稱 *" data-en-text="Company *">公司名稱 *</label>
+<label for="company" data-zh>公司名稱 *</label><label for="company" data-en>Company *</label>
 <input type="text" id="company" name="company" required placeholder="例如：未來科技有限公司">
 </div>
 <div class="form-group">
-<label for="name" data-zh-text="負責人姓名 *" data-en-text="Contact Person *">負責人姓名 *</label>
+<label for="name" data-zh>負責人姓名 *</label><label for="name" data-en>Contact Person *</label>
 <input type="text" id="name" name="name" required placeholder="例如：陳大文">
 </div>
 <div class="form-group">
-<label for="phone" data-zh-text="電話 *" data-en-text="Phone *">電話 *</label>
+<label for="phone" data-zh>電話 *</label><label for="phone" data-en>Phone *</label>
 <input type="tel" id="phone" name="phone" required placeholder="例如：+852 1234 5678">
 </div>
 <div class="form-group">
-<label for="email" data-zh-text="電郵 *" data-en-text="Email *">電郵 *</label>
+<label for="email" data-zh>電郵 *</label><label for="email" data-en>Email *</label>
 <input type="email" id="email" name="email" required placeholder="example@domain.com">
 </div>
 <div class="form-group">
-<label for="message" data-zh-text="查詢內容 *" data-en-text="Message *">查詢內容 *</label>
+<label for="message" data-zh>查詢內容 *</label><label for="message" data-en>Message *</label>
 <textarea id="message" name="content" rows="4" required placeholder="請簡述您的項目需求或合作意向..."></textarea>
 </div>
-<button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-zh-text="發送查詢" data-en-text="Send Inquiry">發送查詢</button>
+<button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-zh>發送查詢</button><button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-en>Send Inquiry</button>
 </form>
 </section>
 </main>
@@ -656,9 +713,14 @@ font-size:16px;
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 <footer>
-<p data-zh-text="品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。" data-en-text="Brand Story: We help founders turn ideas into real‑world software products.">品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<p data-zh>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<p data-en>Brand Story: We help founders turn ideas into real‑world software products.</p>
 <br>
-<p data-zh-text="關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。" data-en-text="About Us: Full‑stack developers focusing on custom App & software development, no templates, hand‑crafted solutions.">關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+<p data-zh>關於我們：我們是全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+<p data-en>About Us: Full‑stack developers focusing on custom App & software development, no templates, hand‑crafted solutions.</p>
+<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
+<p data-en>@HKCM Technology. All Rights Reserved.</p>
+
 </footer>
 <script>
 //漢堡菜單開關
@@ -673,86 +735,76 @@ item.addEventListener('click',()=>{
 mobileMenu.classList.remove('open');
 })
 })
-
 //多語言切換，支援localStorage記住語言
 const langSwitch = document.getElementById('langSwitch');
-
 function updateLangUI(){
-    const isEn = document.documentElement.classList.contains('en');
-    langSwitch.textContent = isEn ? '中文' : 'EN';
-    document.querySelectorAll('[data-zh-text][data-en-text]').forEach(el=>{
-        el.textContent = isEn ? el.dataset.enText : el.dataset.zhText;
-    })
+const isEn = document.documentElement.classList.contains('en');
+langSwitch.textContent = isEn ? '中文' : 'EN';
 }
-
 langSwitch.addEventListener('click',()=>{
-    document.documentElement.classList.toggle('en');
-    const isEn = document.documentElement.classList.contains('en');
-    localStorage.setItem('siteLang', isEn ? 'en' : 'zh');
-    updateLangUI();
+document.documentElement.classList.toggle('en');
+const isEn = document.documentElement.classList.contains('en');
+localStorage.setItem('siteLang', isEn ? 'en' : 'zh');
+updateLangUI();
 });
-
 //讀取本地存儲語言
 document.addEventListener('DOMContentLoaded', function(){
-    const savedLang = localStorage.getItem('siteLang');
-    if(savedLang === 'en'){
-        document.documentElement.classList.add('en');
+const savedLang = localStorage.getItem('siteLang');
+if(savedLang === 'en'){
+document.documentElement.classList.add('en');
     }
-    updateLangUI();
-
-    // Hero自動輪播
+updateLangUI();
+// Hero自動輪播
     (function(){
-        const items = document.querySelectorAll('.slider-item');
-        let index = 0;
-        setInterval(()=>{
-            items[index].classList.remove('active');
-            index = (index + 1) % items.length;
-            items[index].classList.add('active');
+const items = document.querySelectorAll('.slider-item');
+let index = 0;
+setInterval(()=>{
+items[index].classList.remove('active');
+index = (index + 1) % items.length;
+items[index].classList.add('active');
         },4500);
     })();
-
-    // FAQ 展開/收合互動
-    document.querySelectorAll('.faq-question').forEach(item => {
-        item.addEventListener('click', () => {
-            const answer = item.nextElementSibling;
-            const isOpen = answer.style.display === 'block';
-            document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
-            answer.style.display = isOpen ? 'none' : 'block';
+// FAQ 展開/收合互動
+document.querySelectorAll('.faq-question').forEach(item => {
+item.addEventListener('click', () => {
+const answer = item.nextElementSibling;
+const isOpen = answer.style.display === 'block';
+document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+answer.style.display = isOpen ? 'none' : 'block';
         });
     });
-
-    //表單提交
-    const form = document.getElementById("contactForm");
-    if(!form){
-        console.error("找不到contactForm表單");
-        return;
+//表單提交
+const form = document.getElementById("contactForm");
+if(!form){
+console.error("找不到contactForm表單");
+return;
     }
-    form.addEventListener("submit",async function(e){
-        e.preventDefault();
-        const fd = new FormData(form);
-        const payload = {
-            company:fd.get("company"),
-            name:fd.get("name"),
-            phone:fd.get("phone"),
-            email:fd.get("email"),
-            content:fd.get("content")
+form.addEventListener("submit",async function(e){
+e.preventDefault();
+const fd = new FormData(form);
+const payload = {
+company:fd.get("company"),
+name:fd.get("name"),
+phone:fd.get("phone"),
+email:fd.get("email"),
+content:fd.get("content")
         };
-        try{
-            const res = await fetch("/api/submit-inquiry",{
-                method:"POST",
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(payload)
+try{
+const res = await fetch("/api/submit-inquiry",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(payload)
             });
-            const ret = await res.json();
-            if(ret.ok){
-                alert("提交成功，感謝您的查詢");
-                form.reset();
+const ret = await res.json();
+if(ret.ok){
+alert("提交成功，感謝您的查詢");
+form.reset();
             }else{
-                alert("提交失敗："+ret.msg);
+alert("提交失敗："+ret.msg);
             }
         }catch(err){
-            console.error("請求異常",err);
-            alert("網絡請求失敗，請確認後端服務已啟動");
+console.error("請求異常",err);
+alert("網絡請求失敗，請確認後端服務已啟動");
         }
     });
 });
