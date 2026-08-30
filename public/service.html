@@ -100,7 +100,7 @@ width: auto;
 display: block;
 object-fit: contain;
 }
-.logo span {
+.logo span.company-name {
 display: block;
 color: var(--text-main);
 font-size: 20px;
@@ -396,13 +396,51 @@ text-align:center;
 color:var(--text-muted);
 font-size:0.9rem;
 }
-/* 手機響應式 */
-@media (max-width:768px) {
+
+/* ==========響應式規則========== */
+/* 電腦螢幕 大於1024px */
+@media (min-width: 1025px){
+.desktop-nav, .social-header{
+display:flex !important;
+}
+.hamburger{
+display:none !important;
+}
+.mobile-menu{
+display:none !important;
+}
+}
+/* 平板螢幕 768‑1024px，強制顯示頂部導航，不隱藏 */
+@media (min-width:768px) and (max-width:1024px){
+.desktop-nav, .social-header{
+display:flex !important;
+}
+.hamburger{
+display:none !important;
+}
+.mobile-menu{
+display:none !important;
+}
+header{
+padding:16px 4%;
+}
+.logo img{
+height:44px;
+}
+h2.section-title{
+font-size:2rem;
+}
+section{
+padding:70px 4%;
+}
+}
+/* 手機 767px及以下：隱藏頂部導航，顯示漢堡 */
+@media (max-width:767px) {
 .desktop-nav, .social-header{
 display:none !important;
 }
 .hamburger{
-display:block;
+display:block !important;
 }
 h2.section-title {
 font-size:1.8rem;
@@ -419,7 +457,7 @@ height:140px;
 .logo img {
 height:40px;
 }
-.logo span {
+.logo span.company-name {
 font-size:16px;
 }
 }
@@ -429,7 +467,7 @@ font-size:16px;
 <header>
 <a href="index.html#home" class="logo" title="返回首頁">
 <img src="./logo.JPG" alt="晟銘科技 App開發">
-<span data-zh="晟銘科技 App軟件開發" data-en="Shengming Tech App Software Development">晟銘科技 App軟件開發</span>
+<span class="company-name" data-zh="晟銘科技 App軟件開發" data-en="CM software development">晟銘科技 App軟件開發</span>
 </a>
 <div class="header-right">
 <button class="lang-btn" id="langSwitch">EN</button>
@@ -511,7 +549,6 @@ font-size:16px;
 <a href="index.html#contact" class="btn-sci-fi" data-zh="開始諮詢專案" data-en="Start Project Inquiry">開始諮詢專案</a>
 </div>
 </section>
-
 <section id="service-page">
 <h2 class="section-title" data-zh="服務項目" data-en="Services">服務項目</h2>
 <p style="color: var(--text-muted);" data-zh="全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。" data-en="Full‑range software engineering support, one‑stop development for App, website, AI and cloud.">全方位的軟體工程與技術支援，從App、網站到AI雲端提供一條龍開發服務。</p>
@@ -546,7 +583,6 @@ font-size:16px;
 </div>
 </div>
 </section>
-
 <section id="pain-point">
 <h2 class="section-title" data-zh="企業常遇痛點" data-en="Common Business Pain Points">企業常遇痛點</h2>
 <p style="color: var(--text-muted);" data-zh="很多創業團隊與中小企業，在做軟件專案時都會遇到以下困境" data-en="Many startups and SMEs face these challenges in software projects.">很多創業團隊與中小企業，在做軟件專案時都會遇到以下困境</p>
@@ -569,7 +605,6 @@ font-size:16px;
 </div>
 </div>
 </section>
-
 <section id="our-solution">
 <h2 class="section-title" data-zh="我們的解決方案" data-en="Our Solutions">我們的解決方案</h2>
 <p style="color: var(--text-muted);" data-zh="針對以上痛點，晟銘科技給出對應解法" data-en="Shengming Tech provides targeted solutions for above pain points.">針對以上痛點，晟銘科技給出對應解法</p>
@@ -596,7 +631,6 @@ font-size:16px;
 </div>
 </section>
 </main>
-
 <script>
 //漢堡選單
 const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -609,44 +643,50 @@ item.addEventListener('click', () => {
 mobileMenu.classList.remove('open');
 });
 });
-
 //雙語切換
 let currentLang = "zh";
 const langBtn = document.getElementById("langSwitch");
-
 function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('siteLang', lang);
-    langBtn.textContent = lang === "zh" ? "EN" : "中文";
-    document.querySelectorAll("[data-zh][data-en]").forEach(el => {
-        const targetText = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
-        let textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim() !== '');
-        if(textNode){
-            textNode.textContent = targetText;
-        }else{
-            el.prepend(document.createTextNode(targetText));
-        }
-    });
+currentLang = lang;
+localStorage.setItem('siteLang', lang);
+langBtn.textContent = lang === "zh" ? "EN" : "中文";
+
+// 公司名：切英文強制 CM software development，中文還原 data‑zh
+document.querySelector(".company-name").innerText = lang === "en"
+? "CM software development"
+: document.querySelector(".company-name").getAttribute("data-zh");
+
+document.querySelectorAll("[data-zh][data-en]").forEach(el => {
+// 跳過公司名，上面已經單獨處理
+if(el.classList.contains("company-name")) return;
+const targetText = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+let textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim() !== '');
+if(textNode){
+textNode.textContent = targetText;
+}else{
+el.prepend(document.createTextNode(targetText));
 }
-
-langBtn.addEventListener("click", () => {
-    setLanguage(currentLang === "zh" ? "en" : "zh");
 });
-
+}
+langBtn.addEventListener("click", () => {
+setLanguage(currentLang === "zh" ? "en" : "zh");
+});
 //讀取本地記憶語言
 const savedLang = localStorage.getItem('siteLang');
 if(savedLang){
-    setLanguage(savedLang);
+setLanguage(savedLang);
 }
 </script>
-
 <a href="https://wa.me/85253663058?text=您好，我想查詢軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp聯絡">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 <footer>
 <p data-zh="品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。" data-en="Brand story: We help entrepreneurs realise ideas, turning business concepts into working software.">品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。</p>
 <br>
-<p data-zh="關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。" data-en="About us: Full‑stack developers focusing on custom App & software development, no templates, hand‑craft every project.">關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
+<p data-zh="關於我們：我們是全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。" data-en="About us: Full‑stack developers focusing on custom App & software development, no templates, hand‑craft every project.">關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
+<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
+<p data-en>@HKCM Technology. All Rights Reserved.</p>
+
 </footer>
 </body>
 </html>
