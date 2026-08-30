@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-zh>項目作品 | 晟銘科技app軟件開發</title>
-<title data-en>Project Works | Shengming Tech App Development</title>
+<title data-en>Project Works | CM software development</title>
 <meta name="description" content="晟铭科技精選項目作品，APP與全棧軟件開發案例展示">
 <meta name="keywords" content="軟件開發,APP開發,香港,項目案例">
 <meta name="geo.region" content="HK">
@@ -99,6 +99,12 @@ font-size:20px;
 font-weight:700;
 white-space:nowrap;
 }
+/* 英文模式下強制簡寫，避免擠壓漢堡按鈕 */
+html.en .logo [data-en] {
+font-size: 17px !important;
+letter-spacing:1px;
+}
+
 .header-right{
 display:flex;
 align-items:center;
@@ -193,6 +199,33 @@ font-size:22px;
 color:var(--text-muted);
 text-decoration:none;
 }
+
+/* ========== 媒體查詢：992px以下（手機）隱藏頂部導航，顯示漢堡 ========== */
+@media (max-width: 992px){
+.desktop-nav, .social-header{
+display:none !important;
+}
+.hamburger{
+display:block !important;
+}
+.header-right{
+gap:12px;
+}
+/* 手機端英文logo再縮小，徹底防止擠壓漢堡按鈕 */
+html.en .logo [data-en] {
+font-size: 14px !important;
+}
+}
+/* 平板與電腦 >992px：保留頁頭導航完全可見，不會隱藏 */
+@media (min-width: 993px) {
+.desktop-nav {
+display:block !important;
+}
+.hamburger {
+display:none !important;
+}
+}
+
 main {
 padding-top: 120px;
 padding-bottom: 80px;
@@ -286,7 +319,8 @@ html.en [data-en]{display:unset;}
 <a href="./index.html#home" class="logo" title="返回首頁">
 <img src="logo.JPG" alt="晟銘科技 App開發">
 <span data-zh>晟銘科技 App軟件開發</span>
-<span data-en>Shengming Tech App Development</span>
+<!--切換英文全程顯示簡寫 CM software development -->
+<span data-en>CM software development</span>
 </a>
 <div class="header-right">
 <!-- 電腦/平板端順序：語言按鈕 → 導航 → 社交 -->
@@ -495,8 +529,11 @@ allowfullscreen>
 <p data-zh>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
 <p data-en>Brand Story: We help founders turn ideas into real-world software products.</p>
 <br>
-<p data-zh>關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+<p data-zh>關於我們：我們是全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
 <p data-en>About Us: Full-stack developers focusing on custom App & software development, no templates, hand-crafted solutions.</p>
+<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
+<p data-en>@HKCM Technology. All Rights Reserved.</p>
+
 </footer>
 <script>
 //漢堡菜單開關
