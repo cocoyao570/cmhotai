@@ -3,43 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- SEO & GEO Meta Tags -->
-<title>晟铭科技｜常見問題FAQ｜App軟件開發</title>
+<title data-zh="晟铭科技｜常見問題FAQ｜App軟件開發" data-en="Shengming Tech | FAQ | App Development">晟铭科技｜常見問題FAQ｜App軟件開發</title>
 <meta name="description" content="晟铭科技常見問題，關於App開發、報價、工期、程式碼所有權、售後維護、項目簽約等問題解答，香港軟件開發公司。">
 <meta name="keywords" content="軟件開發FAQ,App開發問題,報價,程式碼所有權,香港軟件公司">
 <meta name="geo.region" content="HK">
 <meta name="geo.placename" content="Hong Kong">
-<!-- Open Graph / Social Media -->
+
 <meta property="og:title" content="晟铭科技｜常見問題FAQ">
 <meta property="og:description" content="App與軟件定製開發常見問題一覽。">
 <meta property="og:type" content="website">
 
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
-<!-- FontAwesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 
 <style>
 :root {
---bg-color: #f8fafc;            /* 質感淺藍灰現代底色 */
---card-bg: rgba(255, 255, 255, 0.75); /* 輕盈白玻璃卡片底色 */
---primary-glow: #00a3ff;        /* 科技藍 */
---secondary-glow: #8b5cf6;      /* 現代感紫色光暈 */
---text-main: #111827;           /* 極深藍黑文字 */
---text-muted: #4b5563;          /* 太空灰副標題文字 */
+--bg-color: #f8fafc;
+--card-bg: rgba(255, 255, 255, 0.75);
+--primary-glow: #00a3ff;
+--secondary-glow: #8b5cf6;
+--text-main: #111827;
+--text-muted: #4b5563;
 --accent: #00a3ff;
 --transition: all 0.3s ease;
 }
-
 
 * {
 box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
-
 
 body {
 background-color: var(--bg-color);
@@ -49,8 +42,6 @@ overflow-x: hidden;
 line-height: 1.6;
 }
 
-
-/* 科技風動態背景光暈 */
 body::before {
 content: '';
 position: fixed;
@@ -62,7 +53,6 @@ background: radial-gradient(circle, rgba(0, 243, 255, 0.15), transparent 70%);
 z-index: -1;
 filter: blur(80px);
 }
-
 
 body::after {
 content: '';
@@ -76,8 +66,6 @@ z-index: -1;
 filter: blur(80px);
 }
 
-
-/* 頁頭 Header */
 header {
 position: fixed;
 top: 0;
@@ -92,7 +80,6 @@ backdrop-filter: blur(10px);
 border-bottom: 1px solid rgba(0, 163, 255, 0.15);
 z-index: 1000;
 }
-
 
 .logo {
 font-family: 'Orbitron', sans-serif;
@@ -125,15 +112,19 @@ font-weight: 700;
 white-space: nowrap;
 }
 
+.header-right{
+display:flex;
+align-items:center;
+gap:24px;
+}
 
-nav ul {
+.desktop-nav ul {
 display: flex;
 list-style: none;
 gap: 30px;
 }
 
-
-nav a {
+.desktop-nav a {
 color: var(--text-muted);
 text-decoration: none;
 font-weight: 400;
@@ -141,24 +132,94 @@ transition: var(--transition);
 font-size: 0.95rem;
 }
 
-
-nav a:hover, nav a.active {
+.desktop-nav a:hover, .desktop-nav a.active {
 color: var(--primary-glow);
-text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+text-shadow: 0 0 8px rgba(0,243,255,0.6);
 }
 
+.social-header a{
+color:var(--text-muted);
+font-size:20px;
+margin:0 8px;
+transition:var(--transition);
+text-decoration:none;
+}
+.social-header a:hover{
+color:var(--primary-glow);
+text-shadow:0 0 8px rgba(0,243,255,0.6);
+}
 
-/* 主內容容器 */
+.lang-btn{
+border:1px solid var(--text-muted);
+background:transparent;
+color:var(--text-muted);
+padding:4px 10px;
+border-radius:4px;
+cursor:pointer;
+font-size:14px;
+transition:var(--transition);
+}
+.lang-btn:hover{
+border-color:var(--primary-glow);
+color:var(--primary-glow);
+text-shadow:0 0 6px rgba(0,243,255,0.4);
+}
+
+.hamburger{
+display:none;
+font-size:26px;
+background:none;
+border:none;
+color:var(--text-muted);
+cursor:pointer;
+padding:4px;
+}
+
+.mobile-menu{
+display:none;
+position:fixed;
+top:72px;
+left:0;
+width:100%;
+background:rgba(255,255,255,0.97);
+backdrop-filter:blur(12px);
+padding:28px 5%;
+border-bottom:1px solid rgba(0,163,255,0.15);
+z-index:999;
+}
+.mobile-menu.open{
+display:block;
+}
+.mobile-menu ul{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:18px;
+margin-bottom:24px;
+}
+.mobile-menu a{
+font-size:18px;
+color:var(--text-main);
+text-decoration:none;
+}
+.mobile-social{
+display:flex;
+gap:16px;
+font-size:22px;
+}
+.mobile-social a{
+color:var(--text-muted);
+text-decoration:none;
+}
+
 main {
 padding-top: 100px;
 }
-
 
 section {
 padding: 80px 10%;
 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 
 h2.section-title {
 font-family: 'Orbitron', sans-serif;
@@ -170,14 +231,11 @@ background: linear-gradient(90deg, #111827, var(--primary-glow));
 letter-spacing: 1px;
 }
 
-
-/* FAQ 摺疊區塊 */
 .faq-list {
 width: 100%;
 max-width: 850px;
 margin:40px auto 0;
 }
-
 
 .faq-item {
 background: var(--card-bg);
@@ -188,7 +246,6 @@ overflow: hidden;
 backdrop-filter: blur(5px);
 }
 
-
 .faq-question {
 padding: 20px;
 font-weight: 700;
@@ -198,7 +255,6 @@ justify-content: space-between;
 align-items: center;
 }
 
-
 .faq-answer {
 padding: 0 20px 20px;
 color: var(--text-muted);
@@ -206,12 +262,10 @@ font-size: 0.95rem;
 display: none;
 }
 
-
 .block-bottom-btn-wrap{
 margin-top:50px;
 text-align:center;
 }
-
 
 .btn-sci-fi {
 display: inline-block;
@@ -231,15 +285,12 @@ box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
 border-radius: 4px;
 }
 
-
 .btn-sci-fi:hover {
 background: var(--primary-glow);
 color: var(--bg-color);
 box-shadow: 0 0 25px var(--primary-glow);
 }
 
-
-/* 浮動 WhatsApp 按鈕 */
 .whatsapp-float {
 position: fixed;
 bottom: 30px;
@@ -259,14 +310,11 @@ transition: var(--transition);
 text-decoration: none;
 }
 
-
 .whatsapp-float:hover {
 transform: scale(1.1);
 box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
 }
 
-
-/* 頁腳 Footer */
 footer {
 padding: 40px 10%;
 background: rgba(248, 250, 252, 0.9);
@@ -276,11 +324,12 @@ color: var(--text-muted);
 font-size: 0.9rem;
 }
 
-
-/* 響應式調整 */
 @media (max-width: 768px) {
-nav ul {
-display: none;
+.desktop-nav, .social-header{
+display:none !important;
+}
+.hamburger{
+display:block;
 }
 h2.section-title {
 font-size: 1.8rem;
@@ -299,148 +348,199 @@ font-size:16px;
 </head>
 <body>
 
-
-<!-- 頁頭（已替換為真實logo圖片） -->
 <header>
 <a href="index.html#home" class="logo" title="返回首頁">
 <img src="./logo.JPG" alt="晟銘科技 App開發">
-<span>晟銘科技 App軟件開發</span>
+<span data-zh="晟銘科技 App軟件開發" data-en="Shengming Tech App Dev">晟銘科技 App軟件開發</span>
 </a>
-<nav>
+
+<div class="header-right">
+<button class="lang-btn" id="langSwitch">EN</button>
+
+<nav class="desktop-nav">
 <ul>
-<li><a href="index.html#home">首頁</a></li>
-<li><a href="./works.html">作品</a></li>
-<li><a href="./service.html">服務項目</a></li>
-<li><a href="./faq.html" class="active">FAQ</a></li>
-<li><a href="index.html#contact">聯絡我們</a></li>
+<li><a href="index.html#home" data-zh="首頁" data-en="Home">首頁</a></li>
+<li><a href="./work.html" data-zh="作品" data-en="Works">作品</a></li>
+<li><a href="./service.html" data-zh="服務項目" data-en="Services">服務項目</a></li>
+<li><a href="./faq.html" class="active" data-zh="FAQ" data-en="FAQ">FAQ</a></li>
+<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact">聯絡我們</a></li>
 </ul>
 </nav>
+
+<div class="social-header">
+<a href="https://facebook.com/ycweb/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
+<a href="https://www.instagram.com/cm__app_development/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+<i class="fa-brands fa-instagram"></i>
+</a>
+</div>
+
+<button class="hamburger" id="hamburgerBtn">
+<i class="fas fa-bars"></i>
+</button>
+</div>
 </header>
 
+<div class="mobile-menu" id="mobileMenu">
+<ul>
+<li><a href="index.html#home" data-zh="首頁" data-en="Home">首頁</a></li>
+<li><a href="./work.html" data-zh="作品" data-en="Works">作品</a></li>
+<li><a href="./service.html" data-zh="服務項目" data-en="Services">服務項目</a></li>
+<li><a href="./faq.html" class="active" data-zh="FAQ" data-en="FAQ">FAQ</a></li>
+<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact">聯絡我們</a></li>
+</ul>
+<div class="mobile-social">
+<a href="https://facebook.com/ycweb/" target="_blank" rel="noopener noreferrer">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
+<a href="https://www.instagram.com/cm__app_development/" target="_blank" rel="noopener noreferrer">
+<i class="fa-brands fa-instagram"></i>
+</a>
+</div>
+</div>
 
 <main>
 <section>
 <div style="text-align:center;">
-<h2 class="section-title">常見問題 (FAQ)</h2>
-<p style="color:var(--text-muted);max-width:700px;margin:0 auto;">整理客戶最常詢問的開發相關問題，如果這裡找不到答案，歡迎聯繫我們諮詢。</p>
+<h2 class="section-title" data-zh="常見問題 (FAQ)" data-en="Frequently Asked Questions">常見問題 (FAQ)</h2>
+<p style="color:var(--text-muted);max-width:700px;margin:0 auto;" data-zh="整理客戶最常詢問的開發相關問題，如果這裡找不到答案，歡迎聯繫我們諮詢。" data-en="Here are common questions about development. If you cannot find your answer, feel free to contact us.">整理客戶最常詢問的開發相關問題，如果這裡找不到答案，歡迎聯繫我們諮詢。</p>
 </div>
-
 
 <div class="faq-list">
 <div class="faq-item">
-<div class="faq-question">開發一個專案通常需要多少時間？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</div>
+<div class="faq-question" data-zh="開發一個專案通常需要多少時間？" data-en="How long does a project take?">開發一個專案通常需要多少時間？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。" data-en="Project duration depends on complexity. Small‑to‑medium apps take 4‑8 weeks, large AI systems may take over 3 months. We provide an accurate timeline during evaluation.">項目週期取決於複雜度。一般中小型企業應用約需 4 至 8 週，而大型 AI 系統整合則需 3 個月以上。我們會在需求評估階段提供精準的時間表。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">你們提供售後維護與技術支援嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</div>
+<div class="faq-question" data-zh="你們提供售後維護與技術支援嗎？" data-en="Do you provide after‑sales support?">你們提供售後維護與技術支援嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。" data-en="Yes, all delivered software comes with warranty. We also provide 7×24 cloud monitoring and long‑term maintenance plans.">是的，所有交付的軟件均享有完善的售後保固期，並提供 7x24 的雲端監控與長期的技術升級維護方案。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">如何確保項目的程式碼安全與商業機密？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</div>
+<div class="faq-question" data-zh="如何確保項目的程式碼安全與商業機密？" data-en="How do you protect code and business confidentiality?">如何確保項目的程式碼安全與商業機密？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。" data-en="We sign NDA before cooperation. All source code belongs fully to the client upon delivery.">我們在合作前會簽署嚴格的保密協議 (NDA)，且所有代碼資產在交付後全權歸客戶所有，確保最高的安全性。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">App開發大約預算範圍是多少？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">簡單工具類App由數萬起，帶會員、支付、後台管理的商業App會依功能規模向上浮動。需要您提供功能清單，我們才可以給出精確報價。</div>
+<div class="faq-question" data-zh="App開發大約預算範圍是多少？" data-en="What is the budget range for App development?">App開發大約預算範圍是多少？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="簡單工具類App由數萬起，帶會員、支付、後台管理的商業App會依功能規模向上浮動。需要您提供功能清單，我們才可以給出精確報價。" data-en="Simple tool‑style apps start from tens of thousands. Commercial apps with membership, payment and backend vary by scope. Provide your feature list for an accurate quote.">簡單工具類App由數萬起，帶會員、支付、後台管理的商業App會依功能規模向上浮動。需要您提供功能清單，我們才可以給出精確報價。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">做完之後原始程式碼會交給我嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">合約約定交付完成後，全部原始程式碼、設計源檔、數據庫腳本都會完整移交客戶，後續您可以找其他團隊繼續二次開發。</div>
+<div class="faq-question" data-zh="做完之後原始程式碼會交給我嗎？" data-en="Will I get the source code after completion?">做完之後原始程式碼會交給我嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="合約約定交付完成後，全部原始程式碼、設計源檔、數據庫腳本都會完整移交客戶，後續您可以找其他團隊繼續二次開發。" data-en="Upon delivery, full source code, design assets and database scripts are handed over. You may hire other teams for further development.">合約約定交付完成後，全部原始程式碼、設計源檔、數據庫腳本都會完整移交客戶，後續您可以找其他團隊繼續二次開發。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">可以只做Android或者只做iOS單一平台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以，支持只開發單一平台。多數商業項目建議雙平台同時開發，覆蓋更多用戶。</div>
+<div class="faq-question" data-zh="可以只做Android或者只做iOS單一平台嗎？" data-en="Can you build only Android or only iOS?">可以只做Android或者只做iOS單一平台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以，支持只開發單一平台。多數商業項目建議雙平台同時開發，覆蓋更多用戶。" data-en="Yes, single‑platform development is supported. Most commercial projects recommend building both platforms for wider coverage.">可以，支持只開發單一平台。多數商業項目建議雙平台同時開發，覆蓋更多用戶。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">App如何上架到Apple App Store以及Google Play？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">需要客戶擁有對應開發者帳號，我們負責打包、上架素材準備、提交審核；審核由平台官方負責，我們協助處理審核被駁回的調整。</div>
+<div class="faq-question" data-zh="App如何上架到Apple App Store以及Google Play？" data-en="How to publish App to App Store and Google Play?">App如何上架到Apple App Store以及Google Play？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="需要客戶擁有對應開發者帳號，我們負責打包、上架素材準備、提交審核；審核由平台官方負責，我們協助處理審核被駁回的調整。" data-en="Client needs developer accounts. We handle build, assets and submission. Platform performs review, we assist on rejection fixes.">需要客戶擁有對應開發者帳號，我們負責打包、上架素材準備、提交審核；審核由平台官方負責，我們協助處理審核被駁回的調整。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">項目中途想要新增功能要如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">需求變更會另外評估工時與報價，簽署變更單後再進行開發；合約內原始範圍的功能免費調整。</div>
+<div class="faq-question" data-zh="項目中途想要新增功能要如何處理？" data-en="What if I want new features mid‑project?">項目中途想要新增功能要如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="需求變更會另外評估工時與報價，簽署變更單後再進行開發；合約內原始範圍的功能免費調整。" data-en="Change requests are quoted separately after scope review. Original contract scope adjustments are free of charge.">需求變更會另外評估工時與報價，簽署變更單後再進行開發；合約內原始範圍的功能免費調整。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">還沒有完整產品構想，可以先諮詢嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以，歡迎免費前期溝通，我們協助梳理業務邏輯、建議可行技術方案，不用先付費。</div>
+<div class="faq-question" data-zh="還沒有完整產品構想，可以先諮詢嗎？" data-en="Can I consult without a complete product idea?">還沒有完整產品構想，可以先諮詢嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以，歡迎免費前期溝通，我們協助梳理業務邏輯、建議可行技術方案，不用先付費。" data-en="Free pre‑project consultation available. We help sort business logic and propose technical solutions with no upfront payment.">可以，歡迎免費前期溝通，我們協助梳理業務邏輯、建議可行技術方案，不用先付費。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">是否可以先出原型，確認之後再寫程式？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以，流程包含UI原型階段，畫面流程確認完畢，才進入實際編碼，避免後期大規模改動。</div>
+<div class="faq-question" data-zh="是否可以先出原型，確認之後再寫程式？" data-en="Can you make prototype before actual coding?">是否可以先出原型，確認之後再寫程式？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以，流程包含UI原型階段，畫面流程確認完畢，才進入實際編碼，避免後期大規模改動。" data-en="UI prototype phase is included. Coding starts only after prototype approval to avoid heavy rework later.">可以，流程包含UI原型階段，畫面流程確認完畢，才進入實際編碼，避免後期大規模改動。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">伺服器是你們提供，還是客戶自己購買？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">兩種模式都支持：可協助代租雲伺服器，也可以使用客戶本身已有的雲端帳號。</div>
+<div class="faq-question" data-zh="伺服器是你們提供，還是客戶自己購買？" data-en="Do you provide server or does client purchase it?">伺服器是你們提供，還是客戶自己購買？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="兩種模式都支持：可協助代租雲伺服器，也可以使用客戶本身已有的雲端帳號。" data-en="Both options available: we can help rent cloud servers or use client’s existing cloud accounts.">兩種模式都支持：可協助代租雲伺服器，也可以使用客戶本身已有的雲端帳號。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">香港本地伺服器與海外伺服器如何選擇？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">主要用戶在香港就建議香港節點；面向全球用戶則選多節點CDN加速，我們會給出合適建議。</div>
+<div class="faq-question" data-zh="香港本地伺服器與海外伺服器如何選擇？" data-en="How to choose between Hong Kong and overseas servers?">香港本地伺服器與海外伺服器如何選擇？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="主要用戶在香港就建議香港節點；面向全球用戶則選多節點CDN加速，我們會給出合適建議。" data-en="Choose HK node for local users; multi‑node CDN for global audience. We give proper recommendations.">主要用戶在香港就建議香港節點；面向全球用戶則選多節點CDN加速，我們會給出合適建議。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">你們可以做AI相關功能嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以，支援接入大語言模型、圖像識別、自動化流程、AI問答模塊，可整合進網站、App或是後台系統。</div>
+<div class="faq-question" data-zh="你們可以做AI相關功能嗎？" data-en="Can you implement AI‑powered features?">你們可以做AI相關功能嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以，支援接入大語言模型、圖像識別、自動化流程、AI問答模塊，可整合進網站、App或是後台系統。" data-en="Yes. We integrate LLM, image recognition, automation and AI chat modules into websites, Apps and backend systems.">可以，支援接入大語言模型、圖像識別、自動化流程、AI問答模塊，可整合進網站、App或是後台系統。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">專案付款方式是怎樣？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">一般採階段付款，簽約支付首期，階段交付對應階段款，全部驗收完畢支付尾數，具體會寫入合約。</div>
+<div class="faq-question" data-zh="專案付款方式是怎樣？" data-en="What is your payment term?">專案付款方式是怎樣？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="一般採階段付款，簽約支付首期，階段交付對應階段款，全部驗收完畢支付尾數，具體會寫入合約。" data-en="Phased payment: initial payment on signing, milestone payments upon delivery, final payment after full acceptance. Terms stated in contract.">一般採階段付款，簽約支付首期，階段交付對應階段款，全部驗收完畢支付尾數，具體會寫入合約。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">如果項目驗收發現bug如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">保固期內屬於合約範圍內功能缺陷，我們免費修復；新增功能、使用環境人為造成問題不在保固範圍。</div>
+<div class="faq-question" data-zh="如果項目驗收發現bug如何處理？" data-en="How do you handle bugs after acceptance?">如果項目驗收發現bug如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="保固期內屬於合約範圍內功能缺陷，我們免費修復；新增功能、使用環境人為造成問題不在保固範圍。" data-en="Contract‑scope defects get free fixes within warranty. New features and man‑made environment issues are excluded.">保固期內屬於合約範圍內功能缺陷，我們免費修復；新增功能、使用環境人為造成問題不在保固範圍。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">可以接手別間公司做一半的爛尾項目嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以，需要先拿到源碼做代碼審查，評估架構品質，再告知是否可以接手以及對應成本。</div>
+<div class="faq-question" data-zh="可以接手別間公司做一半的爛尾項目嗎？" data-en="Can you take over unfinished projects from other vendors?">可以接手別間公司做一半的爛尾項目嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以，需要先拿到源碼做代碼審查，評估架構品質，再告知是否可以接手以及對應成本。" data-en="Yes, source‑code review required first. We assess code quality then quote accordingly.">可以，需要先拿到源碼做代碼審查，評估架構品質，再告知是否可以接手以及對應成本。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">軟件完成後，會教我們員工如何操作後台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">交付時提供操作說明文件，也可以提供線上講解教學，協助內部人員快速上手管理後台。</div>
+<div class="faq-question" data-zh="軟件完成後，會教我們員工如何操作後台嗎？" data-en="Will you train our staff for backend operation?">軟件完成後，會教我們員工如何操作後台嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="交付時提供操作說明文件，也可以提供線上講解教學，協助內部人員快速上手管理後台。" data-en="Operation documents are delivered. Online training sessions available for your team to get familiar with backend.">交付時提供操作說明文件，也可以提供線上講解教學，協助內部人員快速上手管理後台。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">網站、App可以支援繁體中文、簡體多語言嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">原生支持多語言架構，繁體、簡體、英文等可以依需求配置。</div>
+<div class="faq-question" data-zh="網站、App可以支援繁體中文、簡體多語言嗎？" data-en="Do websites and Apps support multi‑language?">網站、App可以支援繁體中文、簡體多語言嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="原生支持多語言架構，繁體、簡體、英文等可以依需求配置。" data-en="Multi‑language architecture built‑in. Traditional Chinese, Simplified Chinese, English and others configurable on request.">原生支持多語言架構，繁體、簡體、英文等可以依需求配置。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">開發完成之後後續版本更新如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以簽長期維護合約，按月或按年，持續迭代新版本；也可以每次更新單獨報價。</div>
+<div class="faq-question" data-zh="開發完成之後後續版本更新如何處理？" data-en="How are future version updates handled?">開發完成之後後續版本更新如何處理？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以簽長期維護合約，按月或按年，持續迭代新版本；也可以每次更新單獨報價。" data-en="Long‑term monthly/annual maintenance contracts for continuous iteration; one‑off quotation per update is also available.">可以簽長期維護合約，按月或按年，持續迭代新版本；也可以每次更新單獨報價。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">你們的團隊技術棧是什麼？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">全棧團隊，覆蓋移動App、前端網頁、後端API、數據庫、雲端部署，一站式完成項目，不需要多方協調不同廠商。</div>
+<div class="faq-question" data-zh="你們的團隊技術棧是什麼？" data-en="What tech stack does your team use?">你們的團隊技術棧是什麼？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="全棧團隊，覆蓋移動App、前端網頁、後端API、數據庫、雲端部署，一站式完成項目，不需要多方協調不同廠商。" data-en="Full‑stack team covering mobile App, frontend web, backend API, database and cloud deployment. One‑stop delivery without multiple‑vendor coordination.">全棧團隊，覆蓋移動App、前端網頁、後端API、數據庫、雲端部署，一站式完成項目，不需要多方協調不同廠商。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">什麼情況項目會延遲工期？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">客戶反覆修改需求、確認回覆延遲、中途大量新增功能，都會影響工期，我們會及時同步風險。</div>
+<div class="faq-question" data-zh="什麼情況項目會延遲工期？" data-en="What causes project delays?">什麼情況項目會延遲工期？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="客戶反覆修改需求、確認回覆延遲、中途大量新增功能，都會影響工期，我們會及時同步風險。" data-en="Repeated requirement changes, slow feedback and mid‑scope feature additions cause delays. We keep you updated on risks.">客戶反覆修改需求、確認回覆延遲、中途大量新增功能，都會影響工期，我們會及時同步風險。</div>
 </div>
 <div class="faq-item">
-<div class="faq-question">可以先做Demo測試概念可行性嗎？ <i class="fa-solid fa-chevron-down"></i></div>
-<div class="faq-answer">可以製作最小可行性Demo，驗證商業概念，確認方向正確再投入完整開發。</div>
+<div class="faq-question" data-zh="可以先做Demo測試概念可行性嗎？" data-en="Can you build a Demo to verify concept feasibility?">可以先做Demo測試概念可行性嗎？ <i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-answer" data-zh="可以製作最小可行性Demo，驗證商業概念，確認方向正確再投入完整開發。" data-en="Minimum viable Demo can be built to validate business idea before full‑scale development.">可以製作最小可行性Demo，驗證商業概念，確認方向正確再投入完整開發。</div>
 </div>
 </div>
-
 
 <div class="block-bottom-btn-wrap">
-<a href="index.html#contact" class="btn-sci-fi">尚有疑問？立即諮詢</a>
+<a href="index.html#contact" class="btn-sci-fi" data-zh="尚有疑問？立即諮詢" data-en="Have questions? Contact us">尚有疑問？立即諮詢</a>
 </div>
 </section>
 </main>
 
-
-<!-- 浮動WhatsApp按鈕 -->
 <a href="https://wa.me/85253663058?text=您好，我想查詢貴公司的軟件開發服務" class="whatsapp-float" target="_blank" aria-label="WhatsApp 聯絡">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-
-<!-- 頁腳 -->
 <footer>
-<p>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
+<p data-zh="品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。" data-en="Brand story: We help founders turn ideas into real‑world software products.">品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
 <br>
-<p>關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
+<p data-zh="關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。" data-en="About us: Full‑stack team focusing on custom App & software development, no template reuse.">關於我們：我們是一群全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
 </footer>
 
-
 <script>
-// FAQ 展開收合
+let currentLang = "zh";
+const langBtn = document.getElementById("langSwitch");
+
+function setLanguage(lang){
+    currentLang = lang;
+    langBtn.textContent = lang === "zh" ? "EN" : "中文";
+    document.querySelectorAll("[data-zh][data-en]").forEach(el=>{
+        el.textContent = el.getAttribute(`data-${lang}`);
+    });
+}
+
+langBtn.addEventListener("click",()=>{
+    setLanguage(currentLang === "zh" ? "en" : "zh");
+});
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburgerBtn.addEventListener('click', () => {
+mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu a').forEach(item => {
+item.addEventListener('click', () => {
+mobileMenu.classList.remove('open');
+});
+});
+
 document.querySelectorAll('.faq-question').forEach(item => {
 item.addEventListener('click', () => {
 const answer = item.nextElementSibling;
@@ -450,7 +550,6 @@ answer.style.display = isOpen ? 'none' : 'block';
 });
 });
 </script>
-
 
 </body>
 </html>
