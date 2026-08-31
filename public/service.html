@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- SEO & GEO Meta Tags -->
-<title>晟铭科技｜服務項目｜App軟件開發</title>
-<meta name="description" content="晟铭科技提供App開發、自定義軟件、AI系統整合、雲端架構部署，面向香港企業提供全套軟件開發服務與完整項目流程。">
+<title>Coco Yao 服務項目｜App軟件開發</title>
+<meta name="description" content="Coco Yao 提供App開發、自定義軟件、AI系統整合、雲端架構部署，面向香港企業提供全套軟件開發服務與完整項目流程。">
 <meta name="keywords" content="軟件開發,App開發,AI系統整合,雲端部署,香港軟件公司,項目開發流程">
 <meta name="geo.region" content="HK">
 <meta name="geo.placename" content="Hong Kong">
 <!-- Open Graph -->
-<meta property="og:title" content="晟铭科技｜服務項目">
+<meta property="og:title" content="Coco Yao 服務項目">
 <meta property="og:description" content="全方位軟件工程，從需求梳理到上線維護完整服務流程。">
 <meta property="og:type" content="website">
 <!-- Google Fonts -->
@@ -90,6 +90,9 @@ display: flex;
 align-items: center;
 gap: 10px;
 transition: var(--transition);
+min-width: 0; /* 允许子元素压缩省略 */
+flex:1;
+margin-right:12px;
 }
 .logo:hover{
 text-shadow: 0 0 12px rgba(0,163,255,0.4);
@@ -99,6 +102,7 @@ height: 50px;
 width: auto;
 display: block;
 object-fit: contain;
+flex-shrink:0;
 }
 .logo span.company-name {
 display: block;
@@ -106,11 +110,14 @@ color: var(--text-main);
 font-size: 20px;
 font-weight: 700;
 white-space: nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
 .header-right{
 display:flex;
 align-items:center;
 gap:24px;
+flex-shrink:0; /* 右側區域永遠不收縮，漢堡按鈕不會被擠掉 */
 }
 .desktop-nav ul {
 display: flex;
@@ -162,6 +169,7 @@ border:none;
 color:var(--text-muted);
 cursor:pointer;
 padding:4px;
+flex-shrink:0;
 }
 .mobile-menu{
 display:none;
@@ -396,7 +404,6 @@ text-align:center;
 color:var(--text-muted);
 font-size:0.9rem;
 }
-
 /* ==========響應式規則========== */
 /* 電腦螢幕 大於1024px */
 @media (min-width: 1025px){
@@ -466,8 +473,8 @@ font-size:16px;
 <body>
 <header>
 <a href="index.html#home" class="logo" title="返回首頁">
-<img src="./logo.JPG" alt="晟銘科技 App開發">
-<span class="company-name" data-zh="晟銘科技 App軟件開發" data-en="CM software development">晟銘科技 App軟件開發</span>
+<img src="./logo.PNG" alt="Coco Yao App開發">
+<span class="company-name" data-zh="Coco Yao 獨立全棧App開發與Meta/Google精準投流" data-en="CM Software Development">Coco Yao 獨立全棧App開發與Meta/Google精準投流</span>
 </a>
 <div class="header-right">
 <button class="lang-btn" id="langSwitch">EN</button>
@@ -477,7 +484,7 @@ font-size:16px;
 <li><a href="./work.html" data-zh="作品" data-en="Works">作品</a></li>
 <li><a href="./service.html" class="active" data-zh="服務項目" data-en="Services">服務項目</a></li>
 <li><a href="./faq.html" data-zh="FAQ" data-en="FAQ">FAQ</a></li>
-<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact Us">聯絡我們</a></li>
+<li><a href="index.html#contact" data-zh="聯絡我們" data-en="Contact Us">聯絡我</a></li>
 </ul>
 </nav>
 <div class="social-header">
@@ -606,7 +613,7 @@ font-size:16px;
 </div>
 </section>
 <section id="our-solution">
-<h2 class="section-title" data-zh="我們的解決方案" data-en="Our Solutions">我們的解決方案</h2>
+<h2 class="section-title" data-zh="我們的解決方案" data-en="Our Solutions">我的解決方案</h2>
 <p style="color: var(--text-muted);" data-zh="針對以上痛點，晟銘科技給出對應解法" data-en="Shengming Tech provides targeted solutions for above pain points.">針對以上痛點，晟銘科技給出對應解法</p>
 <div class="grid-container">
 <div class="solution-card">
@@ -650,12 +657,10 @@ function setLanguage(lang) {
 currentLang = lang;
 localStorage.setItem('siteLang', lang);
 langBtn.textContent = lang === "zh" ? "EN" : "中文";
-
-// 公司名：切英文強制 CM software development，中文還原 data‑zh
+// 公司名：切英文強制 COCO YAO App Development，中文還原 data‑zh
 document.querySelector(".company-name").innerText = lang === "en"
-? "CM software development"
+? "Coco Yao App Development"
 : document.querySelector(".company-name").getAttribute("data-zh");
-
 document.querySelectorAll("[data-zh][data-en]").forEach(el => {
 // 跳過公司名，上面已經單獨處理
 if(el.classList.contains("company-name")) return;
@@ -681,12 +686,14 @@ setLanguage(savedLang);
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 <footer>
-<p data-zh="品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。" data-en="Brand story: We help entrepreneurs realise ideas, turning business concepts into working software.">品牌故事：期望幫助更多創業者落實想法，晟銘科技致力把每一個商業構想變成可用的軟件產品。</p>
+<p 
+data-zh="【官方聲明】 本網站為 Coco Yao 個人獨立開發工作室之唯一官方網站。本工作室僅提供正規網頁、企業系統、流動端 App 客製化開發及 Meta/Google 廣告代投服務。本站絕無經營任何網絡兼職、點讚刷單、虛假流量或理財投資業務，特此誠實聲明。"
+data-en="【Official Statement】This is the only official website of Coco Yao independent studio. We provide custom website, enterprise system & mobile App development, Meta/Google ad services. We DO NOT engage in part‑time online jobs, fake likes, traffic manipulation or investment finance business.">
+【官方聲明】 本網站為 Coco Yao 個人獨立開發工作室之唯一官方網站。本工作室僅提供正規網頁、企業系統、流動端 App 客製化開發及 Meta/Google 廣告代投服務。本站絕無經營任何網絡兼職、點讚刷單、虛假流量或理財投資業務，特此誠實聲明。
+</p>
 <br>
-<p data-zh="關於我們：我們是全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。" data-en="About us: Full‑stack developers focusing on custom App & software development, no templates, hand‑craft every project.">關於我們：我們是一群全棧程式開發人員，專注App與軟件客製開發，拒絕套版，親手完成每一個項目。</p>
-<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
-<p data-en>@HKCM Technology. All Rights Reserved.</p>
-
+<p data-zh>© 2026 Coco Yao. 保留所有权利。</p>
+<p data-en>© 2026 Coco Yao. All Rights Reserved.</p>
 </footer>
 </body>
 </html>
