@@ -511,7 +511,7 @@ font-size:16px;
 <body>
 <header>
 <a href="#home" class="logo">
-<img src="./logo.PNG" alt="Coco Yao App開發">
+<img src="logo.PNG" alt="Coco Yao App開發">
 <span data-zh>Coco Yao 獨立全棧App開發與Meta/Google精準投流 </span>
 <span data-en>Coco Yao App Development</span>
 </a>
@@ -595,15 +595,15 @@ font-size:16px;
 <div class="hero-slider">
 <!--第1張輪播圖，預留給你的工作相片-->
 <div class="slider-item active">
-<img src="./coco1.png" alt="我的開發工作相片1">
+<img src="coco1.png" alt="我的開發工作相片1">
 </div>
 <!--第2張輪播圖，預留給你的工作相片-->
 <div class="slider-item">
-<img src="./coco2.png" alt="我的開發工作相片2">
+<img src="coco2.png" alt="我的開發工作相片2">
 </div>
 <!--第3張輪播圖，預留給你的工作相片-->
 <div class="slider-item">
-<img src="./coco3.png" alt="我的開發工作相片3">
+<img src="coco3.png" alt="我的開發工作相片3">
 </div>
 </div>
 </div>
@@ -638,7 +638,7 @@ font-size:16px;
 </div>
 <!-- 作品3 -->
 <div class="sci-card">
-<img class="sci-card-img" src="./ISO.png" alt="作品 3｜ISO 展示官網">
+<img class="sci-card-img" src="ISO.png" alt="作品 3｜ISO 展示官網">
 <div class="sci-card-inner">
 <h3 data-zh>作品 3｜ISO 展示官網</h3>
 <h3 data-en>ISO Showcase Website</h3>
@@ -649,7 +649,7 @@ font-size:16px;
 </div>
 <!-- 作品4 預留 -->
 <div class="sci-card">
-<img class="sci-card-img" src="./app.png" alt="作品 4｜前後端分離點餐 App（影片展示）">
+<img class="sci-card-img" src="app.png" alt="作品 4｜前後端分離點餐 App（影片展示）">
 <div class="sci-card-inner">
 <h3 data-zh>作品 4｜前後端分離點餐 App（影片展示）</h3>
 <h3 data-en>Work Title 4</h3>
@@ -661,7 +661,7 @@ font-size:16px;
 </div>
 <!-- 作品5 預留 -->
 <div class="sci-card">
-<img class="sci-card-img" src="./coco yao.png" alt="作品 5｜表單型網站前台">
+<img class="sci-card-img" src="coco yao.png" alt="作品 5｜表單型網站前台">
 <div class="sci-card-inner">
 <h3 data-zh>作品 5｜表單型網站前台</h3>
 <h3 data-en>Work Title 5</h3>
@@ -673,7 +673,7 @@ MySQL 存储客戶諮詢數據，後台支援數據查閱與檔案匯出，中�
 </div>
 <!-- 作品6 預留 -->
 <div class="sci-card">
-<img class="sci-card-img" src="./hotai.png" alt="作品 6｜企業後台管理系統登入介面">
+<img class="sci-card-img" src="hotai.png" alt="作品 6｜企業後台管理系統登入介面">
 <div class="sci-card-inner">
 <h3 data-zh>作品 6｜企業後台管理系統登入介面</h3>
 <h3 data-en>Work Title 6</h3>
@@ -883,7 +883,8 @@ content:fd.get("content")
 try{
 const res = await fetch("/api/submit-inquiry",{
 method:"POST",
-headers:{"Content‑Type":"application/json"},
+headers:{"Content-Type":"application/json"},
+
 body:JSON.stringify(payload)
             });
 const ret = await res.json();
