@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- SEO & GEO Meta Tags -->
-<title data-zh>晟铭科技app軟件開發</title>
-<title data-en>CM software development</title>
-<meta name="description" content="晟铭科技app軟件開發 AI 提供頂尖的軟件開發、AI 系統整合與雲端解決方案，專為香港及全球企業打造簡約、大氣、高效能的科技產品。">
+<title data-zh>Coco Yao 獨立全棧App開發與Meta/Google精準投流</title>
+<title data-en>Coco Yao App Development</title>
+<meta name="description" content="coco app軟件開發 AI 提供頂尖的軟件開發、AI 系統整合與雲端解決方案，專為香港及全球企業打造簡約、大氣、高效能的科技產品。">
 <meta name="keywords" content="軟件開發, 應用程式開發, 人工智能, 系統整合, 網站設計, 香港科技公司">
 <meta name="geo.region" content="HK">
 <meta name="geo.placename" content="Hong Kong">
 <!-- Open Graph / Social Media -->
-<meta property="og:title" content="晟铭科技app軟件開發 AI 智能軟件開發">
+<meta property="og:title" content="Coco Yao App開發 AI 智能軟件開發">
 <meta property="og:description" content="引領未來的科技風軟件開發專家，助您實現企業數位轉型。">
 <meta property="og:type" content="website">
 <!-- Google Fonts -->
@@ -90,11 +90,14 @@ display: flex;
 align-items: center;
 gap: 10px;
 transition: var(--transition);
+flex-shrink: 1;
+min-width: 0;
 }
 .logo img{
 height:46px;
 width:auto;
 display:block;
+flex-shrink:0;
 }
 .logo span{
 color:var(--text-main);
@@ -111,6 +114,8 @@ letter-spacing:1px;
 display:flex;
 align-items:center;
 gap:24px;
+flex-shrink: 0;
+min-width: 80px;
 }
 .desktop-nav ul {
 display: flex;
@@ -163,6 +168,7 @@ border:none;
 color:var(--text-muted);
 cursor:pointer;
 padding:4px;
+flex-shrink:0;
 }
 /* 手機彈出菜單面板 */
 .mobile-menu{
@@ -210,7 +216,7 @@ display:flex !important;
 display:none !important;
 }
 }
-/* 只有小於等於992px手機：隱藏頂部導航，顯示漢堡 */
+/* 只有小於等於992px手機：隱藏頂部導航，顯示漢堡，修復logo文字擠爆漢堡 */
 @media (max-width: 992px){
 .desktop-nav, .social-header{
 display:none !important;
@@ -218,9 +224,20 @@ display:none !important;
 .hamburger{
 display:block !important;
 }
-.header-right{gap:12px;}
+.header-right{
+gap:12px;
+flex-shrink:0;
+min-width: 70px;
+}
+.logo span{
+font-size:14px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+max-width: calc(100vw - 140px);
+}
 html.en .logo span{
-font-size:14px !important;
+font-size:13px !important;
 }
 }
 /* 主內容容器 */
@@ -494,9 +511,9 @@ font-size:16px;
 <body>
 <header>
 <a href="#home" class="logo">
-<img src="logo.JPG" alt="晟铭科技 App開發">
-<span data-zh>晟銘科技 App軟件開發</span>
-<span data-en>CM software development</span>
+<img src="./logo.PNG" alt="Coco Yao App開發">
+<span data-zh>Coco Yao 獨立全棧App開發與Meta/Google精準投流 </span>
+<span data-en>Coco Yao App Development</span>
 </a>
 <div class="header-right">
 <button class="lang-btn" id="langSwitch">EN</button>
@@ -545,23 +562,48 @@ font-size:16px;
 <section id="home">
 <div class="hero-wrap">
 <div class="hero-text">
-<h1>
-<span data-zh>重塑未來</span><span data-en>Reshape Future</span>
-<span data-zh>智能軟件開發</span><span data-en>Intelligent Software Dev</span>
-</h1>
-<p data-zh>我們將前瞻性科技與極簡美學結合，為全球企業提供頂級的雲端軟件、AI 系統整合與數位轉型方案。</p>
-<p data-en>We combine forward‑looking tech & minimalist aesthetics, delivering cloud software, AI integration & digital‑transformation solutions.</p>
+<div data-zh>
+<h1>逆境，是最好的開發期。</h1>
+<p>您好，我是 Coco Yao，一名生活在香港的獨立全棧網頁與 App 個人開發者。</p>
+<p>過去我做過很多份不同工作，通過持續學習，成為了自由職業者。最近一場突如其來的骨折受傷，讓我不得不留在家中療養。</p>
+<p>身體的限制反而徹底解放了我的專注力。我決定化焦慮為拼勁，收回所有通勤與社交的時間，每天 10 小時以上 200% 專注於代碼研發。</p>
+<p>我是一人軍隊，能為您的中小企或初創團隊帶來三大核心承諾：</p>
+<ul style="padding-left:1.2rem;margin:1rem 0;">
+<li style="margin-bottom:0.6rem;"><strong>拒絕罐頭套版 (No Templates)</strong>：我精通  Next.js / Angular 前端、PHP + MySQL 後端與 HTML5/CSS3 基礎，拒絕廉價模板套版。</li>
+<li style="margin-bottom:0.6rem;"><strong>一套代碼，雙端交付</strong>：我精通跨平台原生技術，一套代碼同時交付 iOS 與 Android，直接為您省下 50% 外包預算。</li>
+<li><strong>研發至變現閉環</strong>：我兼具 Meta、Google 與 YouTube 精準投流實力。不只寫代碼，更從底層埋好 Pixel 與 CAPI 追蹤，用數據幫您開拓線上客源</li>
+</ul>
+<p>這裡沒有大公司的層層轉包與行政溢價。您與我直接對接，溝通最透明、修改最即時，每一分預算都實打實地轉化為高質量的商業增長系統。</p>
+<p>身體正在慢慢恢復，而我為您用代碼構建商業系統的腳步，現在就可以開始。</p>
+</div>
+<div data-en>
+<h1>Adversity is the best development period.</h1>
+<p>Hi, I'm Coco Yao, an independent full‑stack web & App engineer based in Hong Kong.</p>
+<p>I used to work regular 9‑to‑5 office jobs. A recent unexpected fracture disrupted everything, forcing me to recover at home and step away from traditional employment.</p>
+<p>Losing mobility brought anxiety, yet as a developer my instinct is to solve problems. I turned setbacks into opportunity. Physical limits freed my focus, so I founded my independent dev studio and take full‑time freelance projects.</p>
+<p>I can devote 200% focus to deliver for you. As an individual developer, I offer three guarantees big companies cannot match:</p>
+<ul style="padding-left:1.2rem;margin:1rem 0;">
+<li style="margin-bottom:0.6rem;"><strong>No canned templates</strong>: Proficient in Next.js(React) and Angular, plus PHP & MySQL backend. Every line is hand‑written from HTML/CSS base to complex enterprise systems, no cheap templates.</li>
+<li style="margin-bottom:0.6rem;"><strong>One codebase, two platforms</strong>: Cross‑platform native App development. One budget delivers both iOS(App Store) and Android(Google Play), saving startups up to 50% outsourcing cost.</li>
+<li><strong>Genuine cost‑efficiency</strong>: No multi‑layer outsourcing or heavy corporate overhead. You communicate directly with me. Every dollar you spend goes toward high‑quality code.</li>
+</ul>
+<p>Real capability is proven by working products. All featured projects below are built entirely by me, with public live demos you can test right now.</p>
+<p>My injury heals slowly, yet I’m ready to start building your business system with code.</p>
+</div>
 <a href="#contact" class="btn-sci-fi" data-zh>立即諮詢</a><a href="#contact" class="btn-sci-fi" data-en>Get Inquiry</a>
 </div>
 <div class="hero-slider">
+<!--第1張輪播圖，預留給你的工作相片-->
 <div class="slider-item active">
-<img src="https://picsum.photos/id/0/1200/800" alt="軟件開發專案展示">
+<img src="./coco1.png" alt="我的開發工作相片1">
 </div>
+<!--第2張輪播圖，預留給你的工作相片-->
 <div class="slider-item">
-<img src="https://picsum.photos/id/180/1200/800" alt="App移動應用">
+<img src="./coco2.png" alt="我的開發工作相片2">
 </div>
+<!--第3張輪播圖，預留給你的工作相片-->
 <div class="slider-item">
-<img src="https://picsum.photos/id/48/1200/800" alt="AI雲端系統">
+<img src="./coco3.png" alt="我的開發工作相片3">
 </div>
 </div>
 </div>
@@ -572,36 +614,78 @@ font-size:16px;
 <p style="color: var(--text-muted);" data-zh>探索我們為各行業領袖打造的高效能科技產品。</p>
 <p style="color: var(--text-muted);" data-en>Explore high‑performance tech products built for industry leaders.</p>
 <div class="grid-container">
+<!-- 作品1 -->
 <div class="sci-card">
-<img class="sci-card-img" src="https://picsum.photos/id/1/600/300" alt="Quantum AI 數據分析平台">
+<img class="sci-card-img" src="./shop.png" alt="作品 1｜購物網站（Shopify 架構）">
 <div class="sci-card-inner">
-<h3 data-zh>Quantum AI 數據分析平台</h3>
+<h3 data-zh>作品 1｜購物網站（Shopify 架構）</h3>
 <h3 data-en>Quantum AI Analytics Platform</h3>
-<p data-zh>利用尖端機器學習算法，為跨國金融企業提供即時風險預測與視覺化數據看板。</p>
+<p data-zh>前端：HTML5 + JavaScript + CSS，以 Shopify 原生架構搭建；
+使用 Shopify 生態完成商品、購物車、訂單、會員整套電商邏輯，無需自行開發後端與資料庫，快速落地商用購物網站。</p>
 <p data-en>Real‑time risk prediction & visual dashboard powered by cutting‑edge ML for multinational finance.</p>
 </div>
 </div>
+<!-- 作品2 -->
 <div class="sci-card">
-<img class="sci-card-img" src="https://picsum.photos/id/2/600/300" alt="AeroCloud 雲端協作系統">
+<img class="sci-card-img" src="./trip.png" alt="作品 2｜Trip 旅遊網站">
 <div class="sci-card-inner">
-<h3 data-zh>AeroCloud 雲端協作系統</h3>
+<h3 data-zh>作品 2｜Trip 旅遊網站</h3>
 <h3 data-en>AeroCloud Collaboration System</h3>
-<p data-zh>高併發、極速響應的企業級 SaaS 平台，優化全球團隊的遠端工作效率。</p>
+<p data-zh>前端：HTML5 + JavaScript + Tailwind CSS，純展示型網站，響應式景點、行程介面；
+僅靜態展示頁面，不含自訂後端、數據庫，電腦手機均可正常瀏覽。</p>
 <p data-en>High‑concurrency enterprise SaaS to boost remote‑team efficiency worldwide.</p>
 </div>
 </div>
+<!-- 作品3 -->
 <div class="sci-card">
-<img class="sci-card-img" src="https://picsum.photos/id/3/600/300" alt="CyberShield 區塊鏈資安系統">
+<img class="sci-card-img" src="./ISO.png" alt="作品 3｜ISO 展示官網">
 <div class="sci-card-inner">
-<h3 data-zh>CyberShield 區塊鏈資安系統</h3>
-<h3 data-en>CyberShield Blockchain Security</h3>
-<p data-zh>為高端電子商務與 Web3 項目打造的去中心化資安防護網。</p>
+<h3 data-zh>作品 3｜ISO 展示官網</h3>
+<h3 data-en>ISO Showcase Website</h3>
+<p data-zh>前端：HTML5 + JavaScript + Tailwind CSS；
+純靜態企業展示官網，做 SEO 優化，展示企業資訊、認證證書，頁面載入速度快，無後端資料庫。</p>
 <p data-en>Decentralized security network for premium e‑commerce & Web3 projects.</p>
+</div>
+</div>
+<!-- 作品4 預留 -->
+<div class="sci-card">
+<img class="sci-card-img" src="./app.png" alt="作品 4｜前後端分離點餐 App（影片展示）">
+<div class="sci-card-inner">
+<h3 data-zh>作品 4｜前後端分離點餐 App（影片展示）</h3>
+<h3 data-en>Work Title 4</h3>
+<p data-zh>APP 端：原生架構，一套架構可同時編譯輸出 iOS、Android 雙平台應用；
+後端：PHP 開發 RESTful API；
+數據庫：MySQL，處理菜單、訂單業務邏輯，標準前後端分離架構，手機端優先。</p>
+<p data-en>Work description placeholder.</p>
+</div>
+</div>
+<!-- 作品5 預留 -->
+<div class="sci-card">
+<img class="sci-card-img" src="./coco yao.png" alt="作品 5｜表單型網站前台">
+<div class="sci-card-inner">
+<h3 data-zh>作品 5｜表單型網站前台</h3>
+<h3 data-en>Work Title 5</h3>
+<p data-zh>前端：HTML5 + JavaScript + Tailwind CSS，內建前端表單驗證；
+後端：PHP API 負責接收提交資料；
+MySQL 存储客戶諮詢數據，後台支援數據查閱與檔案匯出，中小企業詢價諮詢場景。</p>
+<p data-en>Work description placeholder.</p>
+</div>
+</div>
+<!-- 作品6 預留 -->
+<div class="sci-card">
+<img class="sci-card-img" src="./hotai.png" alt="作品 6｜企業後台管理系統登入介面">
+<div class="sci-card-inner">
+<h3 data-zh>作品 6｜企業後台管理系統登入介面</h3>
+<h3 data-en>Work Title 6</h3>
+<p data-zh>前端：HTML5 + JavaScript + Tailwind CSS；
+後端：PHP 實現 Session 身份驗證、權限攔截；
+MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
+<p data-en>Work description placeholder.</p>
 </div>
 </div>
 </div>
 <div class="block-bottom-btn-wrap">
-<a href="./work.html" class="btn-sci-fi" data-zh>查看作品</a><a href="./work.html" class="btn-sci-fi" data-en>View Works</a>
+<a href="./work.html" class="btn-sci-fi" data-zh>查看作品線上版本</a><a href="./work.html" class="btn-sci-fi" data-en>View Works</a>
 </div>
 </section>
 <section id="services">
@@ -612,59 +696,37 @@ font-size:16px;
 <div class="grid-container">
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-code" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>自定義軟件開發</span><span data-en>Custom Software Dev</span></h3>
-<p data-zh>從前端到後端架構，量身打造符合企業獨特業務邏輯的高擴展性應用程式。</p>
-<p data-en>Full‑stack custom applications built to match your unique business logic.</p>
+<h3><i class="fa-solid fa-globe" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>🌐 1. 網頁前端開發 (Web Frontend) —— 雙主流架構</span><span data-en>🌐 1. Web Frontend — Dual mainstream architecture</span></h3>
+<p data-zh>從最底層的紮實基本功，到現代高效能的前端渲染，提供完美流暢的用戶體驗：<br><br>先進前端框架：精通 Next.js (React) 網頁高性能渲染，以及 Angular 企業級架構。不論是注重 SEO 的極速品牌官網，還是高複雜度的企業管理後台（CMS/Dashboard），皆能精準交付。<br><br>核心開發基礎：精通 HTML5 / CSS3 / JavaScript (ES6+) 原生開發，採用標準語義化代碼，確保網站結構穩固、代碼輕量、加載極速。<br><br>視覺與響應式：深諳 Tailwind CSS 與響應式網頁設計（RWD），確保網頁在 iPhone、Android 手機、iPad 及 PC 電腦屏幕上皆能完美適配，畫面絕不走樣。</p>
+<p data-en>Solid low‑level foundation plus modern high‑performance rendering for smooth user experience.<br><br>Skilled in Next.js(React) high‑speed rendering and Angular enterprise‑grade framework. Deliver SEO‑friendly brand sites and complex enterprise dashboards.<br><br>Pure HTML5/CSS3/JavaScript(ES6+) semantic coding for lightweight, fast‑loading pages.<br><br>Tailwind CSS & responsive RWD design, perfect display across iPhone, Android, iPad and desktop PC.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-brain" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>AI 與大數據整合</span><span data-en>AI & Big‑Data Integration</span></h3>
-<p data-zh>導入大語言模型與自動化工作流，提升企業運營效率與智能化水平。</p>
-<p data-en>LLM & automated workflows to upgrade enterprise‑level intelligence & efficiency.</p>
+<h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>📲 2. 流動端 App 開發 (Mobile Application) —— 雙平台原生交付</span><span data-en>📲 2. Mobile App Development — Cross‑platform native delivery</span></h3>
+<p data-zh>打破傳統大公司分開開發的昂貴壁壘，用尖端的跨平台原生技術為客戶創造最高性價比：<br><br>跨平台原生研發：精通現代流動端跨平台開發技術。<br><br>一套代碼，雙端交付：只需一次開發預算，即可一人同時完美交付 iOS (App Store) 與 Android (Google Play) 雙系統原生應用。<br><br>商業核心價值：比起傳統分開尋找 iOS/Android 工程師，能為中小企及初創團隊直接節省高達 50% 的外包本金與開發週期。</p>
+<p data-en>Break high cost barriers of big‑company separated development.<br><br>Master modern cross‑platform native mobile technology.<br><br>One single budget delivers native iOS(App Store) plus Android(Google Play).<br><br>Save up to 50% outsourcing budget & development cycle for startups and SMEs.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>雲端架構與優化</span><span data-en>Cloud Architecture & Optimization</span></h3>
-<p data-zh>提供 AWS / GCP 雲端架構設計、負載平衡及高安全性防護部署服務。</p>
-<p data-en>AWS/GCP architecture design, load‑balancing & secure production deployment.</p>
+<h3><i class="fa-solid fa-database" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>🗄️ 3. 後端與數據庫 (Backend & Database) —— 穩固的數據鐵三角</span><span data-en>🗄️ 3. Backend & Database — Reliable data infrastructure</span></h3>
+<p data-zh>拒絕廉價、不安全的罐頭系統，以最成熟、穩定的企業級架構保障核心資安：<br><br>後端核心開發：精通 PHP (Laravel / 核心架構開發) 兩大核心，確保系統邏輯嚴謹、具備高併發處理能力且易於長期維護。<br><br>數據庫設計：深諳 MySQL 數據庫的高擴展性設計、索引優化與高效查詢。<br><br>系統資安防護：精通 RESTful API 安全整合、嚴格的資料加密與防 SQL 注入技術（SQL Injection Prevention），確保企業的核心商業客戶資料絕不外洩。</p>
+<p data-en>Reject cheap unsafe template systems. Mature enterprise‑grade architecture for data security.<br><br>PHP(Laravel) backend development for strict logic, high concurrency and long‑term maintainability.<br><br>MySQL scalable schema design, index tuning and efficient query.<br><br>Secure RESTful API integration, data encryption and SQL‑injection protection to safeguard business data.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-location-dot" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>GEO地區定位優化</span><span data-en>GEO Location Optimization</span></h3>
-<p data-zh>針對香港及海外做地區權重、在地流量優化，精準匹配本地客群，提升區域搜尋排名。</p>
-<p data-en>Optimize regional weight and local traffic for HK and overseas, improve regional search rankings.</p>
+<h3><i class="fa-solid fa-cloud" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>☁️ 4. 雲端部署與監控 (DevOps & Cloud) —— 一站式託管運維</span><span data-en>☁️ 4. DevOps & Cloud — All‑in‑one hosting & maintenance</span></h3>
+<p data-zh>不只負責寫代碼，更能一人搞定上線與安全防護，解決客戶的長期運維焦慮：<br><br>雲端架構部署：熟悉 AWS、GCP 雲端伺服器搭建、負載平衡及高安全性防護配置。<br><br>現代化託管：精通採用 Docker 容器化技術，並熟練運用 Railway 等現代雲端平台進行極速託管、部署與 7x24 小時的雲端效能監控。</p>
+<p data-en>Not only coding, but full deployment & security to remove long‑term maintenance worries.<br><br>AWS/GCP server setup, load‑balancing and hardening.<br><br>Docker containerization, Railway and modern platforms for fast deployment plus 7×24 performance monitoring.</p>
 </div>
 </div>
 <div class="sci-card">
 <div class="sci-card-inner">
-<h3><i class="fa-solid fa-magnifying-glass-chart" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>SEO搜尋引擎優化</span><span data-en>SEO Search Engine Optimization</span></h3>
-<p data-zh>網站全方位SEO，關鍵詞、結構與收錄優化，穩定提升自然搜尋流量與品牌曝光。</p>
-<p data-en>Full‑site SEO, keyword & index optimization to steadily boost organic search traffic.</p>
-</div>
-</div>
-<!-- 新增服務 -->
-<div class="sci-card">
-<div class="sci-card-inner">
-<h3><i class="fa-solid fa-palette" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>廣告素材製作</span><span data-en>Advertising Production</span></h3>
-<p data-zh>商業海報、宣傳圖、短片素材與品牌視覺包裝，按營銷場景定製，提升廣告轉換。</p>
-<p data-en>Commercial posters, promo visuals, short‑video materials and brand visual packaging for marketing scenarios.</p>
-</div>
-</div>
-<div class="sci-card">
-<div class="sci-card-inner">
-<h3><i class="fa-brands fa-meta" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>Meta社交平台推廣</span><span data-en>Meta Platform Promotion</span></h3>
-<p data-zh>Facebook、IG廣告投放優化、受眾定位，適合香港本地與海外社交電商引流獲客。</p>
-<p data-en>Facebook & Instagram ads optimization, audience targeting for HK local and overseas social‑commerce traffic.</p>
-</div>
-</div>
-<div class="sci-card">
-<div class="sci-card-inner">
-<h3><i class="fa-brands fa-youtube" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>YouTube / Google 搜尋推廣</span><span data-en>YouTube & Google Ads Promotion</span></h3>
-<p data-zh>Google關鍵詞、YouTube影片廣告投放優化，搶佔海外搜尋流量，提高詢單轉化。</p>
-<p data-en>Google keyword ads & YouTube video ads optimization to capture overseas search traffic and boost inquiries.</p>
+<h3><i class="fa-solid fa-rocket" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>🚀 5. 商業精準投流與流量增長 (Growth Hacking & Ad Optimization) —— 研發到變現閉環</span><span data-en>🚀 5. Growth & Ad Optimization — Build‑to‑monetize full loop</span></h3>
+<p data-zh>【市場罕見優勢】 拒絕只寫代碼的「工具人」定位，擁有從 0 搭建系統到精準獲客的商業落地能力：<br><br>Meta 全渠道投流：精通 Meta Ads（Facebook & Instagram） 廣告投放。利用全棧技術優勢，親手在代碼層完美對接 Meta Pixel 與 Conversion API (CAPI)，突破第三方隱私限制，精準追蹤用戶行為（漏斗模型優化），大幅提升 ROAS（廣告投資回報率）。<br><br>Google & YouTube 關鍵字與影音投流：深諳 Google Ads 精準關鍵字（Search）、PMax 全景廣告及 YouTube 影音廣告投放。結合前端 Next.js / HTML5 的極致 SEO 代碼優化，打造「自然搜尋流量 + 付費精準流量」的雙引擎增長模式。<br><br>數據驅動決策：熟練運用 Google Analytics 4 (GA4)、Google Tag Manager (GTM) 進行深度的漏斗轉化率分析，用真實的商業數據（非虛榮指標）幫老闆增加網店（E‑commerce）與 App 的營業額。</p>
+<p data-en>【Rare advantage】More than pure coding engineer: end‑to‑end capability from zero‑to‑build to customer acquisition.<br><br>Meta Ads(Facebook/Instagram), native‑code Meta Pixel & Conversion‑API integration to bypass privacy limits, track funnels and lift ROAS.<br><br>Google Ads Search, PMax & YouTube ads, plus Next.js / HTML5 SEO optimization for organic + paid dual‑engine traffic growth.<br><br>GA4 & GTM funnel analysis. Use real business metrics to boost e‑commerce & App revenue.</p>
 </div>
 </div>
 </div>
@@ -745,13 +807,11 @@ font-size:16px;
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 <footer>
-<p data-zh>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
-<p data-en>Brand Story: We help founders turn ideas into real‑world software products.</p>
+<p data-zh>【官方聲明】 本網站為 Coco Yao 個人獨立開發工作室之唯一官方網站。本工作室僅提供正規網頁、企業系統、流動端 App 客製化開發及 Meta/Google 廣告代投服務。本站絕無經營任何網絡兼職、點讚刷單、虛假流量或理財投資業務，特此誠實聲明。</p>
+<p data-en>[Official Statement] This website is the only official website of Coco Yao's independent development studio. This studio only provides customized development of legitimate websites, enterprise systems, and mobile apps, as well as Meta/Google ad placement services. This site absolutely does not engage in any online part‑time jobs, fake likes/orders, fraudulent traffic, or financial investment businesses. This is a formal declaration of honesty..</p>
 <br>
-<p data-zh>關於我們：我們是全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
-<p data-en>About Us: Full‑stack developers focusing on custom App & software development, no templates, hand‑crafted solutions.</p>
-<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
-<p data-en>@HKCM Technology. All Rights Reserved.</p>
+<p data-zh>© 2026 Coco Yao. 保留所有权利。</p>
+<p data-en>© 2026 Coco Yao. All Rights Reserved.</p>
 </footer>
 <script>
 //漢堡菜單開關
