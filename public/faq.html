@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-zh>晟铭科技｜常見問題FAQ｜App軟件開發</title>
-<title data-en>CM Tech | FAQ | App Development</title>
-<meta name="description" content="晟铭科技常見問題，關於App開發、報價、工期、程式碼所有權、售後維護、項目簽約等問題解答，香港軟件開發公司。">
+<title data-zh>Coco Yao ｜常見問題FAQ｜App軟件開發</title>
+<title data-en>Coco Yao | FAQ | App Development</title>
+<meta name="description" content="Coco Yao 常見問題，關於App開發、報價、工期、程式碼所有權、售後維護、項目簽約等問題解答，香港軟件開發公司。">
 <meta name="keywords" content="軟件開發FAQ,App開發問題,報價,程式碼所有權,香港軟件公司">
 <meta name="geo.region" content="HK">
 <meta name="geo.placename" content="Hong Kong">
-<meta property="og:title" content="晟铭科技｜常見問題FAQ">
+<meta property="og:title" content="Coco Yao ｜常見問題FAQ">
 <meta property="og:description" content="App與軟件定製開發常見問題一覽。">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
@@ -84,6 +84,7 @@ display: flex;
 align-items: center;
 gap: 10px;
 transition: var(--transition);
+flex-shrink:1;
 }
 .logo:hover{
 text-shadow: 0 0 12px rgba(0,163,255,0.4);
@@ -93,16 +94,22 @@ height: 50px;
 width: auto;
 display: block;
 object-fit: contain;
+flex-shrink:0;
+}
+.logo span {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 .logo span[data-zh]{display:block;}
 .logo span[data-en]{display:none;}
 html.en .logo span[data-zh]{display:none;}
 html.en .logo span[data-en]{display:block;}
-
 .header-right{
 display:flex;
 align-items:center;
 gap:24px;
+flex-shrink:0;
 }
 .desktop-nav ul {
 display: flex;
@@ -290,12 +297,10 @@ text-align: center;
 color: var(--text-muted);
 font-size: 0.9rem;
 }
-
 /* 多語隱藏規則，和index.html完全一致 */
 [data-en]{display:none;}
 html.en [data-zh]{display:none;}
 html.en [data-en]{display:unset;}
-
 @media (min-width: 993px) {
 .desktop-nav, .social-header{
 display:flex !important;
@@ -310,6 +315,9 @@ display:none !important;
 }
 .hamburger{
 display:block !important;
+}
+.logo {
+max-width: calc(100% - 110px);
 }
 }
 @media (max-width: 768px) {
@@ -328,11 +336,9 @@ height:40px;
 <body>
 <header>
 <a href="index.html#home" class="logo" title="返回首頁">
-<img src="./logo.JPG" alt="晟銘科技 App開發">
-
-<span data-zh>晟銘科技 App軟件開發</span>
-<span data-en>CM software development</span>
-
+<img src="./logo.PNG" alt="cocoyao App開發">
+<span data-zh>Coco Yao 獨立全棧App開發與Meta/Google精準投流 </span>
+<span data-en>Coco Yao App Development</span>
 </a>
 <div class="header-right">
 <button class="lang-btn" id="langSwitch">EN</button>
@@ -637,14 +643,11 @@ height:40px;
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 <footer>
-<p data-zh>品牌故事：期望幫助更多創業者落地想法，晟銘科技致力將每一個商業構想化為真實軟件產品。</p>
-<p data-en>Brand story: We help founders turn ideas into real‑world software products.</p>
+<p data-zh>【官方聲明】 本網站為 Coco Yao 個人獨立開發工作室之唯一官方網站。本工作室僅提供正規網頁、企業系統、流動端 App 客製化開發及 Meta/Google 廣告代投服務。本站絕無經營任何網絡兼職、點讚刷單、虛假流量或理財投資業務，特此誠實聲明。</p>
+<p data-en>[Official Statement] This website is the only official website of Coco Yao's independent development studio. This studio only provides customized development of legitimate websites, enterprise systems, and mobile apps, as well as Meta/Google ad placement services. This site absolutely does not engage in any online part-time jobs, fake likes/orders, fraudulent traffic, or financial investment businesses. This is a formal declaration of honesty..</p>
 <br>
-<p data-zh>關於我們：我們是全棧程式員，橫跨前後端，專注App與軟件定製開發，拒絕套版，親手實現每一套解決方案。</p>
-<p data-en>About us: Full‑stack team focusing on custom App & software development, no template reuse.</p>
-<p data-zh>@HK晟銘科技app軟件開發 版權所有</p>
-<p data-en>@HKCM Technology. All Rights Reserved.</p>
-
+<p data-zh>© 2026 Coco Yao. 保留所有权利。</p>
+<p data-en>© 2026 Coco Yao. All Rights Reserved.</p>
 </footer>
 <script>
 // 與index.html完全一致：多語言、localStorage記憶
@@ -659,14 +662,12 @@ const isEn = document.documentElement.classList.contains('en');
 localStorage.setItem('siteLang', isEn ? 'en' : 'zh');
 updateLangUI();
 });
-
 document.addEventListener('DOMContentLoaded', function(){
 const savedLang = localStorage.getItem('siteLang');
 if(savedLang === 'en'){
 document.documentElement.classList.add('en');
 }
 updateLangUI();
-
 //漢堡菜單
 const hamburgerBtn = document.getElementById('hamburgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -678,7 +679,6 @@ item.addEventListener('click',()=>{
 mobileMenu.classList.remove('open');
 })
 })
-
 //FAQ 互動，點擊只打開當前，其他收起，與index行為統一
 document.querySelectorAll('.faq-question').forEach(item => {
 item.addEventListener('click', () => {
