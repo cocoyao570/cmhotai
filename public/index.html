@@ -424,7 +424,7 @@ backdrop-filter: blur(10px);
 margin-top: 20px;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea,.form-group select {
 width: 100%;
 padding: 12px;
 background: rgba(255, 255, 255, 0.9);
@@ -437,7 +437,7 @@ transition: var(--transition);
 .form-group{
 margin-bottom:16px;
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus,.form-group select:focus {
 outline: none;
 border-color: var(--primary-glow);
 background: #ffffff;
@@ -786,6 +786,19 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <input type="text" id="company" name="company" required placeholder="例如：未來科技有限公司">
 </div>
 <div class="form-group">
+  <label data-zh>客戶類型 *</label>
+  <label data-en>Client Type</label>
+  <select name="clientType" required>
+    <option data-zh value="hk_company">香港註冊公司</option>
+    <option data-en value="hk_company">Hong Kong Registered Company</option>
+    <option data-zh value="overseas_company">境外公司</option>
+    <option data-en value="overseas_company">Overseas Company</option>
+    <option data-zh value="individual">個人 / 自由職業者</option>
+    <option data-en value="individual">Individual / Freelancer</option>
+  </select>
+</div>
+
+<div class="form-group">
 <label for="name" data-zh>負責人姓名 *</label><label for="name" data-en>Contact Person *</label>
 <input type="text" id="name" name="name" required placeholder="例如：陳大文">
 </div>
@@ -797,9 +810,42 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <label for="email" data-zh>電郵 *</label><label for="email" data-en>Email *</label>
 <input type="email" id="email" name="email" required placeholder="example@domain.com">
 </div>
+
+<!-- 新增雙語下拉查詢項目 必填 -->
 <div class="form-group">
-<label for="message" data-zh>查詢內容 *</label><label for="message" data-en>Message *</label>
-<textarea id="message" name="content" rows="4" required placeholder="請簡述您的項目需求或合作意向..."></textarea>
+<label for="inquiryTypeZh" data-zh>查詢項目 *</label>
+<label for="inquiryTypeEn" data-en>Inquiry Type *</label>
+<select id="inquiryTypeZh" name="inquiryType" required data-zh>
+<option value="">請選擇服務類別</option>
+<option value="app-dev">App 原生雙平台開發（iOS + Android）</option>
+<option value="brand-web">企業官網 / 品牌展示網站</option>
+<option value="ecommerce">電商購物網站開發</option>
+<option value="backend-system">後台管理系統開發</option>
+<option value="landing">表單型 / 行銷落地頁網站</option>
+<option value="ai-integrate">AI 功能整合開發</option>
+<option value="refactor">現有網站/App改版、維護優化</option>
+<option value="ads">Meta / Google 廣告投流配套</option>
+<option value="quote">個人作品集網站 報價諮詢、專案評估</option>
+<option value="other">其他（自行填寫）</option>
+</select>
+<select id="inquiryTypeEn" name="inquiryType" required data-en style="display:none;">
+<option value="">Select Service Type</option>
+<option value="app-dev">Native App Development (iOS + Android)</option>
+<option value="brand-web">Corporate / Brand Official Website</option>
+<option value="ecommerce">E‑commerce Shopping Website</option>
+<option value="backend-system">Admin Backend System Development</option>
+<option value="landing">Form / Marketing Landing Page</option>
+<option value="ai-integrate">AI Feature Integration</option>
+<option value="refactor">Existing Website / App Refactor & Maintenance</option>
+<option value="ads">Meta / Google Ads Setup</option>
+<option value="quote">Project Quotation & Consultation</option>
+<option value="other">Others (please specify)</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="message" data-zh>補充說明</label><label for="message" data-en>Additional Notes</label>
+<textarea id="message" name="content" rows="4" placeholder="請簡述您的項目需求、預算或合作意向..."></textarea>
 </div>
 <button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-zh>發送查詢</button><button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-en>Send Inquiry</button>
 </form>
@@ -833,6 +879,20 @@ const langSwitch = document.getElementById('langSwitch');
 function updateLangUI(){
 const isEn = document.documentElement.classList.contains('en');
 langSwitch.textContent = isEn ? '中文' : 'EN';
+//切換下拉選單顯示隱藏
+const selZh = document.getElementById('inquiryTypeZh');
+const selEn = document.getElementById('inquiryTypeEn');
+if(isEn){
+selZh.style.display = 'none';
+selEn.style.display = 'block';
+selZh.removeAttribute('required');
+selEn.setAttribute('required','required');
+}else{
+selZh.style.display = 'block';
+selEn.style.display = 'none';
+selEn.removeAttribute('required');
+selZh.setAttribute('required','required');
+}
 }
 langSwitch.addEventListener('click',()=>{
 document.documentElement.classList.toggle('en');
@@ -842,66 +902,4 @@ updateLangUI();
 });
 //讀取本地存儲語言
 document.addEventListener('DOMContentLoaded', function(){
-const savedLang = localStorage.getItem('siteLang');
-if(savedLang === 'en'){
-document.documentElement.classList.add('en');
-    }
-updateLangUI();
-// Hero自動輪播
-    (function(){
-const items = document.querySelectorAll('.slider-item');
-let index = 0;
-setInterval(()=>{
-items[index].classList.remove('active');
-index = (index + 1) % items.length;
-items[index].classList.add('active');
-        },4500);
-    })();
-// FAQ 展開/收合互動
-document.querySelectorAll('.faq-question').forEach(item => {
-item.addEventListener('click', () => {
-const answer = item.nextElementSibling;
-const isOpen = answer.style.display === 'block';
-document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
-answer.style.display = isOpen ? 'none' : 'block';
-        });
-    });
-//表單提交
-const form = document.getElementById("contactForm");
-if(!form){
-console.error("找不到contactForm表單");
-return;
-    }
-form.addEventListener("submit",async function(e){
-e.preventDefault();
-const fd = new FormData(form);
-const payload = {
-company:fd.get("company"),
-name:fd.get("name"),
-phone:fd.get("phone"),
-email:fd.get("email"),
-content:fd.get("content")
-        };
-try{
-const res = await fetch("/api/submit-inquiry",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-
-body:JSON.stringify(payload)
-            });
-const ret = await res.json();
-if(ret.ok){
-alert("提交成功，感謝您的查詢");
-form.reset();
-            }else{
-alert("提交失敗："+ret.msg);
-            }
-        }catch(err){
-console.error("請求異常",err);
-alert("網絡請求失敗，請確認後端服務已啟動");
-        }
-    });
-});
-</script>
-</body>
-</html>
+const saved
