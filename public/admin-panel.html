@@ -9,8 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
-
-
 <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 <div class="flex items-center gap-3">
@@ -31,11 +29,7 @@
 </div>
 </div>
 </header>
-
-
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-
-
 <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
 <div class="flex items-center justify-between mb-4">
@@ -58,8 +52,6 @@
 </div>
 </div>
 </section>
-
-
 <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 <div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 <div>
@@ -78,8 +70,6 @@
 </div>
 </div>
 </section>
-
-
 <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
 <h2 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
 <i class="fa-solid fa-user-gear text-indigo-500"></i> 管理員帳號設定
@@ -128,8 +118,6 @@
 </div>
 </div>
 </section>
-
-
 <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
 <h2 class="text-md font-bold text-slate-900 mb-4 flex items-center gap-2">
 <i class="fa-solid fa-users text-slate-700"></i> 後台帳號列表
@@ -138,24 +126,34 @@
 <div class="p-8 text-center text-slate-400 text-sm">載入用戶模組中…</div>
 </div>
 </section>
-
-
 </main>
-
-
 <style>
 table{width:100%}
 th,td{padding:12px 14px;border-bottom:1px solid #e2e8f0;text-align:left;font-size:14px}
 textarea{resize:vertical;min-height:40px}
 </style>
-
-
 <script>
+// 欄位翻譯映射，與前台表單選項完全對齊
+const clientTypeMap = {
+"hk_company":"香港註冊公司",
+"overseas_company":"境外公司",
+"individual":"個人 / 自由職業者"
+};
+const projectTypeMap = {
+"app_native":"App 原生雙平台開發 (iOS + Android)",
+"corp_website":"企業官網 / 品牌展示網站",
+"ecommerce":"電商購物網站開發",
+"backend_system":"後台管理系統開發",
+"form_landing":"表單型 / 行銷落地頁網站",
+"ai_integrate":"AI 功能整合開發",
+"refactor_maintain":"現有網站/App改版、維護優化",
+"ad_setup":"Meta / Google 廣告投流配套",
+"portfolio_consult":"個人作品集網站、報價諮詢、專案評估",
+"other":"其他 (自行填寫)"
+};
 let userRole = 'admin';
 let chart30Obj = null;
 let chartCompObj = null;
-
-
 window.onload = async () => {
 try {
 const res = await fetch("/api/admin-whoami");
@@ -184,14 +182,10 @@ alert("登入身份校驗異常");
 location.href = "admin-login.html";
 }
 };
-
-
 async function initCharts() {
 try {
 if(chart30Obj) chart30Obj.destroy();
 if(chartCompObj) chartCompObj.destroy();
-
-
 const resTrend = await fetch("/api/stats-30day", { credentials: "include" });
 const trendJson = await resTrend.json();
 const ctx1 = document.getElementById('trendChart').getContext('2d');
@@ -210,8 +204,6 @@ tension:0.3
 },
 options:{responsive:true, maintainAspectRatio:false}
 });
-
-
 const resPie = await fetch("/api/stats-company", { credentials: "include" });
 const pieJson = await resPie.json();
 const ctx2 = document.getElementById('companyChart').getContext('2d');
@@ -230,8 +222,6 @@ options:{responsive:true, maintainAspectRatio:false}
 console.log("圖表載入異常",e);
 }
 }
-
-
 async function loadContactList() {
 try {
 const res = await fetch("/api/inquiry-list");
@@ -244,10 +234,12 @@ return;
 let html = `<table><thead><tr class="bg-slate-50">
 <th>ID</th>
 <th>公司</th>
+<th>客戶類型</th>
+<th>查詢項目</th>
 <th>聯絡人</th>
 <th>電話</th>
 <th>Email</th>
-<th>諮詢內容</th>
+<th>補充說明</th>
 <th>客戶要求備註</th>
 <th>跟進人</th>
 <th>跟進狀態</th>
@@ -255,7 +247,9 @@ let html = `<table><thead><tr class="bg-slate-50">
 <th>提交時間</th>
 </tr></thead><tbody>`;
 list.forEach(r => {
-// 狀態選項對應
+// 翻譯顯示文字，找不到就輸出原始值
+const showClientType = clientTypeMap[r.client_type] || r.client_type || "-";
+const showProjectType = projectTypeMap[r.project_type] || r.project_type || "-";
 const statusOptions = `
 <option value="未跟進" ${r.follow_status === '未跟進' ? 'selected' : ''}>未跟進</option>
 <option value="跟進中" ${r.follow_status === '跟進中' ? 'selected' : ''}>跟進中</option>
@@ -264,6 +258,8 @@ const statusOptions = `
 html += `<tr class="hover:bg-slate-50/80 transition">
 <td>${r.id}</td>
 <td>${r.company||'個人'}</td>
+<td>${showClientType}</td>
+<td>${showProjectType}</td>
 <td>${r.name||''}</td>
 <td>${r.phone||'-'}</td>
 <td>${r.email||'-'}</td>
@@ -292,33 +288,27 @@ console.error(e);
 document.getElementById("contactTable").innerHTML = `<div class="p-8 text-center text-rose-500">無法加載紀錄</div>`;
 }
 }
-
-// ✅ 修復後的更新函數，適配動態更新接口
 async function updateFollowInfo(id, value, field){
-// 構建請求體，只傳入需要更新的字段
-const body = { 
-  id,
-  [field]: value
+const body = {
+id,
+[field]: value
 };
 try {
-  const res = await fetch("/api/update-follow-info",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(body)
+const res = await fetch("/api/update-follow-info",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(body)
   });
-  const ret = await res.json();
-  if(!ret.ok){
-    alert(ret.msg||"更新失敗");
-    // 失敗後刷新頁面還原數據
-    await loadContactList();
+const ret = await res.json();
+if(!ret.ok){
+alert(ret.msg||"更新失敗");
+await loadContactList();
   }
 } catch (err) {
-  console.error('更新請求異常:', err);
-  alert("網絡錯誤，更新失敗");
+console.error('更新請求異常:', err);
+alert("網絡錯誤，更新失敗");
 }
 }
-
-
 async function loadUsers() {
 try {
 const res = await fetch("/api/admin-user-list");
@@ -335,8 +325,6 @@ console.error(e);
 document.getElementById("userTable").innerHTML = `<div class="p-8 text-center text-rose-500">無法加載用戶資料</div>`;
 }
 }
-
-
 async function addAdmin() {
 const username = document.getElementById("newAcc").value.trim();
 const password = document.getElementById("newPwd").value.trim();
@@ -356,8 +344,6 @@ await loadUsers();
 alert(ret.msg || "建立失敗");
 }
 }
-
-
 async function delAdmin(username){
 if(!confirm("確認刪除此管理員帳號？")) return;
 const res = await fetch("/api/delete-admin-user",{
@@ -369,19 +355,13 @@ const ret = await res.json();
 alert(ret.msg);
 await loadUsers();
 }
-
-
 function exportExcel() {
 location.href = "/api/inquiry-export-csv";
 }
-
-
 async function logout() {
 await fetch("/api/admin-logout", { method: "POST" });
 location.href = "admin-login.html";
 }
-
-
 document.querySelector("#btnChangeSelfPwd").addEventListener("click", async ()=>{
 const oldPassword = document.querySelector("#oldPassword").value;
 const newUsername = document.querySelector("#newSelfUsername").value.trim();
