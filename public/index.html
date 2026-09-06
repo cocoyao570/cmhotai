@@ -965,31 +965,40 @@ contactForm.addEventListener('submit',function(e){
         inquiryTypeVal = document.getElementById('inquiryTypeZh').value;
     }
 
-    const formData = new FormData();
-    formData.append("company",document.getElementById('company').value);
-    formData.append("clientType",clientTypeVal);
-    formData.append("name",document.getElementById('name').value);
-    formData.append("phone",document.getElementById('phone').value);
-    formData.append("email",document.getElementById('email').value);
-    formData.append("inquiryType",inquiryTypeVal);
-    formData.append("content",document.getElementById('message').value);
+    // 不再使用FormData，改用JSON物件
+    const payload = {
+        company: document.getElementById('company').value,
+        clientType: clientTypeVal,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        inquiryType: inquiryTypeVal,
+        content: document.getElementById('message').value
+    };
 
-    fetch('./submit.php',{
+    fetch('/api/submit-contact',{
         method:"POST",
-        body:formData
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(payload)
     })
-    .then(res=>res.text())
+    .then(res=>res.json())
     .then(ret=>{
-        alert(isEn?"Inquiry sent successfully!":"查詢已成功送出！");
-        contactForm.reset();
+        if(ret.ok){
+            alert(isEn?"Submit success!":"提交成功");
+            contactForm.reset();
+        }else{
+            alert(isEn?"Submit failed":"提交失敗");
+        }
     })
     .catch(err=>{
-        alert(isEn?"Submit error,please try again later":"提交失敗，請稍後重試");
         console.error(err);
+        alert(isEn?"Network error":"網路異常，請稍後再試");
     })
     .finally(()=>{
         submitButton.disabled = false;
-        submitButton.textContent = isEn ? "Send Inquiry" : "發送查詢";
-    })
-})
+        submitButton.textContent = isEn ? "Submit" : "送出";
+    });
+});
 </script>
