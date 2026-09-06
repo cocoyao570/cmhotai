@@ -340,6 +340,10 @@ background: var(--primary-glow);
 color: var(--bg-color);
 box-shadow: 0 0 25px var(--primary-glow);
 }
+.btn-sci-fi:disabled{
+opacity:0.55;
+pointer-events:none;
+}
 /* 卡片通用格線 (適用於作品與服務) */
 .grid-container {
 display: grid;
@@ -530,8 +534,7 @@ font-size:16px;
 <a href="https://www.facebook.com/cocoyao.dev" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
 <i class="fa-brands fa-facebook-f"></i>
 </a>
-<a href="https://instagram.com/cocoyao.dev
-" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+<a href="https://instagram.com/cocoyao.dev" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
 <i class="fa-brands fa-instagram"></i>
 </a>
 </div>
@@ -553,8 +556,7 @@ font-size:16px;
 <a href="https://www.facebook.com/cocoyao.dev" target="_blank" rel="noopener noreferrer">
 <i class="fa-brands fa-facebook-f"></i>
 </a>
-<a href="https://instagram.com/cocoyao.dev
-" target="_blank" rel="noopener noreferrer">
+<a href="https://instagram.com/cocoyao.dev" target="_blank" rel="noopener noreferrer">
 <i class="fa-brands fa-instagram"></i>
 </a>
 </div>
@@ -699,7 +701,7 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <div class="sci-card">
 <div class="sci-card-inner">
 <h3><i class="fa-solid fa-globe" style="color:var(--primary-glow); margin-bottom:10px;"></i> <span data-zh>🌐 1. 網頁前端開發 (Web Frontend) —— 雙主流架構</span><span data-en>🌐 1. Web Frontend — Dual mainstream architecture</span></h3>
-<p data-zh>從最底層的紮實基本功，到現代高效能的前端渲染，提供完美流暢的用戶體驗：<br><br>先進前端框架：精通 Next.js (React) 網頁高性能渲染，以及 Angular 企業級架構。不論是注重 SEO 的極速品牌官網，還是高複雜度的企業管理後台（CMS/Dashboard），皆能精準交付。<br><br>核心開發基礎：精通 HTML5 / CSS3 / JavaScript (ES6+) 原生開發，採用標準語義化代碼，確保網站結構穩固、代碼輕量、加載極速。<br><br>視覺與響應式：深諳 Tailwind CSS 與響應式網頁設計（RWD），確保網頁在 iPhone、Android 手機、iPad 及 PC 電腦屏幕上皆能完美適配，畫面絕不走樣。</p>
+<p data-zh>從最底層的紮實基本功，到現代高效能的前端渲染，提供完美流暢的用戶體驗：<br><br>先進前端框架：精通 Next.js (React) 網頁高性能渲染，以及 Angular 企業級架構。不論是注重 SEO 的極速品牌官網，還是高複雜度的企業管理後台（CMS/Dashboard），皆能精準交付。<br><br>核心開發基礎：精通 HTML5 / CSS3 / JavaScript (ES6+) 原生開發，採用標準語義化代碼，確保網站結構穩固、代碼輕量、加載極速。<br><br>視覺與響應式：深諳 Tailwind CSS 與響應式網頁設計（RWD），確保網站在 iPhone、Android 手機、iPad 及 PC 電腦屏幕上皆能完美適配，畫面絕不走樣。</p>
 <p data-en>Solid low‑level foundation plus modern high‑performance rendering for smooth user experience.<br><br>Skilled in Next.js(React) high‑speed rendering and Angular enterprise‑grade framework. Deliver SEO‑friendly brand sites and complex enterprise dashboards.<br><br>Pure HTML5/CSS3/JavaScript(ES6+) semantic coding for lightweight, fast‑loading pages.<br><br>Tailwind CSS & responsive RWD design, perfect display across iPhone, Android, iPad and desktop PC.</p>
 </div>
 </div>
@@ -786,18 +788,22 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <input type="text" id="company" name="company" required placeholder="例如：未來科技有限公司">
 </div>
 <div class="form-group">
-  <label data-zh>客戶類型 *</label>
-  <label data-en>Client Type</label>
-  <select name="clientType" required>
-    <option data-zh value="hk_company">香港註冊公司</option>
-    <option data-en value="hk_company">Hong Kong Registered Company</option>
-    <option data-zh value="overseas_company">境外公司</option>
-    <option data-en value="overseas_company">Overseas Company</option>
-    <option data-zh value="individual">個人 / 自由職業者</option>
-    <option data-en value="individual">Individual / Freelancer</option>
-  </select>
+<label data-zh>客戶類型 *</label>
+<label data-en>Client Type *</label>
+<!-- 客戶類型雙語select -->
+<select id="clientTypeZh" name="clientType" data-zh>
+<option value="">請選擇客戶類別</option>
+<option value="hk_company">香港註冊公司</option>
+<option value="overseas_company">境外公司</option>
+<option value="individual">個人 / 自由職業者</option>
+</select>
+<select id="clientTypeEn" name="clientType" data-en style="display:none;">
+<option value="">Select Client Type</option>
+<option value="hk_company">Hong Kong Registered Company</option>
+<option value="overseas_company">Overseas Company</option>
+<option value="individual">Individual / Freelancer</option>
+</select>
 </div>
-
 <div class="form-group">
 <label for="name" data-zh>負責人姓名 *</label><label for="name" data-en>Contact Person *</label>
 <input type="text" id="name" name="name" required placeholder="例如：陳大文">
@@ -810,12 +816,11 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <label for="email" data-zh>電郵 *</label><label for="email" data-en>Email *</label>
 <input type="email" id="email" name="email" required placeholder="example@domain.com">
 </div>
-
-<!-- 新增雙語下拉查詢項目 必填 -->
+<!-- 查詢項目雙語下拉 -->
 <div class="form-group">
 <label for="inquiryTypeZh" data-zh>查詢項目 *</label>
 <label for="inquiryTypeEn" data-en>Inquiry Type *</label>
-<select id="inquiryTypeZh" name="inquiryType" required data-zh>
+<select id="inquiryTypeZh" name="inquiryType" data-zh>
 <option value="">請選擇服務類別</option>
 <option value="app-dev">App 原生雙平台開發（iOS + Android）</option>
 <option value="brand-web">企業官網 / 品牌展示網站</option>
@@ -828,7 +833,7 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <option value="quote">個人作品集網站 報價諮詢、專案評估</option>
 <option value="other">其他（自行填寫）</option>
 </select>
-<select id="inquiryTypeEn" name="inquiryType" required data-en style="display:none;">
+<select id="inquiryTypeEn" name="inquiryType" data-en style="display:none;">
 <option value="">Select Service Type</option>
 <option value="app-dev">Native App Development (iOS + Android)</option>
 <option value="brand-web">Corporate / Brand Official Website</option>
@@ -842,12 +847,11 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <option value="other">Others (please specify)</option>
 </select>
 </div>
-
 <div class="form-group">
 <label for="message" data-zh>補充說明</label><label for="message" data-en>Additional Notes</label>
 <textarea id="message" name="content" rows="4" placeholder="請簡述您的項目需求、預算或合作意向..."></textarea>
 </div>
-<button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-zh>發送查詢</button><button type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-en>Send Inquiry</button>
+<button id="submitBtn" type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer;" data-zh>發送查詢</button><button id="submitBtnEn" type="submit" class="btn-sci-fi" style="width: 100%; cursor: pointer; display:none;" data-en>Send Inquiry</button>
 </form>
 </section>
 </main>
@@ -862,44 +866,130 @@ MySQL 管理管理員帳號權限，可銜接各類業務後台模塊。</p>
 <p data-en>© 2026 Coco Yao. All Rights Reserved.</p>
 </footer>
 <script>
-//漢堡菜單開關
+// 漢堡菜單開關
 const hamburgerBtn = document.getElementById('hamburgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
-hamburgerBtn.addEventListener('click',()=>{
-mobileMenu.classList.toggle('open');
+hamburgerBtn.addEventListener('click', function(){
+    mobileMenu.classList.toggle('open');
 });
-//點擊鏈接關閉手機菜單
-document.querySelectorAll('.mobile-menu a').forEach(item=>{
-item.addEventListener('click',()=>{
-mobileMenu.classList.remove('open');
-})
-})
-//多語言切換，支援localStorage記住語言
+// 點擊移動菜單連結自動關閉
+document.querySelectorAll('.mobile-menu a').forEach(function(item){
+    item.addEventListener('click', function(){
+        mobileMenu.classList.remove('open');
+    });
+});
+
+// 雙語切換
 const langSwitch = document.getElementById('langSwitch');
-function updateLangUI(){
-const isEn = document.documentElement.classList.contains('en');
-langSwitch.textContent = isEn ? '中文' : 'EN';
-//切換下拉選單顯示隱藏
-const selZh = document.getElementById('inquiryTypeZh');
-const selEn = document.getElementById('inquiryTypeEn');
-if(isEn){
-selZh.style.display = 'none';
-selEn.style.display = 'block';
-selZh.removeAttribute('required');
-selEn.setAttribute('required','required');
-}else{
-selZh.style.display = 'block';
-selEn.style.display = 'none';
-selEn.removeAttribute('required');
-selZh.setAttribute('required','required');
+const htmlRoot = document.documentElement;
+let isEn = false;
+
+// 同步下拉選單、按鈕文字
+function applyLang(){
+    if(isEn){
+        htmlRoot.classList.add('en');
+        langSwitch.textContent = "中文";
+        // 顯示英文下拉，隱藏中文下拉
+        document.getElementById('clientTypeZh').style.display = 'none';
+        document.getElementById('clientTypeEn').style.display = 'block';
+        document.getElementById('inquiryTypeZh').style.display = 'none';
+        document.getElementById('inquiryTypeEn').style.display = 'block';
+        // 切換提交按鈕顯示
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('submitBtnEn').style.display = 'block';
+    }else{
+        htmlRoot.classList.remove('en');
+        langSwitch.textContent = "EN";
+        document.getElementById('clientTypeZh').style.display = 'block';
+        document.getElementById('clientTypeEn').style.display = 'none';
+        document.getElementById('inquiryTypeZh').style.display = 'block';
+        document.getElementById('inquiryTypeEn').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'block';
+        document.getElementById('submitBtnEn').style.display = 'none';
+    }
 }
-}
-langSwitch.addEventListener('click',()=>{
-document.documentElement.classList.toggle('en');
-const isEn = document.documentElement.classList.contains('en');
-localStorage.setItem('siteLang', isEn ? 'en' : 'zh');
-updateLangUI();
+langSwitch.addEventListener('click',function(){
+    isEn = !isEn;
+    applyLang();
 });
-//讀取本地存儲語言
-document.addEventListener('DOMContentLoaded', function(){
-const saved
+// 頁面初始化執行一次
+applyLang();
+
+// Hero區輪播
+const sliderItems = document.querySelectorAll('.slider-item');
+let slideIndex = 0;
+function nextSlide(){
+    sliderItems[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % sliderItems.length;
+    sliderItems[slideIndex].classList.add('active');
+}
+setInterval(nextSlide,4500);
+
+// FAQ摺疊
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(q=>{
+    q.addEventListener('click',function(){
+        const ans = this.nextElementSibling;
+        const icon = this.querySelector('.fa-chevron-down');
+        if(ans.style.display === 'block'){
+            ans.style.display = 'none';
+            icon.style.transform = 'rotate(0deg)';
+        }else{
+            ans.style.display = 'block';
+            icon.style.transform = 'rotate(180deg)';
+        }
+    })
+})
+
+// 表單提交處理，兼容兩個submit按鈕
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    let submitButton;
+    if(isEn){
+        submitButton = document.getElementById('submitBtnEn');
+    }else{
+        submitButton = document.getElementById('submitBtn');
+    }
+    submitButton.disabled = true;
+    submitButton.textContent = isEn ? "Sending..." : "發送中...";
+
+    // 取得對應語言的select值
+    let clientTypeVal;
+    let inquiryTypeVal;
+    if(isEn){
+        clientTypeVal = document.getElementById('clientTypeEn').value;
+        inquiryTypeVal = document.getElementById('inquiryTypeEn').value;
+    }else{
+        clientTypeVal = document.getElementById('clientTypeZh').value;
+        inquiryTypeVal = document.getElementById('inquiryTypeZh').value;
+    }
+
+    const formData = new FormData();
+    formData.append("company",document.getElementById('company').value);
+    formData.append("clientType",clientTypeVal);
+    formData.append("name",document.getElementById('name').value);
+    formData.append("phone",document.getElementById('phone').value);
+    formData.append("email",document.getElementById('email').value);
+    formData.append("inquiryType",inquiryTypeVal);
+    formData.append("content",document.getElementById('message').value);
+
+    fetch('./submit.php',{
+        method:"POST",
+        body:formData
+    })
+    .then(res=>res.text())
+    .then(ret=>{
+        alert(isEn?"Inquiry sent successfully!":"查詢已成功送出！");
+        contactForm.reset();
+    })
+    .catch(err=>{
+        alert(isEn?"Submit error,please try again later":"提交失敗，請稍後重試");
+        console.error(err);
+    })
+    .finally(()=>{
+        submitButton.disabled = false;
+        submitButton.textContent = isEn ? "Send Inquiry" : "發送查詢";
+    })
+})
+</script>
