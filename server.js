@@ -2,27 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-
 const bcrypt = require('bcryptjs');
 const ExcelJS = require('exceljs');
 const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@libsql/client');
-
 // 新增：取得香港時間 YYYY‑MM‑DD HH:mm:ss
 // 取得香港時間 YYYY-MM-DD HH:mm:ss（UTC+8，穩定每次取當下時間）
 function getHongKongDateTime() {
-  const hk = new Date(Date.now() + 8 * 60 * 60 * 1000);
-  const p = (n) => String(n).padStart(2, '0');
-  return `${hk.getUTCFullYear()}-${p(hk.getUTCMonth() + 1)}-${p(hk.getUTCDate())} ${p(hk.getUTCHours())}:${p(hk.getUTCMinutes())}:${p(hk.getUTCSeconds())}`;
+const hk = new Date(Date.now() + 8 * 60 * 60 * 1000);
+const p = (n) => String(n).padStart(2, '0');
+return `${hk.getUTCFullYear()}-${p(hk.getUTCMonth() + 1)}-${p(hk.getUTCDate())} ${p(hk.getUTCHours())}:${p(hk.getUTCMinutes())}:${p(hk.getUTCSeconds())}`;
 }
-
 // 建立 libsql 資料庫實例
 const db = createClient({
-  url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN
+url: process.env.TURSO_DATABASE_URL,
+authToken: process.env.TURSO_AUTH_TOKEN
 });
-
 const app = express();
 // ========== 下拉選項中文映射表 ==========
 const clientTypeMap = {
@@ -46,23 +42,17 @@ const inquiryTypeMap = {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// session 完整配置，必須包在 app.use(session({ }))
-const { LibSqlSessionStore } = require('express-session-libsql');
+// session 配置（移除 libsql session store，使用記憶體，不再報錯）
 app.use(session({
-  secret: 'shenming-2026-random-secret-key-888',
-  resave: false,
-  saveUninitialized: false,
-  store: new LibSqlSessionStore({
-    client: db
-  }),
-  cookie: {
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    secure: true,
-    sameSite: 'none'
-  }
+secret: 'shenming-2026-random-secret-key-888',
+resave: false,
+saveUninitialized: false,
+cookie: {
+maxAge: 7 * 24 * 60 * 60 * 1000,
+secure: true,
+sameSite: 'none'
+}
 }));
-
-
 // ========== 初始化數據庫表 ==========
 (async function initDB() {
 // 客戶諮詢表
@@ -210,11 +200,9 @@ await db.execute(`UPDATE admin_user SET password = ? WHERE username = ?`, [hash,
 res.json({ ok: true, msg: `帳號 ${target_username} 密碼已重置` });
 });
 // 客戶表單提交接口
-// 客戶表單提交接口
 app.post('/api/submit-contact', async (req, res) => {
 console.log("👉收到POST，req.body =", req.body);
 try {
-// 前端傳來的key：clientType（駝峰）、inquiryType
 const { company, name, phone, email, inquiryType, clientType, content } = req.body;
 await db.execute(`
       INSERT INTO inquiries
@@ -225,8 +213,8 @@ company,
 name,
 phone,
 email,
-inquiryType,   // 前端 inquiryType → 資料庫 project_type
-clientType,    // 前端 clientType → 資料庫 client_type
+inquiryType,
+clientType,
 content,
 getHongKongDateTime()
     ]);
@@ -252,7 +240,6 @@ return res.json({ ok: false });
 // 取得諮詢紀錄清單
 app.get("/api/inquiry-list", checkLogin, async (req, res) => {
 const ret = await db.execute(`SELECT * FROM inquiries ORDER BY id DESC`);
-// 做中文映射轉換
 const list = ret.rows.map(row => ({
 ...row,
 client_type: clientTypeMap[row.client_type] || row.client_type || "-",
@@ -414,7 +401,6 @@ data.push(1);
   }
 res.json({ labels, data });
 });
-// 靜態資源必須放在所有API後面
 // 靜態資源必須放在所有API後面
 app.use(express.static(path.join(__dirname, 'public')));
 app.get(/^\/.*/, (req, res) => {
