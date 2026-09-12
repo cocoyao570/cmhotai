@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const SQLiteStore = require('connect-sqlite3')(session);
+
 const bcrypt = require('bcryptjs');
 const ExcelJS = require('exceljs');
 const path = require('path');
@@ -17,11 +17,12 @@ function getHongKongDateTime() {
   return `${hk.getUTCFullYear()}-${p(hk.getUTCMonth() + 1)}-${p(hk.getUTCDate())} ${p(hk.getUTCHours())}:${p(hk.getUTCMinutes())}:${p(hk.getUTCSeconds())}`;
 }
 
-
 // 建立 libsql 資料庫實例
 const db = createClient({
-url: "file:contact.db"
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN
 });
+
 const app = express();
 // ========== 下拉選項中文映射表 ==========
 const clientTypeMap = {
@@ -46,20 +47,21 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // session 完整配置，必須包在 app.use(session({ }))
+const LibsqlStore = require('express-session-libsql')(session);
 app.use(session({
-secret: 'shenming-2026-random-secret-key-888',
-resave: false,
-saveUninitialized: false,
-store: new SQLiteStore({
-db: 'sessions.db',
-dir: './',
-table: 'sessions'
+  secret: 'shenming-2026-random-secret-key-888',
+  resave: false,
+  saveUninitialized: false,
+  store: new LibsqlStore({
+    client: db
   }),
-cookie: {
-httpOnly: true,
-maxAge: 7 * 24 * 60 * 60 * 1000
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    secure: true,
+    sameSite: 'none'
   }
 }));
+
 // ========== 初始化數據庫表 ==========
 (async function initDB() {
 // 客戶諮詢表
