@@ -7,8 +7,7 @@ const ExcelJS = require('exceljs');
 const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@libsql/client');
-const pg = require('pg');
-const pgSession = require('connect-pg-simple')(session);
+const { LibsqlStore } = require('@libsql/express-session');
 
 // 取得香港時間 YYYY-MM-DD HH:mm:ss（UTC+8，穩定每次取當下時間）
 function getHongKongDateTime() {
@@ -17,12 +16,11 @@ const p = (n) => String(n).padStart(2, '0');
 return `${hk.getUTCFullYear()}-${p(hk.getUTCMonth() + 1)}-${p(hk.getUTCDate())} ${p(hk.getUTCHours())}:${p(hk.getUTCMinutes())}:${p(hk.getUTCSeconds())}`;
 }
 
-// 建立 libsql 資料庫實例（Turso，存放客戶諮詢紀錄、管理員帳號）
+// 建立 libsql 資料庫實例（Turso，存放客戶諮詢紀錄、管理員帳號、session）
 const db = createClient({
 url: process.env.TURSO_DATABASE_URL,
 authToken: process.env.TURSO_AUTH_TOKEN
 });
-
 const app = express();
 
 // ========== 下拉選項中文映射表 ==========
@@ -49,24 +47,20 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ========== Session 配置（存入Railway PostgreSQL，解決反覆登出） ==========
+// ========== Session 配置（存入Turso，移除Postgres，不再有連線拒絕錯誤） ==========
 app.use(session({
-  secret: 'shenming-2026-random-secret-key-888',
-  resave: false,
-  saveUninitialized: false,
-  store: new pgSession({
-    pool: new pg.Pool({
-      connectionString: process.env.POSTGRES_URL
-    }),
-    createTableIfMissing: true // 自動建立session資料表
-  }),
-  cookie: {
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    secure: true,
-    sameSite: 'none'
-  }
+secret: 'shenming-2026-random-secret-key-888',
+resave: false,
+saveUninitialized: false,
+store: new LibsqlStore({
+db: db
+}),
+cookie: {
+maxAge: 7 * 24 * 60 * 60 * 1000,
+secure: true,
+sameSite: 'none'
+}
 }));
-
 
 // ========== 初始化 Turso 數據庫表 ==========
 (async function initDB() {
@@ -115,6 +109,7 @@ return res.status(401).json({ ok: false, msg: "請先登入後台" });
   }
 next();
 }
+
 // 權限中間件
 function checkRole(requiredRoles) {
 return (req, res, next) => {
@@ -144,11 +139,13 @@ return res.json({ ok: true, role: user.role });
 return res.json({ ok: false, msg: "密碼錯誤" });
   }
 });
+
 // 登出
 app.post("/api/admin-logout", (req, res) => {
 req.session.destroy();
 res.json({ ok: true });
 });
+
 // 取得當前登入用戶
 app.get("/api/admin-whoami", checkLogin, (req, res) => {
 res.json({
@@ -156,6 +153,7 @@ username: req.session.adminName,
 role: req.session.adminRole
   });
 });
+
 // 修改本人帳號密碼
 app.post("/api/change-admin", checkLogin, async (req, res) => {
 const { oldPassword, newUsername, newPassword } = req.body;
@@ -178,11 +176,13 @@ res.json({ ok: true, msg: "帳密已更新，請重新登入" });
 return res.json({ ok: false, msg: "更新失敗，新帳號已被佔用" });
   }
 });
+
 // 取得管理員帳號列表
 app.get("/api/admin-user-list", checkLogin, async (req, res) => {
 const ret = await db.execute("SELECT username, create_at FROM admin_user ORDER BY id DESC");
 res.json(ret.rows);
 });
+
 // 建立新管理員
 app.post("/api/create-admin-user", checkLogin, checkRole(['admin']), async (req, res) => {
 const { username, password } = req.body;
@@ -196,6 +196,7 @@ res.json({ ok: true, msg: "帳號建立完成" });
 return res.json({ ok: false, msg: "帳號重複，建立失敗" });
   }
 });
+
 // 刪除管理員帳號
 app.post("/api/delete-admin-user", checkLogin, checkRole(['admin']), async (req, res) => {
 const { username } = req.body;
@@ -206,6 +207,7 @@ return res.json({ ok: false, msg: "禁止刪除當前登入帳號" });
 await db.execute(`DELETE FROM admin_user WHERE username = ?`, [username]);
 res.json({ ok: true, msg: "刪除成功" });
 });
+
 // 重置使用者密碼
 app.post("/api/admin-reset-user-pwd", checkLogin, checkRole(['admin']), async (req, res) => {
 const { target_username, new_password } = req.body;
@@ -216,6 +218,7 @@ const hash = await bcrypt.hash(new_password, 10);
 await db.execute(`UPDATE admin_user SET password = ? WHERE username = ?`, [hash, target_username]);
 res.json({ ok: true, msg: `帳號 ${target_username} 密碼已重置` });
 });
+
 // 客戶表單提交接口
 app.post('/api/submit-contact', async (req, res) => {
 console.log("👉收到POST，req.body =", req.body);
@@ -241,6 +244,7 @@ console.error("❌插入資料庫錯誤：", err);
 return res.status(500).json({ ok: false, msg: "提交失敗" });
   }
 });
+
 // 兼容舊前端路徑 /submit.php
 app.post("/submit.php", async (req, res) => {
 console.log("📩submit.php 接收到表單：", req.body);
@@ -254,6 +258,7 @@ console.error('插入錯誤:', err);
 return res.json({ ok: false });
   }
 });
+
 // 取得諮詢紀錄清單
 app.get("/api/inquiry-list", checkLogin, async (req, res) => {
 const ret = await db.execute(`SELECT * FROM inquiries ORDER BY id DESC`);
@@ -264,6 +269,7 @@ project_type: inquiryTypeMap[row.project_type] || row.project_type || "-"
   }));
 res.json(list);
 });
+
 // 更新跟進資訊
 app.post("/api/update-follow-info", checkLogin, async (req, res) => {
 const { id, ...updateFields } = req.body;
@@ -294,11 +300,12 @@ const sql = `UPDATE inquiries SET ${setClauses.join(', ')} WHERE id = ?`;
 try {
 await db.execute(sql, values);
 res.json({ ok: true, msg: "更新成功" });
-  } catch (err) {
+  } catch (err)
 console.error('更新錯誤:', err);
 return res.json({ ok: false, msg: "更新失敗" });
   }
 });
+
 // Excel匯出
 app.get("/api/inquiry-export-csv", checkLogin, async (req, res) => {
 try {
@@ -371,6 +378,7 @@ console.error("匯出Excel異常：", excelErr);
 res.status(500).json({ ok: false, msg: "伺服器生成Excel錯誤" });
   }
 });
+
 // 30天統計圖表
 app.get("/api/stats-30day", checkLogin, async (req, res) => {
 const ret = await db.execute(`SELECT DATE(create_at) as day, COUNT(*) as cnt FROM inquiries GROUP BY DATE(create_at) ORDER BY day ASC`);
@@ -387,6 +395,7 @@ data.push(find ? find.cnt : 0);
   }
 res.json({ labels, data });
 });
+
 // 企業來源餅圖
 app.get("/api/stats-company", checkLogin, async (req, res) => {
 const ret = await db.execute(`
@@ -429,4 +438,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 console.log(`✅後台服務啟動完成，本機: http://127.0.0.1:${PORT}`);
 });
-
