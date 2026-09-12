@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+
 const bcrypt = require('bcryptjs');
 const ExcelJS = require('exceljs');
 const path = require('path');
@@ -46,7 +47,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // session 完整配置，必須包在 app.use(session({ }))
-const LibsqlStore = require('express-session-libsql')(session);
+const { LibsqlStore } = require('express-session-libsql');
 app.use(session({
   secret: 'shenming-2026-random-secret-key-888',
   resave: false,
@@ -60,6 +61,7 @@ app.use(session({
     sameSite: 'none'
   }
 }));
+
 
 // ========== 初始化數據庫表 ==========
 (async function initDB() {
