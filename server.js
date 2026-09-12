@@ -7,19 +7,24 @@ const ExcelJS = require('exceljs');
 const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@libsql/client');
-// 新增：取得香港時間 YYYY‑MM‑DD HH:mm:ss
+const pg = require('pg');
+const pgSession = require('connect-pg-simple')(session);
+
 // 取得香港時間 YYYY-MM-DD HH:mm:ss（UTC+8，穩定每次取當下時間）
 function getHongKongDateTime() {
 const hk = new Date(Date.now() + 8 * 60 * 60 * 1000);
 const p = (n) => String(n).padStart(2, '0');
 return `${hk.getUTCFullYear()}-${p(hk.getUTCMonth() + 1)}-${p(hk.getUTCDate())} ${p(hk.getUTCHours())}:${p(hk.getUTCMinutes())}:${p(hk.getUTCSeconds())}`;
 }
-// 建立 libsql 資料庫實例
+
+// 建立 libsql 資料庫實例（Turso，存放客戶諮詢紀錄、管理員帳號）
 const db = createClient({
 url: process.env.TURSO_DATABASE_URL,
 authToken: process.env.TURSO_AUTH_TOKEN
 });
+
 const app = express();
+
 // ========== 下拉選項中文映射表 ==========
 const clientTypeMap = {
 "hk_company": "香港註冊公司",
@@ -38,22 +43,32 @@ const inquiryTypeMap = {
 "quote": "個人作品集網站 報價諮詢、專案評估",
 "other": "其他（自行填寫）"
 };
+
 // ========== 中間件 ==========
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// session 配置（移除 libsql session store，使用記憶體，不再報錯）
+
+// ========== Session 配置（存入Railway PostgreSQL，解決反覆登出） ==========
 app.use(session({
-secret: 'shenming-2026-random-secret-key-888',
-resave: false,
-saveUninitialized: false,
-cookie: {
-maxAge: 7 * 24 * 60 * 60 * 1000,
-secure: true,
-sameSite: 'none'
-}
+  secret: 'shenming-2026-random-secret-key-888',
+  resave: false,
+  saveUninitialized: false,
+  store: new pgSession({
+    pool: new pg.Pool({
+      connectionString: process.env.POSTGRES_URL
+    }),
+    createTableIfMissing: true // 自動建立session資料表
+  }),
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    secure: true,
+    sameSite: 'none'
+  }
 }));
-// ========== 初始化數據庫表 ==========
+
+
+// ========== 初始化 Turso 數據庫表 ==========
 (async function initDB() {
 // 客戶諮詢表
 await db.execute(`CREATE TABLE IF NOT EXISTS inquiries (
@@ -92,6 +107,7 @@ const hashStaff = bcrypt.hashSync("123456", 10);
 await db.execute(`INSERT OR REPLACE INTO admin_user(username, password, role) VALUES (?,?,?)`, ["staff01", hashStaff, "staff"]);
 console.log("✅已重置員工帳號：staff01 / 123456");
 })();
+
 // 登入攔截中間件
 function checkLogin(req, res, next) {
 if (!req.session.isLogin) {
@@ -110,6 +126,7 @@ return res.status(403).json({ ok: false, msg: "權限不足，只有總管理員
     }
   };
 }
+
 // ==================== 接口 ====================
 // 登入
 app.post("/api/admin-login", async (req, res) => {
@@ -401,12 +418,15 @@ data.push(1);
   }
 res.json({ labels, data });
 });
+
 // 靜態資源必須放在所有API後面
 app.use(express.static(path.join(__dirname, 'public')));
 app.get(/^\/.*/, (req, res) => {
 res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 console.log(`✅後台服務啟動完成，本機: http://127.0.0.1:${PORT}`);
 });
+
