@@ -47,12 +47,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // session 完整配置，必須包在 app.use(session({ }))
-const { LibsqlStore } = require('express-session-libsql');
+const { LibSqlSessionStore } = require('express-session-libsql');
 app.use(session({
   secret: 'shenming-2026-random-secret-key-888',
   resave: false,
   saveUninitialized: false,
-  store: new LibsqlStore({
+  store: new LibSqlSessionStore({
     client: db
   }),
   cookie: {
