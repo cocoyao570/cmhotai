@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const ExcelJS = require('exceljs');
 const path = require('path');
 const cors = require('cors');
+const crypto = require('crypto');
 const { createClient } = require('@libsql/client');
 
 // 取得香港時間 YYYY-MM-DD HH:mm:ss（UTC+8）
@@ -29,6 +30,7 @@ const clientTypeMap = {
   "overseas_company": "境外公司",
   "individual": "個人 / 自由職業者"
 };
+
 const inquiryTypeMap = {
   "app-dev": "App 原生雙平台開發（iOS + Android）",
   "brand-web": "企業官網 / 品牌展示網站",
@@ -47,17 +49,42 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ========== Session 配置（記憶體模式，簡單不依賴額外套件） ==========
-app.use(session({
-  secret: 'shenming-2026-random-secret-key-888',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    secure: false,
-    sameSite: 'lax'
+// ========== Cookie 型 Session（Vercel Serverless 適用，不依賴記憶體） ==========
+const SESSION_SECRET = process.env.SESSION_SECRET || 'shenming-2026-random-secret-key-888';
+
+function parseCookies(req) {
+  const list = {};
+  (req.headers.cookie || '').split(';').forEach(c => {
+    const idx = c.indexOf('=');
+    if (idx > -1) {
+      const key = c.slice(0, idx).trim();
+      const val = c.slice(idx + 1).trim();
+      if (key) list[key] = decodeURIComponent(val);
+    }
+  });
+  return list;
+}
+
+app.use((req, res, next) => {
+  req.session = { isLogin: false, adminName: null, adminRole: null };
+  const cookies = parseCookies(req);
+  const auth = cookies['auth'];
+  if (auth && auth.includes('.')) {
+    const dotIdx = auth.lastIndexOf('.');
+    const data = auth.slice(0, dotIdx);
+    const sig = auth.slice(dotIdx + 1);
+    const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(data).digest('hex');
+    if (sig === expectedSig) {
+      try {
+        const payload = JSON.parse(Buffer.from(data, 'base64').toString());
+        req.session.isLogin = true;
+        req.session.adminName = payload.name;
+        req.session.adminRole = payload.role;
+      } catch (e) {}
+    }
   }
-}));
+  next();
+});
 
 // ========== 初始化 Turso 資料庫表 ==========
 (async function initDB() {
@@ -100,6 +127,7 @@ app.use(session({
     await db.execute(`INSERT INTO admin_user(username, password, role) VALUES (?,?,?)`, ["admin", hashAdmin, "admin"]);
     console.log("✅已建立管理員：admin / admin123");
   }
+
   const staffCheck = await db.execute(`SELECT id FROM admin_user WHERE username = ?`, ["staff01"]);
   if (staffCheck.rows.length === 0) {
     const hashStaff = bcrypt.hashSync("123456", 10);
@@ -129,6 +157,7 @@ function checkRole(requiredRoles) {
 }
 
 // ==================== API接口 ====================
+
 // 後台登入
 app.post("/api/admin-login", async (req, res) => {
   const { username, password } = req.body;
@@ -137,9 +166,9 @@ app.post("/api/admin-login", async (req, res) => {
   if (!user) return res.json({ ok: false, msg: "帳號不存在" });
   const passOk = await bcrypt.compare(password, user.password);
   if (passOk) {
-    req.session.isLogin = true;
-    req.session.adminName = user.username;
-    req.session.adminRole = user.role;
+    const payload = Buffer.from(JSON.stringify({ name: user.username, role: user.role })).toString('base64');
+    const sig = crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('hex');
+    res.setHeader('Set-Cookie', `auth=${payload}.${sig}; Path=/; HttpOnly; Max-Age=604800; SameSite=Lax`);
     return res.json({ ok: true, role: user.role });
   } else {
     return res.json({ ok: false, msg: "密碼錯誤" });
@@ -148,7 +177,7 @@ app.post("/api/admin-login", async (req, res) => {
 
 // 登出
 app.post("/api/admin-logout", (req, res) => {
-  req.session.destroy();
+  res.setHeader('Set-Cookie', `auth=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax`);
   res.json({ ok: true });
 });
 
@@ -176,7 +205,7 @@ app.post("/api/change-admin", checkLogin, async (req, res) => {
   try {
     await db.execute(`UPDATE admin_user SET username = ?, password = ? WHERE id = ?`,
       [useUsername, newHash, row.id]);
-    req.session.destroy();
+    res.setHeader('Set-Cookie', `auth=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax`);
     res.json({ ok: true, msg: "帳密已更新，請重新登入" });
   } catch (e) {
     return res.json({ ok: false, msg: "更新失敗，新帳號已被佔用" });
@@ -242,7 +271,7 @@ app.post('/api/submit-contact', async (req, res) => {
       inquiryType,
       clientType,
       content,
-      getHongKongDateTime()
+getHongKongDateTime()
     ]);
     return res.json({ ok: true, msg: "查詢已成功送出！" });
   } catch(err) {
@@ -337,32 +366,32 @@ app.get("/api/inquiry-export-csv", checkLogin, async (req, res) => {
     if (rows && rows.length > 0) {
       rows.forEach(item => {
         worksheet.addRow({
-          id: item.id,
-          company: item.company,
-          client_type: clientTypeMap[item.client_type] || item.client_type || "",
-          project_type: inquiryTypeMap[item.project_type] || item.project_type || "",
-          name: item.name,
-          phone: item.phone,
-          email: item.email,
-          content: item.content,
-          customer_note: item.customer_note || "",
-          follow_user: item.follow_user || "",
-          follow_status: item.follow_status || "未跟進",
-          price: item.price || "",
-          create_at: item.create_at
+id: item.id,
+company: item.company,
+client_type: clientTypeMap[item.client_type] || item.client_type || "",
+project_type: inquiryTypeMap[item.project_type] || item.project_type || "",
+name: item.name,
+phone: item.phone,
+email: item.email,
+content: item.content,
+customer_note: item.customer_note || "",
+follow_user: item.follow_user || "",
+follow_status: item.follow_status || "未跟進",
+price: item.price || "",
+create_at: item.create_at
         })
       })
     }
     worksheet.getRow(1).font = { bold: true, color: { argb: 'FFFFFFFF' } };
     worksheet.getRow(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF4F46E5' }
+type: 'pattern',
+pattern: 'solid',
+fgColor: { argb: 'FF4F46E5' }
     };
     worksheet.eachRow((row, rowNumber) => {
-      if (rowNumber > 1) {
-        const statusCell = row.getCell(11);
-        if (statusCell.value === '已跟進') {
+if (rowNumber > 1) {
+const statusCell = row.getCell(11);
+if (statusCell.value === '已跟進') {
           statusCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF10B981' } };
           statusCell.font = { color: { argb: 'FFFFFFFF' }, bold: true };
         } else if (statusCell.value === '跟進中') {
@@ -416,31 +445,29 @@ app.get("/api/stats-company", checkLogin, async (req, res) => {
   const data = [];
   let otherSum = 0;
   raw.forEach((item, idx) => {
-    if (idx < 6) {
+if (idx < 6) {
       labels.push(item.company);
-      data.push(item.cnt);
+data.push(item.cnt);
     } else {
-      otherSum += item.cnt;
+otherSum += item.cnt;
     }
   });
-  if (otherSum > 0) {
-    labels.push("其他");
-    data.push(otherSum);
+if (otherSum > 0) {
+labels.push("其他");
+data.push(otherSum);
   }
-  if (labels.length === 0) {
-    labels.push("暫無數據");
-    data.push(1);
+if (labels.length === 0) {
+labels.push("暫無數據");
+data.push(1);
   }
-  res.json({ labels, data });
+res.json({ labels, data });
 });
 
 // 靜態資源，必須放在所有API路由之後
 app.use(express.static(path.join(__dirname, 'public')));
 app.get(/^\/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅服務啟動`);
-});
+// Vercel Serverless：export app，不要 app.listen
+module.exports = app;
